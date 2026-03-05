@@ -1,26 +1,79 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import 'tailwindcss';
+@import '@heroui/styles';
+@import 'tw-animate-css';
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-exo), Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
+
+/* Not Found Page Animation */
+@keyframes floatProduce {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px) rotate(-6deg) scale(0.88);
+  }
+  15%,
+  85% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.45;
+    transform: translateY(-18px) rotate(5deg) scale(1.07);
+  }
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes badgePop {
+  0% {
+    transform: scale(0) rotate(-20deg);
+  }
+  70% {
+    transform: scale(1.15) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes cartWiggle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-8deg) scale(1.06);
+  }
+  40% {
+    transform: rotate(6deg) scale(1.08);
+  }
+  60% {
+    transform: rotate(-4deg) scale(1.04);
+  }
+  80% {
+    transform: rotate(2deg) scale(1.02);
+  }
+}
+.card-in {
+  animation: cardIn 0.75s 0.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.badge-pop {
+  animation: badgePop 0.5s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.cart-wiggle {
+  animation:
+    cartWiggle 0.8s 1.2s ease-in-out both,
+    cartWiggle 0.8s 4s ease-in-out infinite;
+}
+
+/* End Not Found Page Animation */
