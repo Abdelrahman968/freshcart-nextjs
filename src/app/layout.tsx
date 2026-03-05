@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Exo } from 'next/font/google';
 import './globals.css';
 import Navbar from '@components/Navbar/Navbar';
+import ProgressBar from '@components/Nprogress/Nprogress';
 
 const exo = Exo({
   variable: '--font-exo',
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${exo.variable} antialiased`}>
+        <ProgressBar />
         <Navbar />
         <main>{children}</main>
       </body>

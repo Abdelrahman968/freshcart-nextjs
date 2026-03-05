@@ -22,7 +22,8 @@
       "@components/*": ["./src/components/*"],
       "@app/*": ["./src/app/*"],
       "@public/*": ["./public/*"],
-      "@node_modules/*": ["./node_modules/*"]
+      "@node_modules/*": ["./node_modules/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "include": [

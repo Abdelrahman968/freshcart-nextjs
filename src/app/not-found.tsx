@@ -1,18 +1,12 @@
 import Link from 'next/link';
 import { IconType } from 'react-icons';
-import {
-  FaCarrot,
-  FaLemon,
-  FaSeedling,
-  FaShieldAlt,
-  FaTruck,
-} from 'react-icons/fa';
+import { FaCarrot, FaLemon, FaSeedling } from 'react-icons/fa';
 import { FaAppleWhole, FaCartShopping } from 'react-icons/fa6';
 import { GiAvocado, GiBroccoli, GiGrapes, GiPlantSeed } from 'react-icons/gi';
-import { TbHomeFilled, TbRefresh } from 'react-icons/tb';
+import { TbHomeFilled } from 'react-icons/tb';
 import GoBackButton from '@components/GoBackButton/GoBackButton';
-import { BiSupport } from 'react-icons/bi';
 import { Metadata } from 'next';
+import FooterBanner from '@components/FooterBanner/FooterBanner';
 
 interface floatingIconsType {
   Icon: IconType;
@@ -29,13 +23,6 @@ interface PopularDestinationType {
   name: string;
   href: string;
   active: boolean;
-}
-
-interface FooterInfoType {
-  id: number;
-  icon: IconType;
-  title: string;
-  description: string;
 }
 
 const floatingIcons: floatingIconsType[] = [
@@ -140,33 +127,6 @@ const popularDestinations: PopularDestinationType[] = [
   },
 ];
 
-const footerInfo: FooterInfoType[] = [
-  {
-    id: 1,
-    icon: FaTruck,
-    title: 'Free Shipping',
-    description: 'On orders over 500 EGP',
-  },
-  {
-    id: 2,
-    icon: TbRefresh,
-    title: 'Easy Returns',
-    description: '14-day return policy',
-  },
-  {
-    id: 3,
-    icon: FaShieldAlt,
-    title: 'Secure Payment',
-    description: '100% secure checkout',
-  },
-  {
-    id: 4,
-    icon: BiSupport,
-    title: '24/7 Support',
-    description: 'Contact us anytime',
-  },
-];
-
 export const metadata: Metadata = {
   title: 'FreshCart - Not Found',
   description: 'FreshCart is an e-commerce website',
@@ -189,25 +149,27 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="relative overflow-hidden">
-      {floatingIcons.map((item, index) => (
-        <span
-          key={index}
-          className={`pointer-events-none absolute text-emerald-400 drop-shadow-sm ${item.rot} z-1`}
-          style={{
-            top: item.top,
-            left: item.left,
-            animationName: 'floatProduce',
-            animationDuration: item.dur,
-            animationDelay: item.delay,
-            animationTimingFunction: 'ease-in-out',
-            animationIterationCount: 'infinite',
-          }}
-        >
-          <item.Icon size={item.size} />
-        </span>
-      ))}
-      <div className="z-5 flex flex-col items-center justify-center gap-5 min-h-screen py-20 bg-gray-50 relative overflow-hidden">
+    <div className="relative overflow-hidden min-h-screen pt-20 bg-gray-50">
+      {floatingIcons.map(
+        ({ Icon, top, left, size, delay, dur, rot }, index) => (
+          <span
+            key={index}
+            className={`pointer-events-none absolute text-emerald-400 drop-shadow-sm ${rot} z-1`}
+            style={{
+              top,
+              left,
+              animationName: 'floatProduce',
+              animationDuration: dur,
+              animationDelay: delay,
+              animationTimingFunction: 'ease-in-out',
+              animationIterationCount: 'infinite',
+            }}
+          >
+            <Icon size={size} />
+          </span>
+        )
+      )}
+      <div className="z-5 flex flex-col items-center justify-center gap-5  relative">
         <div className="relative">
           <div className="bg-white py-10 px-20 rounded-xl shadow-xl">
             <FaCartShopping color="#6EE599" size={100} />
@@ -242,7 +204,7 @@ export default function NotFound() {
           </Link>
           <GoBackButton />
         </div>
-        <div className="bg-white border-2 border-default rounded-2xl text-center p-5">
+        <div className="bg-white border-2 border-gray-200 rounded-2xl text-center p-5">
           <h2 className="text-gray-400 font-semibold mb-4 uppercase">
             Popular Destinations
           </h2>
@@ -251,31 +213,14 @@ export default function NotFound() {
               <Link
                 key={destination.id}
                 href={destination.href}
-                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-300 ease-in-out border border-default ${destination.active ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-300 ease-in-out border border-gray-200 ${destination.active ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
               >
                 <p>{destination.name}</p>
               </Link>
             ))}
           </div>
         </div>
-        <div className="bg-green-50 border-2 border-default rounded-xl p-5 w-[90%] mt-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {footerInfo.map(info => (
-              <div
-                key={info.id}
-                className="flex flex-col md:flex-row items-center justify-center gap-2"
-              >
-                <div className="bg-green-100 w-15 h-15 rounded-xl flex items-center justify-center">
-                  <info.icon size={24} className="text-green-600" />
-                </div>
-                <div className="flex flex-col items-center  md:items-start justify-center">
-                  <p className="font-semibold">{info.title}</p>
-                  <p className="text-gray-500 text-sm">{info.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <FooterBanner />
       </div>
     </div>
   );
