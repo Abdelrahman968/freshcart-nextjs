@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { FaBars, FaGift, FaHome, FaRegHeart, FaTruck } from 'react-icons/fa';
+import { FaBars, FaRegHeart, FaTruck } from 'react-icons/fa';
 import Image from 'next/image';
 import logo from '@assets/header/logo.svg';
 import { useState } from 'react';

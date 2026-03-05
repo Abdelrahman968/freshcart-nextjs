@@ -15,7 +15,6 @@ type SearchHeaderProps = {
 };
 
 function SearchHeader({
-  position,
   placeholder,
   roundValue,
   width,
