@@ -6,6 +6,7 @@ import logo from '@assets/header/logo.svg';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
+import { BiSupport } from 'react-icons/bi';
 
 function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
@@ -56,7 +57,6 @@ function MobileLinks() {
         <hr className="my-5 border-gray-200 w-full px-0" />
         <div className="my-5">
           <SearchHeader
-            position="mobile"
             placeholder="Search products..."
             roundValue="rounded-lg"
             width="w-full"
@@ -124,6 +124,36 @@ function MobileLinks() {
               <p className="lg:font-semibold text-base text-black">Cart</p>
             </div>
           </Link>
+        </div>
+        <hr className="my-5 border-gray-200 w-full px-0" />
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button className="p-3 rounded-xl font-bold text-white hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out bg-green-500 w-full">
+            <Link href="/login">Sign In</Link>
+          </button>
+          <button className="p-3 rounded-xl font-bold text-green-600 hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out border border-green-500 w-full">
+            <Link href="/register">Sign Up</Link>
+          </button>
+        </div>
+        <hr className="my-5 border-gray-200 w-full px-0" />
+
+        <div>
+          <button className="w-full active:scale-105 transition-all duration-300 ease-in-out">
+            <Link href="/support">
+              <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                  <BiSupport color="#16A34A" strokeWidth={1.5} />
+                </div>
+                <div className="flex flex-col justify-center items-start">
+                  <p className="text-sm font-semibold text-gray-700">
+                    Need Help?
+                  </p>
+                  <p className="text-sm text-green-600">
+                    24/7 <span className="text-green-600">Contact Support</span>
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </button>
         </div>
       </div>
     </>

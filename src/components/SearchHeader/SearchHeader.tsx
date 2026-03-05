@@ -7,7 +7,6 @@ type Inputs = {
 };
 
 type SearchHeaderProps = {
-  position: string;
   placeholder: string;
   roundValue: string;
   width: string;

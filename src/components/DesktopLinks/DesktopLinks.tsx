@@ -40,7 +40,7 @@ const categories: Category[] = [
 function DesktopLinks() {
   const [showCategories, setShowCategories] = useState(false);
   return (
-    <div className="font-medium text-[#364153] hidden xl:block">
+    <div className="font-medium text-base text-[#364153] hidden xl:block">
       <ul className="flex gap-5">
         <li className="hover:text-[#6AA64A] transition-colors duration-300">
           <Link href="/">Home</Link>

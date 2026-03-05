@@ -23,7 +23,8 @@
       "@app/*": ["./src/app/*"],
       "@public/*": ["./public/*"],
       "@node_modules/*": ["./node_modules/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": [

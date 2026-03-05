@@ -32,7 +32,6 @@ function Navbar() {
             </Link>
             <div className="relative w-full mr-5 hidden md:block">
               <SearchHeader
-                position="desktop"
                 roundValue="rounded-full"
                 width="2xl:w-[550px] xl:w-[400px] lg:w-[340px] w-[350px]"
                 height="h-10"

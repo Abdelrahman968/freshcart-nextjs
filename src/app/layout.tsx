@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${exo.variable} antialiased`}>
+      <body className={`${exo.variable} antialiased scrollbar-custom`}>
         <ProgressBar />
         <Navbar />
         <main>{children}</main>

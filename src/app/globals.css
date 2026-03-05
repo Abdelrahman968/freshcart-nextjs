@@ -3,6 +3,7 @@
 
 body {
   font-family: var(--font-exo), Arial, Helvetica, sans-serif;
+  min-height: 500vh;
 }
 
 /* Not Found Page Animation */
@@ -73,3 +74,18 @@ body {
 }
 
 /* End Not Found Page Animation */
+
+/* Swiper Pagination */
+.swiper-pagination-bullet {
+  transition: all 0.3s;
+  opacity: 1 !important;
+  background: #ffffff80 !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff !important;
+  border-radius: 6px !important;
+  width: 32px !important;
+}
