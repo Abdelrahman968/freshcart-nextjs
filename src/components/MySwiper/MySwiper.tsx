@@ -87,7 +87,7 @@ function MySwiper({
                     <Link href={slide.buttonLink2}>
                       <button
                         type="button"
-                        className="bg-transparent border border-white/50 text-white font-semibold px-6 py-2 rounded-lg cursor-pointer hover:scale-105 transition-all duration-300 backdrop-blur-md shadow-2xl"
+                        className="bg-transparent border border-white/50 text-white font-semibold px-6 py-2 rounded-lg cursor-pointer hover:scale-105 transition-all duration-300 backdrop-blur-xs shadow-2xl"
                       >
                         {slide.buttonText2}
                       </button>

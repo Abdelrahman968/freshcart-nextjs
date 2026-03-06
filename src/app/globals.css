@@ -3,6 +3,7 @@
 
 body {
   font-family: var(--font-exo), Arial, Helvetica, sans-serif;
+  min-height: 500vh;
 }
 
 /* Not Found Page Animation */
