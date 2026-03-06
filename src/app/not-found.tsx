@@ -6,7 +6,9 @@ import { GiAvocado, GiBroccoli, GiGrapes, GiPlantSeed } from 'react-icons/gi';
 import { TbHomeFilled } from 'react-icons/tb';
 import GoBackButton from '@components/GoBackButton/GoBackButton';
 import { Metadata } from 'next';
-import FooterBanner from '@components/FooterBanner/FooterBanner';
+import IconBanner from '@components/IconBanner/IconBanner';
+
+import { notFoundBannerInfo } from '../data/iconBanner';
 
 interface floatingIconsType {
   Icon: IconType;
@@ -220,7 +222,9 @@ export default function NotFound() {
             ))}
           </div>
         </div>
-        <FooterBanner />
+        <div className="bg-green-50 p-5 w-full mt-4">
+          <IconBanner data={notFoundBannerInfo} />
+        </div>
       </div>
     </div>
   );

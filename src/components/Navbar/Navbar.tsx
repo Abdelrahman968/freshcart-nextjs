@@ -6,10 +6,11 @@ import SearchHeader from '@components/SearchHeader/SearchHeader';
 import DesktopLinks from '@components/DesktopLinks/DesktopLinks';
 import MobileLinks from '@components/MobileLinks/MobileLinks';
 import UserHeader from '@components/UserHeader/UserHeader';
+import ShoppingCart from '@components/ShoppingCart/ShoppingCart';
+import BiSupport from '@components/BiSupport/BiSupport';
 
 import Link from 'next/link';
-import { BiSupport } from 'react-icons/bi';
-import { FaRegHeart, FaShoppingCart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 
 function Navbar() {
   return (
@@ -41,34 +42,27 @@ function Navbar() {
           </div>
           <DesktopLinks />
           <div className="flex items-center gap-4 ml-6.5">
-            <Link
-              href="/support"
-              className="items-center gap-2 hover:text-[#6AA64A] transition-colors duration-300 hidden xl:flex"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#F0FDF4] flex items-center justify-center">
-                <BiSupport color="#16A34A" size={20} strokeWidth={1.1} />
-              </div>
-              <div className="flex flex-col">
-                <p className="text-xs font-medium text-[#99A1AF]">Support</p>
-                <p className="text-sm font-medium">
-                  24/7 <span className="text-[#16A34A]">Help</span>
-                </p>
-              </div>
-            </Link>
+            <BiSupport
+              LinkClassName="items-center gap-2 hover:text-[#6AA64A] transition-colors duration-300 hidden xl:flex transform transition-transform duration-150 ease-in-out hover:scale-102"
+              iconClassName="w-10 h-10 rounded-full bg-[#F0FDF4] flex items-center justify-center"
+              size={20}
+              color="#16A34A"
+              strokeWidth={1.1}
+              textDivClassName="flex flex-col"
+              firstText="Support"
+              secondText={['24/7', 'Help']}
+              firstTextClassName="text-xs font-medium text-[#99A1AF]"
+              secondTextClassName="text-sm font-medium"
+            />
             <div className="w-[2px] h-10 bg-[#E5E7EB] hidden xl:block" />
             <div className="flex items-center gap-2">
               <Link
                 href="/wishlist"
-                className="w-10 h-10 rounded-full hover:bg-[#F0FDF4] flex items-center justify-center hover:text-[#16A34A] transition-all duration-300 ease-in-out cursor-pointer"
+                className="w-10 h-10 rounded-full hover:bg-red-50 flex items-center justify-center hover:text-red-600 transition-all duration-300 ease-in-out cursor-pointer"
               >
                 <FaRegHeart size={20} strokeWidth={1.1} />
               </Link>
-              <Link
-                href="/cart"
-                className="w-10 h-10 rounded-full hover:bg-[#F0FDF4] flex items-center justify-center hover:text-[#16A34A] transition-all duration-300 ease-in-out cursor-pointer"
-              >
-                <FaShoppingCart size={20} strokeWidth={1.1} />
-              </Link>
+              <ShoppingCart />
             </div>
             <UserHeader />
             <MobileLinks />

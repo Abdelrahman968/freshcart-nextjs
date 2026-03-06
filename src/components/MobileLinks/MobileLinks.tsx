@@ -6,7 +6,7 @@ import logo from '@assets/header/logo.svg';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
-import { BiSupport } from 'react-icons/bi';
+import BiSupport from '../BiSupport/BiSupport';
 
 function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
@@ -106,7 +106,7 @@ function MobileLinks() {
             href="/wishlist"
             className="active:scale-105 transition-all duration-300 ease-in-out"
           >
-            <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl">
+            <div className=" flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
               <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
                 <FaRegHeart color="#FB2C36" strokeWidth={5} />
               </div>
@@ -117,7 +117,7 @@ function MobileLinks() {
             href="/cart"
             className="active:scale-105 transition-all duration-300 ease-in-out"
           >
-            <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl">
+            <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
               <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                 <FaTruck color="#16A34A" strokeWidth={5} />
               </div>
@@ -138,21 +138,18 @@ function MobileLinks() {
 
         <div>
           <button className="w-full active:scale-105 transition-all duration-300 ease-in-out">
-            <Link href="/support">
-              <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <BiSupport color="#16A34A" strokeWidth={1.5} />
-                </div>
-                <div className="flex flex-col justify-center items-start">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Need Help?
-                  </p>
-                  <p className="text-sm text-green-600">
-                    24/7 <span className="text-green-600">Contact Support</span>
-                  </p>
-                </div>
-              </div>
-            </Link>
+            <BiSupport
+              LinkClassName="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200"
+              iconClassName="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"
+              size={20}
+              color="#16A34A"
+              strokeWidth={1.5}
+              textDivClassName="flex flex-col justify-center items-start"
+              firstText="Need Help?"
+              secondText={['24/7', 'Contact Support']}
+              firstTextClassName="text-sm font-semibold text-gray-700"
+              secondTextClassName="text-sm text-green-600"
+            />
           </button>
         </div>
       </div>
