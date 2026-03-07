@@ -1,30 +1,30 @@
-import type { Metadata } from 'next';
-import { Exo } from 'next/font/google';
-import './globals.css';
-import Navbar from '@components/Navbar/Navbar';
-import ProgressBar from '@components/Nprogress/Nprogress';
+import type { Metadata } from "next";
+import { Exo } from "next/font/google";
+import "./globals.css";
+import Navbar from "@components/Navbar/Navbar";
+import ProgressBar from "@components/Nprogress/Nprogress";
 
 const exo = Exo({
-  variable: '--font-exo',
-  subsets: ['latin'],
+  variable: "--font-exo",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'FreshCart',
-  description: 'FreshCart is an e-commerce website',
-  keywords: ['FreshCart', 'e-commerce', 'website'],
-  authors: [{ name: 'Abdelrahman Ayman' }],
-  creator: 'Abdelrahman Ayman',
-  publisher: 'Abdelrahman Ayman',
+  title: "FreshCart",
+  description: "FreshCart is an e-commerce website",
+  keywords: ["FreshCart", "e-commerce", "website"],
+  authors: [{ name: "Abdelrahman Ayman" }],
+  creator: "Abdelrahman Ayman",
+  publisher: "Abdelrahman Ayman",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };

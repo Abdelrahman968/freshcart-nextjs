@@ -29,7 +29,6 @@ function MainTitle({
         <p>{linkText}</p>
         <FaArrowRight />
       </Link>
-      {/* add button */}
     </div>
   );
 }

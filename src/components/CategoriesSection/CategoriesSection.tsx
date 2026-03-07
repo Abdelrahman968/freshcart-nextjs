@@ -1,34 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-interface CategoriesType {
-  _id: string;
-  name: string;
-  slug: string;
-  image: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { getAllCategories } from '@services/categories.service';
+import MainTitle from '@components/MainTitle/MainTitle';
 
 async function CategoriesSection() {
-  async function getAllCategories(): Promise<CategoriesType[] | null> {
-    try {
-      const res = await fetch(
-        'https://ecommerce.routemisr.com/api/v1/categories'
-      );
-      const finalRes = await res.json();
-      // console.log('finalRes', finalRes);
-      return finalRes.data;
-    } catch (err) {
-      console.log('finalRes', err);
-      return null;
-    }
-  }
-
   const data = await getAllCategories();
 
   return (
     <>
+      <MainTitle
+        textOne="Shop By"
+        textTwo="Category"
+        linkText="View All Categories"
+        linkUrl="/categories"
+      />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {data?.map(cat => {
           return (
