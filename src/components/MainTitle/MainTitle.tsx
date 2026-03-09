@@ -4,15 +4,15 @@ import { FaArrowRight } from 'react-icons/fa';
 interface MainTitleProps {
   textOne: string;
   textTwo: string;
-  linkText: string;
-  linkUrl: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
 function MainTitle({
   textOne = 'Shop By',
   textTwo = 'Category',
-  linkText = 'View All Categories',
-  linkUrl = '/categories',
+  linkText,
+  linkUrl,
 }: MainTitleProps) {
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center justify-center md:justify-between gap-4">
@@ -22,13 +22,15 @@ function MainTitle({
           {textOne} <span className="text-emerald-600">{textTwo}</span>
         </h2>
       </div>
-      <Link
-        href={`${linkUrl}`}
-        className="text-primary-600 self-end sm:self-auto hover:text-primary-700 font-medium flex items-center cursor-pointer gap-2 text-emerald-600 hover:text-emerald-800 transition-all duration-300 ease-in-out"
-      >
-        <p>{linkText}</p>
-        <FaArrowRight />
-      </Link>
+      {linkText && linkUrl && (
+        <Link
+          href={`${linkUrl}`}
+          className="self-end sm:self-auto font-medium flex items-center cursor-pointer gap-2 text-green-600 hover:text-green-800 transition-all duration-300 ease-in-out"
+        >
+          <p>{linkText}</p>
+          <FaArrowRight />
+        </Link>
+      )}
     </div>
   );
 }

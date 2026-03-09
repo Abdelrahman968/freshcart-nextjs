@@ -22,7 +22,7 @@ async function CategoriesSection() {
               key={cat._id}
               className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer"
             >
-              <div className="h-20 w-20 overflow-hidden bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary-200 transition">
+              <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
                 <Image
                   alt={`${cat.name}-Category`}
                   src={cat.image}
