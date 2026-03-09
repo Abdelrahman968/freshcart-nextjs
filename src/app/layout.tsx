@@ -3,7 +3,8 @@ import { Exo } from 'next/font/google';
 import './globals.css';
 import Navbar from '@components/Navbar/Navbar';
 import ProgressBar from '@components/Nprogress/Nprogress';
-import Footer from '../components/Footer/Footer';
+import Footer from '@components/Footer/Footer';
+import { ToastProviderHeroUI } from '../context/ToastProvider';
 
 const exo = Exo({
   variable: '--font-exo',
@@ -40,10 +41,12 @@ export default function RootLayout({
       <body
         className={`${exo.variable} antialiased scrollbar-custom flex flex-col min-h-screen`}
       >
-        <ProgressBar />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ToastProviderHeroUI>
+          <ProgressBar />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ToastProviderHeroUI>
       </body>
     </html>
   );
