@@ -19,7 +19,7 @@ async function FeaturedProducts() {
             price={product.price}
             rating={product.ratingsAverage}
             reviews={product.ratingsQuantity}
-            link={`/products/${product.slug}`}
+            link={`/products/${product.slug}?id=${product._id}`}
             priceAfterDiscount={product.priceAfterDiscount}
           />
         ))}

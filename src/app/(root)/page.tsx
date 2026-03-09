@@ -5,7 +5,7 @@ import FeatureCard from '@components/FeatureCard/FeatureCard';
 import FeaturedProducts from '@components/FeaturedProducts/FeaturedProducts';
 import NewsletterSection from '@components/NewsletterSection/NewsletterSection';
 
-import { homeTopBannerInfo } from '../../data/iconBanner';
+import { homeTopBannerInfo, notFoundBannerInfo } from '../../data/iconBanner';
 import { slides } from '../../data/homeSlides';
 
 function HomePage() {
@@ -71,6 +71,9 @@ function HomePage() {
       <section className="py-16 bg-linear-to-b from-white to-gray-50 px-1 md:px-9 overflow-hidden">
         <NewsletterSection />
       </section>
+      <div className="bg-green-50 p-5 w-full">
+        <IconBanner data={notFoundBannerInfo} />
+      </div>
     </>
   );
 }

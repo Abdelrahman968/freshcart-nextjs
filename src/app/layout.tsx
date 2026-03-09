@@ -37,10 +37,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${exo.variable} antialiased scrollbar-custom`}>
+      <body
+        className={`${exo.variable} antialiased scrollbar-custom flex flex-col min-h-screen`}
+      >
         <ProgressBar />
         <Navbar />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
