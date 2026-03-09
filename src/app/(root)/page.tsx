@@ -1,10 +1,12 @@
 import MySwiper from '@components/MySwiper/MySwiper';
-import { slides } from '../../data/homeSlides';
-import IconBanner from '../../components/IconBanner/IconBanner';
-import { homeTopBannerInfo } from '../../data/iconBanner';
+import IconBanner from '@components/IconBanner/IconBanner';
 import CategoriesSection from '@components/CategoriesSection/CategoriesSection';
-import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts';
+import FeatureCard from '@components/FeatureCard/FeatureCard';
+import FeaturedProducts from '@components/FeaturedProducts/FeaturedProducts';
+import NewsletterSection from '@components/NewsletterSection/NewsletterSection';
+
+import { homeTopBannerInfo } from '../../data/iconBanner';
+import { slides } from '../../data/homeSlides';
 
 function HomePage() {
   return (
@@ -65,6 +67,9 @@ function HomePage() {
       </section>
       <section className="px-1 md:px-9">
         <FeaturedProducts />
+      </section>
+      <section className="py-16 bg-linear-to-b from-white to-gray-50 px-1 md:px-9 overflow-hidden">
+        <NewsletterSection />
       </section>
     </>
   );

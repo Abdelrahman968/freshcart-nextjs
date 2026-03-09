@@ -1,67 +1,9 @@
+import { getFeaturedProducts } from '../../services/products.service';
+import { ProductCardProps } from '../../types/product.type';
 import MainTitle from '../MainTitle/MainTitle';
 import ProductCard from '../ProductCard/ProductCard';
 
-interface Subcategory {
-  _id: string;
-  name: string;
-  slug: string;
-  category: string;
-}
-
-interface Category {
-  _id: string;
-  name: string;
-  slug: string;
-  image: string;
-}
-
-interface Brand {
-  _id: string;
-  name: string;
-  slug: string;
-  image: string;
-}
-
-interface ProductCardProps {
-  sold: number;
-  images: string[];
-  subcategory: Subcategory[];
-  ratingsQuantity: number;
-  _id: string;
-  title: string;
-  slug: string;
-  description: string;
-  quantity: number;
-  price: number;
-  imageCover: string;
-  category: Category;
-  brand: Brand;
-  ratingsAverage: number;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-  priceAfterDiscount: number;
-}
-
 async function FeaturedProducts() {
-  const getFeaturedProducts = async (): Promise<ProductCardProps[] | null> => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/products`
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-
-      const data = await response.json();
-      return data.data;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  };
-
   const featuredProducts = await getFeaturedProducts();
 
   return (
