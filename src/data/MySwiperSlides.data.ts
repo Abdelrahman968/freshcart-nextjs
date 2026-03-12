@@ -1,7 +1,7 @@
 import MainSlideImage from '@assets/home/home-slider.png';
-import type { SlideType } from '../types/home.slider';
+import type { HomeSlideType } from '../types/MySwiper.slider';
 
-export const slides: SlideType[] = [
+export const slides: HomeSlideType[] = [
   {
     id: 1,
     image: MainSlideImage,

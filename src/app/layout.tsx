@@ -38,13 +38,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${exo.variable} antialiased scrollbar-custom flex flex-col min-h-screen`}
-      >
+      <body className={`${exo.variable} antialiased`}>
         <ToastProviderHeroUI>
           <ProgressBar />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main>{children}</main>
           <Footer />
         </ToastProviderHeroUI>
       </body>

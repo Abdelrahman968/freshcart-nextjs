@@ -37,7 +37,7 @@ function ProductQuantity({ quantity }: { quantity: number }) {
         <div className="flex items-center gap-4">
           <div className="flex items-center border-2 border-gray-200 rounded-lg overflow-hidden">
             <button
-              className="px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 transition disabled:opacity-50"
+              className="px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 transition disabled:opacity-50 cursor-pointer disabled:hover:bg-transparent disabled:hover:text-gray-600"
               disabled={count <= 1}
               onClick={decrease}
             >
@@ -54,7 +54,7 @@ function ProductQuantity({ quantity }: { quantity: number }) {
             />
 
             <button
-              className="px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 transition disabled:opacity-50"
+              className="px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 transition disabled:opacity-50 cursor-pointer disabled:hover:bg-transparent disabled:hover:text-gray-600"
               disabled={count >= quantity}
               onClick={increase}
             >

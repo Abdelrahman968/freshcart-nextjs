@@ -1,16 +1,20 @@
 import { getFeaturedProducts } from '../../services/products.service';
 import { ProductCardProps } from '../../types/product.type';
-import MainTitle from '../MainTitle/MainTitle';
 import ProductCard from '../ProductCard/ProductCard';
 
-async function FeaturedProducts() {
-  const featuredProducts = await getFeaturedProducts();
+interface FeaturedProductsProps {
+  page: number;
+}
+
+export default async function FeaturedProducts({
+  page,
+}: FeaturedProductsProps) {
+  const featuredProducts = await getFeaturedProducts(page);
 
   return (
-    <>
-      <MainTitle textOne="Featured" textTwo="Products" />
+    <div className="flex flex-col gap-6 justify-center items-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {featuredProducts?.map((product: ProductCardProps) => (
+        {featuredProducts?.data.map((product: ProductCardProps) => (
           <ProductCard
             key={product._id}
             title={product.title}
@@ -19,13 +23,11 @@ async function FeaturedProducts() {
             price={product.price}
             rating={product.ratingsAverage}
             reviews={product.ratingsQuantity}
-            link={`/product/${product._id}`}
+            link={`/products/${product._id}`}
             priceAfterDiscount={product.priceAfterDiscount}
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
-
-export default FeaturedProducts;

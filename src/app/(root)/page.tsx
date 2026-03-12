@@ -1,23 +1,19 @@
-import MySwiper from '@components/MySwiper/MySwiper';
+import HomeSwiper from '@components/HomeSwiper/HomeSwiper';
 import IconBanner from '@components/IconBanner/IconBanner';
 import CategoriesSection from '@components/CategoriesSection/CategoriesSection';
 import FeatureCard from '@components/FeatureCard/FeatureCard';
 import FeaturedProducts from '@components/FeaturedProducts/FeaturedProducts';
 import NewsletterSection from '@components/NewsletterSection/NewsletterSection';
 
-import { homeTopBannerInfo, notFoundBannerInfo } from '../../data/iconBanner';
-import { slides } from '../../data/homeSlides';
+import { homeTopBannerInfo } from '../../data/iconBanner';
+import { slides } from '../../data/MySwiperSlides.data';
+import MainTitle from '../../components/MainTitle/MainTitle';
 
 function HomePage() {
   return (
     <>
       <section>
-        <MySwiper
-          slides={slides}
-          slidesPerView={1}
-          spaceBetween={0}
-          from="HomeSlider"
-        />
+        <HomeSwiper slides={slides} slidesPerView={1} spaceBetween={0} />
       </section>
 
       <section className="py-8 bg-gray-50">
@@ -66,14 +62,12 @@ function HomePage() {
         </div>
       </section>
       <section className="px-1 md:px-9">
-        <FeaturedProducts />
+        <MainTitle textOne="Featured" textTwo="Products" />
+        <FeaturedProducts page={1} />
       </section>
       <section className="py-16 bg-linear-to-b from-white to-gray-50 px-1 md:px-9 overflow-hidden">
         <NewsletterSection />
       </section>
-      <div className="bg-green-50 p-5 w-full">
-        <IconBanner data={notFoundBannerInfo} />
-      </div>
     </>
   );
 }

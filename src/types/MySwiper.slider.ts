@@ -1,6 +1,6 @@
 import { StaticImageData } from 'next/image';
 
-export interface SlideType {
+export interface HomeSlideType {
   id: number;
   image: StaticImageData;
   title: string[];
@@ -9,4 +9,9 @@ export interface SlideType {
   buttonLink: string;
   buttonText2: string;
   buttonLink2: string;
+}
+
+export interface ProductPageSlidesType {
+  id: number;
+  image: StaticImageData;
 }

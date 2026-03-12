@@ -39,3 +39,14 @@ export interface ProductCardProps {
   id: string;
   priceAfterDiscount: number;
 }
+
+export interface FullProductsResponseType {
+  data: ProductCardProps[];
+  metadata: {
+    currentPage: number;
+    numberOfPages: number;
+    limit: number;
+    nextPage: number;
+  };
+  results: number;
+}

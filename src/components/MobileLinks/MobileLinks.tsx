@@ -46,6 +46,7 @@ function MobileLinks() {
             width={165}
             height={32}
             loading="eager"
+            onClick={() => setShowMobileLinks(false)}
           />
           <button
             onClick={() => setShowMobileLinks(false)}
@@ -70,6 +71,7 @@ function MobileLinks() {
             <Link
               href="/"
               className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
             >
               Home
             </Link>
@@ -78,6 +80,7 @@ function MobileLinks() {
             <Link
               href="/products"
               className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
             >
               Shop
             </Link>
@@ -86,6 +89,7 @@ function MobileLinks() {
             <Link
               href="/categories"
               className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
             >
               Categories
             </Link>
@@ -94,6 +98,7 @@ function MobileLinks() {
             <Link
               href="/brands"
               className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
             >
               Brands
             </Link>
@@ -105,6 +110,7 @@ function MobileLinks() {
           <Link
             href="/wishlist"
             className="active:scale-105 transition-all duration-300 ease-in-out"
+            onClick={() => setShowMobileLinks(false)}
           >
             <div className=" flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
               <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
@@ -116,6 +122,7 @@ function MobileLinks() {
           <Link
             href="/cart"
             className="active:scale-105 transition-all duration-300 ease-in-out"
+            onClick={() => setShowMobileLinks(false)}
           >
             <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
               <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
@@ -128,16 +135,23 @@ function MobileLinks() {
         <hr className="my-5 border-gray-200 w-full px-0" />
         <div className="flex flex-col sm:flex-row gap-3">
           <button className="p-3 rounded-xl font-bold text-white hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out bg-green-500 w-full">
-            <Link href="/login">Sign In</Link>
+            <Link href="/login" onClick={() => setShowMobileLinks(false)}>
+              Sign In
+            </Link>
           </button>
           <button className="p-3 rounded-xl font-bold text-green-600 hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out border border-green-500 w-full">
-            <Link href="/register">Sign Up</Link>
+            <Link href="/register" onClick={() => setShowMobileLinks(false)}>
+              Sign Up
+            </Link>
           </button>
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
 
         <div>
-          <button className="w-full active:scale-105 transition-all duration-300 ease-in-out">
+          <button
+            className="w-full active:scale-105 transition-all duration-300 ease-in-out"
+            onClick={() => setShowMobileLinks(false)}
+          >
             <BiSupport
               LinkClassName="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200"
               iconClassName="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"

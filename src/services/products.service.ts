@@ -1,18 +1,23 @@
-import { ProductCardProps } from '../types/product.type';
+import {
+  FullProductsResponseType,
+  ProductCardProps,
+} from '../types/product.type';
 
 // GET All PRODUCTS
-export const getFeaturedProducts = async (): Promise<
-  ProductCardProps[] | null
-> => {
+export const getFeaturedProducts = async (
+  page: number = 1
+): Promise<FullProductsResponseType | null> => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/products?page=${page}`
+    );
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
 
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return null;

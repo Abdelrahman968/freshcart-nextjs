@@ -1,10 +1,8 @@
 import {
   FaStar,
   FaRegStar,
-  FaShoppingCart,
   FaBolt,
   FaRegHeart,
-  FaShareAlt,
   FaTruck,
   FaUndoAlt,
   FaShieldAlt,
@@ -13,10 +11,9 @@ import { ProductCardProps } from '../../types/product.type';
 import { getDiscountPercentage } from '../../utils/price';
 import ProductQuantity from '../ProductQuantity/ProductQuantity';
 import ShareBtn from '../ShareBtn/ShareBtn';
+import AddToCartBtn from '../AddToCartBtn/AddToCartBtn';
 
 function ProductInfo({ product }: { product: ProductCardProps }) {
-  console.log(product);
-
   const discount = getDiscountPercentage(
     product.price,
     product.priceAfterDiscount
@@ -41,12 +38,14 @@ function ProductInfo({ product }: { product: ProductCardProps }) {
         </h1>
         <div className="flex items-center gap-3 mb-4">
           <div className="flex text-yellow-400">
-            {Array.from({ length: product.ratingsAverage }, (_, i) => (
-              <FaStar key={i} />
-            ))}
-            {Array.from({ length: 5 - product.ratingsAverage }, (_, i) => (
-              <FaRegStar key={i} />
-            ))}
+            {Array.from({ length: 5 }, (_, i) => {
+              const ratingValue = i + 1;
+              if (product.ratingsAverage >= ratingValue) {
+                return <FaStar key={i} />;
+              } else {
+                return <FaRegStar key={i} />;
+              }
+            })}
           </div>
           <span className="text-sm text-gray-600">
             {product.ratingsAverage} ({product.ratingsQuantity} reviews)
@@ -101,13 +100,7 @@ function ProductInfo({ product }: { product: ProductCardProps }) {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          <button
-            id="add-to-cart"
-            className="flex-1 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-green-600/25 bg-green-600 cursor-pointer"
-          >
-            <FaShoppingCart />
-            Add to Cart
-          </button>
+          <AddToCartBtn />
           <button
             id="buy-now"
             className="flex-1 bg-gray-900 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
