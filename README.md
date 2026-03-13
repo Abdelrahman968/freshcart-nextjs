@@ -6,8 +6,10 @@ FreshCart is a modern e-commerce web application built to provide a seamless sho
 
 This project leverages modern frontend technologies:
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Library**: [React 19](https://react.dev/)
+- **UI Components**: [HeroUI](https://www.heroui.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Typography**: [Exo Font](https://fonts.google.com/specimen/Exo) (via `next/font`)
 - **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
