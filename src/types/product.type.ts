@@ -19,6 +19,19 @@ interface Brand {
   image: string;
 }
 
+interface Review {
+  _id: string;
+  review: string;
+  rating: number;
+  user: {
+    _id: string;
+    name: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 export interface ProductCardProps {
   sold: number;
   images: string[];
@@ -38,6 +51,7 @@ export interface ProductCardProps {
   updatedAt: string;
   id: string;
   priceAfterDiscount: number;
+  reviews: Review[];
 }
 
 export interface FullProductsResponseType {

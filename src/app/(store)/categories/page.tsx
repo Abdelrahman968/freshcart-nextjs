@@ -3,6 +3,18 @@ import PageHeader from '../../../components/PageHeader/PageHeader';
 import MainTitle from '../../../components/MainTitle/MainTitle';
 import CategoryCard from '../../../components/CategoryCard/CategoryCard';
 import { getAllCategories } from '../../../services/categories.service';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Categories Page | FreshCart`,
+    description: `Categories Page | FreshCart`,
+    keywords: ['Categories Page'],
+    authors: [{ name: 'Abdelrahman Ayman' }],
+    creator: 'Abdelrahman Ayman',
+    publisher: 'Abdelrahman Ayman',
+  };
+}
 
 async function CategoriesPage() {
   const categories = await getAllCategories();

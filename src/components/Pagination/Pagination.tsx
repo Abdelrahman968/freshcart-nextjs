@@ -2,21 +2,25 @@
 import { Pagination as PaginationHeroUI } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 
+interface PaginationProps {
+  currentPage: number;
+  numberOfPages: number;
+  sectionId?: string | undefined;
+}
+
 function Pagination({
   currentPage,
   numberOfPages,
-}: {
-  currentPage: number;
-  numberOfPages: number;
-}) {
+  sectionId,
+}: PaginationProps) {
   const router = useRouter();
   const handlePageChange = (newPage: number) => {
     router.push(`?page=${newPage}`);
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const section = document.getElementById(sectionId!);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
   return (
     <PaginationHeroUI

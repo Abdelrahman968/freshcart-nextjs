@@ -4,6 +4,7 @@ import ProductNotFound from '@components/ProductNotFound/ProductNotFound';
 import { Metadata } from 'next';
 import ProductInfo from '../../../../components/ProductInfo/ProductInfo';
 import ProductImage from '../../../../components/ProductImage/ProductImage';
+import ProductDetailsInfo from '../../../../components/ProductDetilsInfo/ProductDetailsInfo';
 
 interface ProductDetailsPageProps {
   params: Promise<{ id?: string }>;
@@ -32,8 +33,8 @@ export async function generateMetadata(
     }
 
     return {
-      title: product.title,
-      description: product.description,
+      title: `Product Details - ${product.title} | FreshCart`,
+      description: `${product.description} | FreshCart`,
       keywords: [product.title, product.description],
       authors: [{ name: 'Abdelrahman Ayman' }],
       creator: 'Abdelrahman Ayman',
@@ -82,10 +83,13 @@ export default async function ProductDetailsPage(
       <section className="py-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8">
-            <ProductImage />
+            <ProductImage images={product.images} />
             <ProductInfo product={product} />
           </div>
         </div>
+      </section>
+      <section>
+        <ProductDetailsInfo product={product} />
       </section>
     </>
   );

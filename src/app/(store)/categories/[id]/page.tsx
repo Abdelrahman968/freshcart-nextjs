@@ -1,4 +1,21 @@
-import React from 'react';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  return {
+    title: `Sub Categories Page - ${id} | FreshCart`,
+    description: `${id} | FreshCart`,
+    keywords: [id],
+    authors: [{ name: 'Abdelrahman Ayman' }],
+    creator: 'Abdelrahman Ayman',
+    publisher: 'Abdelrahman Ayman',
+  };
+}
 
 async function SubCategoriesPage({
   params,
