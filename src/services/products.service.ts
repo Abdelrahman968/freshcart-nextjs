@@ -1,3 +1,5 @@
+'use server';
+
 import {
   FullProductsResponseType,
   ProductCardProps,
@@ -5,12 +7,19 @@ import {
 
 // GET All PRODUCTS
 export const getFeaturedProducts = async (
-  page: number = 1
+  page: number = 1,
+  brandId?: string
 ): Promise<FullProductsResponseType | null> => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/products?page=${page}`
-    );
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+
+    url.searchParams.append('page', page.toString());
+
+    if (brandId) {
+      url.searchParams.append('brand', brandId);
+    }
+
+    const response = await fetch(url.toString());
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');

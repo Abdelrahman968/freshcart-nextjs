@@ -19,7 +19,7 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
           aria-label="Tabs variants"
           variant="solid"
           color="success"
-          size="lg"
+          className="mx-auto md:mx-1 text-sm md:text-base lg:text-lg"
           selectedKey={selected}
           onSelectionChange={key =>
             setSelected(key as 'product-details' | 'reviews' | 'shipping-info')
@@ -28,9 +28,9 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
           <Tab
             key="product-details"
             title={
-              <div className="flex items-center space-x-2">
-                <FaBox />
-                <span>Product Details</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <FaBox className="text-lg md:text-base" />
+                <span className="hidden sm:block">Product Details</span>
               </div>
             }
           >
@@ -41,9 +41,9 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
           <Tab
             key="reviews"
             title={
-              <div className="flex items-center space-x-2">
-                <FaStarHalfStroke />
-                <span>Reviews</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <FaStarHalfStroke className="text-lg md:text-base" />
+                <span className="hidden sm:block">Reviews</span>
               </div>
             }
           >
@@ -54,9 +54,9 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
           <Tab
             key="shipping-info"
             title={
-              <div className="flex items-center space-x-2">
-                <FaTruck />
-                <span>Shipping & Returns</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <FaTruck className="text-lg md:text-base" />
+                <span className="hidden sm:block">Shipping & Returns</span>
               </div>
             }
           >

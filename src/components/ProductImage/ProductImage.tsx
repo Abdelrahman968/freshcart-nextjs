@@ -11,9 +11,15 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import Image from 'next/image';
+import AppImage from '../AppImage/AppImage';
 
-function ProductImage({ images }: { images: string[] }) {
+function ProductImage({
+  images,
+  ProductName,
+}: {
+  images: string[];
+  ProductName: string;
+}) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   return (
@@ -28,8 +34,8 @@ function ProductImage({ images }: { images: string[] }) {
         >
           {images.map(image => (
             <SwiperSlide key={image}>
-              <Image
-                alt="testImage"
+              <AppImage
+                alt={`${ProductName} image - FreshCart`}
                 width={500}
                 height={500}
                 className="w-full h-full object-cover rounded-xl"
@@ -49,10 +55,10 @@ function ProductImage({ images }: { images: string[] }) {
         >
           {images.map(image => (
             <SwiperSlide key={image} className="rounded-lg overflow-hidden">
-              <Image
+              <AppImage
                 width={1000}
                 height={1000}
-                alt="testImage"
+                alt={`${ProductName} Preview - FreshCart`}
                 className="w-full h-full object-cover "
                 src={image}
               />

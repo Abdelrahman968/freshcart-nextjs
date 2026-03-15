@@ -9,10 +9,6 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'ecommerce.routemisr.com',
       },
-      {
-        protocol: 'https',
-        hostname: 'swiperjs.com',
-      },
     ],
   },
 };

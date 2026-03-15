@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCategories } from '@services/categories.service';
 import MainTitle from '@components/MainTitle/MainTitle';
+import AppImage from '../AppImage/AppImage';
 
 async function CategoriesSection() {
   const data = await getAllCategories();
@@ -23,7 +23,7 @@ async function CategoriesSection() {
               className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer"
             >
               <div className="h-20 w-20 overflow-hidden bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition">
-                <Image
+                <AppImage
                   alt={`${cat.name}-Category`}
                   src={cat.image}
                   loading="lazy"

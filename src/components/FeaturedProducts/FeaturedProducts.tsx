@@ -4,12 +4,14 @@ import ProductCard from '../ProductCard/ProductCard';
 
 interface FeaturedProductsProps {
   page: number;
+  brand?: string;
 }
 
 export default async function FeaturedProducts({
   page,
+  brand,
 }: FeaturedProductsProps) {
-  const featuredProducts = await getFeaturedProducts(page);
+  const featuredProducts = await getFeaturedProducts(page, brand);
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center">

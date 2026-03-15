@@ -7,9 +7,9 @@ import 'swiper/css/pagination';
 
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { HomeSlideType } from '../../types/MySwiper.slider';
+import AppImage from '../AppImage/AppImage';
 
 interface MySwiperProps {
   slides: HomeSlideType[];
@@ -45,7 +45,7 @@ function MySwiper({ slides, slidesPerView, spaceBetween }: MySwiperProps) {
       >
         {slides.map(slide => (
           <SwiperSlide key={slide.id} className="relative">
-            <Image
+            <AppImage
               src={slide.image}
               alt="home-slider"
               width={1920}

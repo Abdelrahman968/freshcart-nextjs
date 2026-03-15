@@ -23,13 +23,17 @@ function Pagination({
     }
   };
   return (
-    <PaginationHeroUI
-      showControls
-      initialPage={currentPage}
-      total={numberOfPages}
-      color="success"
-      onChange={handlePageChange}
-    />
+    <>
+      {numberOfPages > 1 && (
+        <PaginationHeroUI
+          showControls
+          initialPage={currentPage}
+          total={numberOfPages}
+          color="success"
+          onChange={handlePageChange}
+        />
+      )}
+    </>
   );
 }
 

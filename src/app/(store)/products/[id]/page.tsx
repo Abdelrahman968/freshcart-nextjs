@@ -1,10 +1,15 @@
 import Breadcrumb from '@components/Breadcrumb/Breadcrumb';
-import { getProductById } from '../../../../services/products.service';
+import {
+  getFeaturedProducts,
+  getProductById,
+} from '../../../../services/products.service';
 import ProductNotFound from '@components/ProductNotFound/ProductNotFound';
 import { Metadata } from 'next';
 import ProductInfo from '../../../../components/ProductInfo/ProductInfo';
 import ProductImage from '../../../../components/ProductImage/ProductImage';
 import ProductDetailsInfo from '../../../../components/ProductDetilsInfo/ProductDetailsInfo';
+import ProductSwiper from '../../../../components/ProductDetilsInfo/ProductSwiper';
+import { FullProductsResponseType } from '../../../../types/product.type';
 
 interface ProductDetailsPageProps {
   params: Promise<{ id?: string }>;
@@ -58,9 +63,10 @@ export default async function ProductDetailsPage(
   }
 
   let product;
-
+  let mayLikeProducts: FullProductsResponseType | null = null;
   try {
     product = await getProductById(id);
+    mayLikeProducts = await getFeaturedProducts(1, product!.brand._id);
   } catch {
     return <ProductNotFound productId={id} />;
   }
@@ -73,7 +79,7 @@ export default async function ProductDetailsPage(
     <>
       <Breadcrumb
         homeURL="/"
-        categoryURL={`/category/${product.category._id}`}
+        categoryURL={`/categories/${product.category._id}`}
         SubCategoryURL={`/sub-category/${product.subcategory[0]._id}`}
         categoryName={product.category.name}
         SubCategoryName={product.subcategory[0].name}
@@ -83,13 +89,16 @@ export default async function ProductDetailsPage(
       <section className="py-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8">
-            <ProductImage images={product.images} />
+            <ProductImage images={product.images} ProductName={product.title} />
             <ProductInfo product={product} />
           </div>
         </div>
       </section>
       <section>
         <ProductDetailsInfo product={product} />
+      </section>
+      <section className="py-6 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <ProductSwiper productBrands={mayLikeProducts?.data || []} />
       </section>
     </>
   );

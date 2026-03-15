@@ -8,11 +8,11 @@ import { getFeaturedProducts } from '../../../services/products.service';
 async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page: number }>;
+  searchParams: Promise<{ page: number; brand: string }>;
 }) {
-  const page = (await searchParams).page;
+  const { page, brand } = await searchParams;
 
-  const featuredProducts = await getFeaturedProducts(page);
+  const featuredProducts = await getFeaturedProducts(page, brand);
 
   const metadata = featuredProducts?.metadata || {
     currentPage: 1,
@@ -36,7 +36,7 @@ async function ProductsPage({
               {featuredProducts?.results} products
             </p>
           </div>
-          <FeaturedProducts page={page} />
+          <FeaturedProducts page={page} brand={brand} />
         </div>
         <Pagination
           currentPage={metadata.currentPage}

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import logo from '@assets/header/logo.svg';
 
 import TopNav from '@components/TopNav/TopNav';
@@ -11,6 +10,7 @@ import BiSupport from '@components/BiSupport/BiSupport';
 
 import Link from 'next/link';
 import { FaRegHeart } from 'react-icons/fa';
+import AppImage from '../AppImage/AppImage';
 
 function Navbar() {
   return (
@@ -23,7 +23,7 @@ function Navbar() {
               href="/"
               className="block w-full cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
             >
-              <Image
+              <AppImage
                 src={logo}
                 alt="Logo"
                 width={165}

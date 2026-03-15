@@ -10,12 +10,12 @@ import {
 
 import { MdLocationOn } from 'react-icons/md';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
 import ImageLogo from '@assets/header/logo.svg';
 import IconBanner from '../IconBanner/IconBanner';
 import { notFoundBannerInfo } from '../../data/iconBanner';
+import AppImage from '../AppImage/AppImage';
 
 function Footer() {
   return (
@@ -29,7 +29,7 @@ function Footer() {
             <div className="lg:col-span-4">
               <Link className="inline-block mb-6" href="/">
                 <div className="bg-white rounded-lg px-4 py-2 inline-block">
-                  <Image
+                  <AppImage
                     src={ImageLogo}
                     alt="FreshCart Logo"
                     loading="lazy"

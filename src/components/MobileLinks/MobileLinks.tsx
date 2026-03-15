@@ -1,12 +1,12 @@
 'use client';
 import Link from 'next/link';
 import { FaBars, FaRegHeart, FaTruck } from 'react-icons/fa';
-import Image from 'next/image';
 import logo from '@assets/header/logo.svg';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
 import BiSupport from '../BiSupport/BiSupport';
+import AppImage from '../AppImage/AppImage';
 
 function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
@@ -40,7 +40,7 @@ function MobileLinks() {
         className={`bg-white fixed top-0 right-0 h-full w-80 max-w-[85vw] shadow-2xl transition-transform duration-300 overflow-y-auto p-5 ${showMobileLinks ? 'translate-x-0 z-50' : 'translate-x-full'}`}
       >
         <div className="flex items-center justify-between p-2 pb-5">
-          <Image
+          <AppImage
             src={logo}
             alt="Logo"
             width={165}

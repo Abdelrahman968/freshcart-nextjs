@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   FaRegHeart,
@@ -11,6 +10,7 @@ import {
   FaPlus,
 } from 'react-icons/fa6';
 import { getDiscountPercentage } from '../../utils/price';
+import AppImage from '../AppImage/AppImage';
 
 type ProductCardProps = {
   title: string;
@@ -44,7 +44,7 @@ function ProductCard({
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm flex flex-col justify-between h-full hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 ease-in-out">
       <div className="relative">
-        <Image
+        <AppImage
           className="w-full h-60 object-contain bg-white"
           src={image}
           alt={title}
@@ -82,9 +82,13 @@ function ProductCard({
         <div className="text-xs text-gray-500 mb-1">{category}</div>
 
         <h3 className="font-medium mb-1 cursor-pointer">
-          <a className="line-clamp-2" href={link}>
+          <Link
+            className="line-clamp-2 leading-5 min-h-10"
+            href={link}
+            title={title}
+          >
             {title}
-          </a>
+          </Link>
         </h3>
 
         <div className="flex items-center mb-2">

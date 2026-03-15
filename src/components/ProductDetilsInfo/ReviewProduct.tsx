@@ -3,9 +3,16 @@
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 import { ProductCardProps } from '../../types/product.type';
 import { Pagination } from '@heroui/react';
+import { useState } from 'react';
 
 function ReviewProduct({ product }: { product: ProductCardProps }) {
   const { ratingsAverage, ratingsQuantity, reviews } = product;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -33,9 +40,9 @@ function ReviewProduct({ product }: { product: ProductCardProps }) {
     <div className="p-6">
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-          <div className="text-center">
+          <div className="text-center w-full md:w-fit">
             <div className="text-5xl font-bold text-gray-900 mb-2">
-              {ratingsAverage}
+              {ratingsAverage.toFixed(1)}
             </div>
 
             <div className="flex justify-center text-yellow-400 text-lg">
@@ -84,31 +91,34 @@ function ReviewProduct({ product }: { product: ProductCardProps }) {
             </div>
           ) : (
             <div className="space-y-4 ">
-              {reviews.map(review => (
-                <div
-                  key={review._id}
-                  className="border rounded-lg p-4 bg-gray-50"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900">
-                      {review.user.name}
-                    </span>
-                    <div className="flex text-yellow-400 text-sm">
-                      {renderStars(review.rating)}
+              {reviews
+                .slice((currentPage - 1) * 4, currentPage * 4)
+                .map(review => (
+                  <div
+                    key={review._id}
+                    className="border rounded-lg p-4 bg-gray-50"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-medium text-gray-900">
+                        {review.user.name}
+                      </span>
+                      <div className="flex text-yellow-400 text-sm">
+                        {renderStars(review.rating)}
+                      </div>
                     </div>
-                  </div>
 
-                  <p className="text-gray-600 text-sm">{review.review}</p>
-                </div>
-              ))}
+                    <p className="text-gray-600 text-sm">{review.review}</p>
+                  </div>
+                ))}
 
               {reviews.length > 1 && (
                 <div className="flex justify-center">
                   <Pagination
                     showControls
                     initialPage={1}
-                    total={reviews.length}
+                    total={Math.ceil(reviews.length / 4)}
                     color="success"
+                    onChange={handlePageChange}
                   />
                 </div>
               )}

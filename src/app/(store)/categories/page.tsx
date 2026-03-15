@@ -18,7 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function CategoriesPage() {
   const categories = await getAllCategories();
-  console.log(categories);
   return (
     <>
       <PageHeader
