@@ -29,7 +29,7 @@ export const getFeaturedProducts = async (
     return data;
   } catch (error) {
     console.log(error);
-    return null;
+    throw new Error('Failed to fetch products', { cause: error });
   }
 };
 

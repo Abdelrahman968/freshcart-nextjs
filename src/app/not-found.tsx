@@ -148,7 +148,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="relative overflow-hidden min-h-screen pt-20 bg-gray-50">
+    <div className="relative overflow-hidden min-h-screen pt-20 pb-10 bg-gray-50">
       {floatingIcons.map(
         ({ Icon, top, left, size, delay, dur, rot }, index) => (
           <span

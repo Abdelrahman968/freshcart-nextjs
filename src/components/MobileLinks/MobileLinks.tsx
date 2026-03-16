@@ -8,6 +8,19 @@ import SearchHeader from '../SearchHeader/SearchHeader';
 import BiSupport from '../BiSupport/BiSupport';
 import AppImage from '../AppImage/AppImage';
 
+interface MobileLinksProps {
+  id: number;
+  href: string;
+  label: string;
+}
+
+const mobileLinks: MobileLinksProps[] = [
+  { id: 1, href: '/', label: 'Home' },
+  { id: 2, href: '/products', label: 'Shop' },
+  { id: 3, href: '/categories', label: 'Categories' },
+  { id: 4, href: '/brands', label: 'Brands' },
+];
+
 function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
   return (
@@ -66,43 +79,18 @@ function MobileLinks() {
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
 
-        <ul className="flex flex-col gap-6 text-base">
-          <li>
-            <Link
-              href="/"
-              className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
-              onClick={() => setShowMobileLinks(false)}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/products"
-              className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
-              onClick={() => setShowMobileLinks(false)}
-            >
-              Shop
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/categories"
-              className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
-              onClick={() => setShowMobileLinks(false)}
-            >
-              Categories
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/brands"
-              className="p-3 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out"
-              onClick={() => setShowMobileLinks(false)}
-            >
-              Brands
-            </Link>
-          </li>
+        <ul className="flex flex-col gap-2 text-base">
+          {mobileLinks.map(({ id, href, label }) => (
+            <li key={id}>
+              <Link
+                href={href}
+                className="px-3 py-2 rounded-xl font-semibold text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 ease-in-out block"
+                onClick={() => setShowMobileLinks(false)}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
         <hr className="my-5 border-gray-200 w-full px-0" />
 

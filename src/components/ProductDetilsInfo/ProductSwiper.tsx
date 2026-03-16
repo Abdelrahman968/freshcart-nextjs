@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 import MainTitle from '../MainTitle/MainTitle';
 import { ProductCardProps } from '../../types/product.type';
@@ -52,10 +52,14 @@ function ProductSwiper({
           },
         }}
         spaceBetween={30}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         navigation={{
           nextEl: '.custom-next-product',
           prevEl: '.custom-prev-product',
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
         }}
         className="mySwiper"
       >

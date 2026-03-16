@@ -98,3 +98,11 @@ body {
   border: 4px solid #337ab7;
   outline: none;
 }
+
+/* ====== Buttons ====== */
+.btn {
+  border-radius: 0.5rem;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  font-weight: 600;
+}
