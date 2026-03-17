@@ -1,10 +1,11 @@
 'use server';
 
+import { mainToken } from '../lib/auth';
 import { RegisterFormData, RegisterResponse } from '../types/register.type';
 
 export const registerUser = async (
   data: RegisterFormData
-): Promise<RegisterResponse | null> => {
+): Promise<boolean> => {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`;
 
@@ -21,7 +22,10 @@ export const registerUser = async (
     }
 
     const result: RegisterResponse = await response.json();
-    return result;
+    if (result.token) {
+      await mainToken.set(result.token);
+    }
+    return true;
   } catch (error) {
     console.log(error);
     throw new Error('Registration failed', { cause: error });

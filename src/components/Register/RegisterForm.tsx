@@ -1,5 +1,5 @@
 'use client';
-import { Button, Checkbox, Input, Progress } from '@heroui/react';
+import { addToast, Button, Checkbox, Input, Progress } from '@heroui/react';
 import Link from 'next/link';
 import { FaUserPlus } from 'react-icons/fa6';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { calculatePasswordStrength } from '../../utils/calculatePasswordStrength';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { registerUser } from '../../services/register.service';
+import { useRouter } from 'next/navigation';
 
 type RegisterFormData = {
   name: string;
@@ -18,6 +19,7 @@ type RegisterFormData = {
 };
 
 function RegisterForm() {
+  const router = useRouter();
   const [passwordValue, setPasswordValue] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
@@ -29,6 +31,7 @@ function RegisterForm() {
     control,
     formState: { errors, isSubmitting },
     getValues,
+    reset,
   } = useForm<RegisterFormData>({
     mode: 'onChange',
     defaultValues: {
@@ -42,14 +45,31 @@ function RegisterForm() {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    const result = await registerUser({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      rePassword: data.confirmPassword,
-      phone: data.phone,
-    });
-    console.log(result);
+    try {
+      await registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        rePassword: data.confirmPassword,
+        phone: data.phone,
+      });
+
+      addToast({
+        title: 'Registration successful',
+        description: 'You have been registered successfully',
+        color: 'success',
+      });
+
+      router.push('/');
+    } catch (error) {
+      addToast({
+        title: 'Registration failed',
+        description: `${error}`,
+        color: 'danger',
+      });
+    } finally {
+      reset();
+    }
   };
 
   return (
@@ -106,6 +126,9 @@ function RegisterForm() {
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
               setPasswordValue(calculatePasswordStrength(e.target.value));
             },
+            validate: value =>
+              calculatePasswordStrength(value) >= 51 ||
+              'Password must be at least 51% strong',
           })}
           endContent={
             <Button
@@ -240,15 +263,26 @@ function RegisterForm() {
 
       <Button
         type="submit"
-        className="btn bg-green-600 text-white hover:bg-green-700 flex items-center justify-center cursor-pointer transition-colors duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600"
+        className="w-full bg-green-600 text-white py-3 px-4 rounded-xl hover:bg-green-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600"
         isDisabled={isSubmitting}
         isLoading={isSubmitting}
         fullWidth={true}
       >
-        <FaUserPlus />
-        <span>
-          {isSubmitting ? 'Creating Account...' : 'Create My Account'}
-        </span>
+        {isSubmitting ? (
+          <span className="flex gap-2">
+            <p>Creating Account</p>
+            <div className="flex gap-1">
+              <span className="animate-bounce font-bold">.</span>
+              <span className="animate-bounce delay-200 font-bold">.</span>
+              <span className="animate-bounce delay-400 font-bold">.</span>
+            </div>
+          </span>
+        ) : (
+          <span className="flex gap-2">
+            <FaUserPlus />
+            <span>Create My Account</span>
+          </span>
+        )}
       </Button>
     </form>
   );

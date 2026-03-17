@@ -13,8 +13,8 @@ import RegisterForm from '../../../components/Register/RegisterForm';
 function RegisterPage() {
   return (
     <main className="py-10">
-      <div className="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 p-4">
-        <div>
+      <div className="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 justify-center items-center  gap-12 p-4">
+        <div className="hidden lg:flex flex-col justify-stretch">
           <h1 className="text-4xl font-bold">
             Welcome to <span className="text-green-600">FreshCart</span>
           </h1>
@@ -86,7 +86,7 @@ function RegisterPage() {
             </blockquote>
           </div>
         </div>
-        <div className="bg-white rounded-2xl shadow-lg px-6 py-10">
+        <div className="bg-white rounded-2xl shadow-lg  px-6 py-10">
           <h2 className="text-center text-3xl font-semibold mb-2">
             Create Your Account
           </h2>

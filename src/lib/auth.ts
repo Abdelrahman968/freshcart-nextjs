@@ -3,13 +3,13 @@ import { cookies } from 'next/headers';
 export const mainToken = {
   async get(): Promise<string | undefined> {
     const cookieStore = await cookies();
-    return cookieStore.get('token')?.value;
+    return cookieStore.get('fresh-cart.session-token')?.value;
   },
 
   async set(token: string): Promise<void> {
     const cookieStore = await cookies();
 
-    cookieStore.set('token', token, {
+    cookieStore.set('fresh-cart.session-token', token, {
       httpOnly: true,
       secure: true,
       path: '/',
@@ -19,7 +19,6 @@ export const mainToken = {
 
   async delete(): Promise<void> {
     const cookieStore = await cookies();
-    cookieStore.delete('token');
+    cookieStore.delete('fresh-cart.session-token');
   },
-  
 };
