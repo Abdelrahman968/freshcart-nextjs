@@ -96,7 +96,7 @@ function ReviewProduct({ product }: { product: ProductCardProps }) {
                 .map(review => (
                   <div
                     key={review._id}
-                    className="border rounded-lg p-4 bg-gray-50"
+                    className="border border-gray-200 rounded-lg p-4 bg-gray-50"
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-gray-900">

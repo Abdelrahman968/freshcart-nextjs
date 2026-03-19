@@ -16,5 +16,8 @@ export interface AuthResponse {
 
 export interface AuthJSAuthorizeType {
   id: string;
-  data: AuthResponse;
+  name: string;
+  email: string;
+  routeToken: string;
+  expiresAt: number;
 }

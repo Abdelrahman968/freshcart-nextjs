@@ -6,6 +6,7 @@ import {
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { DecodedJwtPayload, jwtDecoder } from '../utils/jwtDecoder';
+import { AppSession, AppUser } from '../types/next-auth.types';
 
 export const nextAuthConfig: NextAuthOptions = {
   providers: [
@@ -42,8 +43,11 @@ export const nextAuthConfig: NextAuthOptions = {
           if (!decodedToken) return null;
 
           const finalData: AuthJSAuthorizeType = {
-            id: decodedToken.id,
-            data: data,
+            id: decodedToken.id || new Date().toISOString(),
+            name: data.user.name,
+            email: data.user.email,
+            routeToken: data.token,
+            expiresAt: decodedToken.exp,
           };
 
           if (res.ok) {
@@ -58,6 +62,41 @@ export const nextAuthConfig: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        const u = user as AppUser;
+        token.id = u.id;
+        token.routeToken = u.routeToken;
+        token.expiresAt = u.expiresAt;
+      }
+
+      if (token.expiresAt && Date.now() >= (token.expiresAt as number) * 1000) {
+        token.error = 'TokenExpired';
+      }
+
+      return token;
+    },
+    session({ session, token }) {
+      const s = session as AppSession;
+
+      if (token.error === 'TokenExpired') {
+        s.expiresAt = undefined;
+        s.routeToken = undefined;
+
+        return session;
+      }
+
+      if (token) {
+        const u = token as AppUser;
+
+        s.user.id = u.id;
+        s.expiresAt = u.expiresAt;
+      }
+
+      return session;
+    },
+  },
   jwt: {
     maxAge: 60 * 60 * 24 * 7,
   },
@@ -68,6 +107,15 @@ export const nextAuthConfig: NextAuthOptions = {
   cookies: {
     sessionToken: {
       name: 'fresh-cart.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NEXT_PUBLIC_ENV === 'production',
+      },
+    },
+    callbackUrl: {
+      name: 'fresh-cart.callback-url',
       options: {
         httpOnly: true,
         sameSite: 'lax',

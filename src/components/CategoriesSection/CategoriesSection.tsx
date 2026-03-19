@@ -18,7 +18,7 @@ async function CategoriesSection() {
         {data?.map(cat => {
           return (
             <Link
-              href={`/categories/${cat.slug}`}
+              href={`/categories/${cat._id}`}
               key={cat._id}
               className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition group cursor-pointer"
             >
