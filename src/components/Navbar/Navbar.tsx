@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <>
       <TopNav />
-      <header className="w-full flex justify-between items-center px-5 md:px-10 xl:px-5 3xl:px-20 h-[72px] text-sm text-gray-500 border-b border-[#F1F2F4] sticky top-0 z-50 bg-white">
+      <header className="w-full flex justify-between items-center px-2 sm:px-5 md:px-15 lg:px-20 h-[72px] text-sm text-gray-500 border-b border-[#F1F2F4] sticky top-0 z-50 bg-white">
         <nav className="w-full h-full flex xl:justify-between justify-between items-center gap-5">
           <div className="flex items-center gap-5">
             <Link
@@ -29,6 +29,7 @@ function Navbar() {
                 width={165}
                 height={32}
                 loading="eager"
+                className="w-full h-full object-cover"
               />
             </Link>
             <div className="relative w-full mr-5 hidden md:block">

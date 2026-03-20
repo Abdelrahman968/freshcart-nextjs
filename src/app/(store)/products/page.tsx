@@ -5,6 +5,11 @@ import MainTitle from '../../../components/MainTitle/MainTitle';
 import Pagination from '../../../components/Pagination/Pagination';
 import { getFeaturedProducts } from '../../../services/products.service';
 import Link from 'next/link';
+import Filters from '../../../components/Filters/Filters';
+import AppImage from '../../../components/AppImage/AppImage';
+import { getBrandById } from '../../../services/brands.service';
+
+import defaultBrandImage from '@assets/ImagePlaceHolder/default-brand-image.png';
 
 async function ProductsPage({
   searchParams,
@@ -21,21 +26,61 @@ async function ProductsPage({
     limit: 1,
   };
 
+  let brandData;
+  if (brand) {
+    brandData = await getBrandById(brand);
+  }
+
   return (
     <>
       <PageHeader
-        title="All Products"
-        subTitle="Explore our complete product collection"
-        icon={<FaBoxOpen size={40} />}
+        title={
+          brand ? `${brandData?.name || 'Unknown'} Products` : 'All Products'
+        }
+        subTitle={
+          brand
+            ? `Explore ${brandData?.name || 'Unknown'} products`
+            : 'Explore our complete product collection'
+        }
+        icon={
+          brand ? (
+            <AppImage
+              src={brandData?.image || defaultBrandImage}
+              alt={brandData?.name || 'Brand Image'}
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
+          ) : (
+            <FaBoxOpen size={40} />
+          )
+        }
       />
+
       <div className="container mx-auto px-4 py-8 flex flex-col gap-6 justify-center items-center">
+        {brand && (
+          <Filters
+            itemName={brandData?.name || 'Product'}
+            fallbackURL="brands"
+          />
+        )}
         {(featuredProducts?.data?.length ?? 0) ? (
           <div>
             <div className="flex justify-between items-center">
-              <MainTitle textOne="All" textTwo="Products" />
+              <MainTitle
+                textOne="All"
+                textTwo={
+                  brand
+                    ? `${brandData?.name || 'Unknown'} Products`
+                    : 'Products'
+                }
+              />
               <p className="text-gray-600 text-sm hidden md:block">
                 Showing {featuredProducts?.data.length} of{' '}
-                {featuredProducts?.results} products
+                {featuredProducts?.results}{' '}
+                {brand
+                  ? `${featuredProducts?.data[0].brand.name} Products`
+                  : 'Featured Products'}
               </p>
             </div>
             <FeaturedProducts page={page} brand={brand} />
@@ -46,16 +91,18 @@ async function ProductsPage({
               <FaBoxOpen size={40} className="text-gray-400" />
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">
-              No Products Found
+              {brand
+                ? `${brandData?.name || 'Unknown'} Products`
+                : 'No Products Found'}
             </h3>
             <p className="text-gray-500 mb-6">
               No products match your current filters.
             </p>
             <Link
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors cursor-pointer duration-300 ease-in-out"
-              href="/products"
+              href={brand ? '/brands' : '/products'}
             >
-              View All Products
+              {brand ? 'View All Brands' : 'View All Products'}
             </Link>
           </div>
         )}

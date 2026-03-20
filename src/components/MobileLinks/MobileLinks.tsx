@@ -1,12 +1,18 @@
 'use client';
 import Link from 'next/link';
-import { FaBars, FaRegHeart, FaTruck } from 'react-icons/fa';
+import { FaBars, FaRegHeart, FaSignOutAlt, FaTruck } from 'react-icons/fa';
 import logo from '@assets/header/logo.svg';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
 import BiSupport from '../BiSupport/BiSupport';
 import AppImage from '../AppImage/AppImage';
+import { useSession } from 'next-auth/react';
+import { RxAvatar } from 'react-icons/rx';
+import { logout } from '../../utils/handleLogOut';
+import { addToast } from '@heroui/toast';
+import { CiLogout } from 'react-icons/ci';
+import { MdError } from 'react-icons/md';
 
 interface MobileLinksProps {
   id: number;
@@ -22,7 +28,33 @@ const mobileLinks: MobileLinksProps[] = [
 ];
 
 function MobileLinks() {
+  const { data: session } = useSession();
   const [showMobileLinks, setShowMobileLinks] = useState(false);
+
+  const handleLogout = async () => {
+    const res = await logout();
+
+    if (res.success) {
+      addToast({
+        title: 'Logged out successfully',
+        description: 'You have been logged out successfully',
+        icon: <CiLogout color="#FB2C36" />,
+        color: 'success',
+        closeIcon: true,
+        shouldShowTimeoutProgress: true,
+      });
+    } else {
+      addToast({
+        title: 'Something went wrong',
+        description: 'Please try again later',
+        icon: <MdError color="#FB2C36" />,
+        color: 'danger',
+        closeIcon: true,
+        shouldShowTimeoutProgress: true,
+      });
+    }
+  };
+
   return (
     <>
       <button
@@ -122,16 +154,46 @@ function MobileLinks() {
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
         <div className="flex flex-col sm:flex-row gap-3">
-          <button className="p-3 rounded-xl font-bold text-white hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out bg-green-500 w-full">
-            <Link href="/login" onClick={() => setShowMobileLinks(false)}>
-              Sign In
-            </Link>
-          </button>
-          <button className="p-3 rounded-xl font-bold text-green-600 hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out border border-green-500 w-full">
-            <Link href="/register" onClick={() => setShowMobileLinks(false)}>
-              Sign Up
-            </Link>
-          </button>
+          {session ? (
+            <div className="flex flex-col gap-3 w-full">
+              <Link
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-100 transition-colors active:scale-105 bg-green-50"
+                href="/profile"
+              >
+                <div className="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center">
+                  <RxAvatar size={25} color="#16A34A" />
+                </div>
+                <span className="font-medium text-gray-700">
+                  {session.user?.name}
+                </span>
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-100 transition-colors w-full text-left active:scale-105 bg-red-50 cursor-pointer"
+              >
+                <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center">
+                  <FaSignOutAlt color="#FB2C36" strokeWidth={5} />
+                </div>
+                <span className="font-medium text-red-600">Sign Out</span>
+              </button>
+            </div>
+          ) : (
+            <>
+              <button className="p-3 rounded-xl font-bold text-white hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out bg-green-500 w-full">
+                <Link href="/login" onClick={() => setShowMobileLinks(false)}>
+                  Sign In
+                </Link>
+              </button>
+              <button className="p-3 rounded-xl font-bold text-green-600 hover:bg-green-50 active:scale-105 transition-all duration-300 ease-in-out border border-green-500 w-full">
+                <Link
+                  href="/register"
+                  onClick={() => setShowMobileLinks(false)}
+                >
+                  Sign Up
+                </Link>
+              </button>
+            </>
+          )}
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
 
