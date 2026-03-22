@@ -50,6 +50,7 @@ function ProductCard({
           alt={title}
           width={500}
           height={500}
+          loading="eager"
         />
 
         {discount !== 0 && (

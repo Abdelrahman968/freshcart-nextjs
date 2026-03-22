@@ -3,10 +3,14 @@ import Link from 'next/link';
 function PageHeader({
   title,
   subTitle,
+  subTitle2,
+  subTitle2Link,
   icon,
 }: {
   title: string;
   subTitle: string;
+  subTitle2?: string;
+  subTitle2Link?: string;
   icon: React.ReactNode;
 }) {
   return (
@@ -16,10 +20,21 @@ function PageHeader({
           <Link className="hover:text-white transition-colors" href="/">
             Home
           </Link>
+          {subTitle2 && subTitle2Link && (
+            <>
+              <span className="text-white/40">/</span>
+              <Link
+                href={subTitle2Link}
+                className="font-medium hover:text-white transition-colors"
+              >
+                {subTitle2}
+              </Link>
+            </>
+          )}
           <span className="text-white/40">/</span>
           <span className="text-white font-medium">{title}</span>
         </nav>
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col md:flex-row text-center md:text-start items-center gap-5">
           <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl ring-1 ring-white/30">
             {icon}
           </div>

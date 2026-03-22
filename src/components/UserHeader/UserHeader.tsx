@@ -7,7 +7,6 @@ import {
   FaRegUser,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import { useSession } from 'next-auth/react';
 import {
   addToast,
   Avatar,
@@ -23,9 +22,10 @@ import { IoSettings } from 'react-icons/io5';
 import { logout } from '../../utils/handleLogOut';
 import { MdError } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
+import { useSession } from 'next-auth/react';
 
 function UserHeader() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -33,8 +33,7 @@ function UserHeader() {
     if (res.success) {
       addToast({
         title: 'Logged out successfully',
-        description: 'You have been logged out successfully',
-        icon: <CiLogout color="#FB2C36" />,
+        icon: <CiLogout color="#16A34A" />,
         color: 'success',
         closeIcon: true,
         shouldShowTimeoutProgress: true,
@@ -42,7 +41,6 @@ function UserHeader() {
     } else {
       addToast({
         title: 'Something went wrong',
-        description: 'Please try again later',
         icon: <MdError color="#FB2C36" />,
         color: 'danger',
         closeIcon: true,
@@ -53,7 +51,7 @@ function UserHeader() {
 
   return (
     <>
-      {session ? (
+      {status === 'authenticated' ? (
         <div className="hidden xl:flex items-center gap-4">
           <Dropdown placement="bottom-end" showArrow shouldBlockScroll={false}>
             <DropdownTrigger>
@@ -64,11 +62,7 @@ function UserHeader() {
                 src={AvatarImg.src}
               />
             </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Profile Actions"
-              variant="faded"
-              color="success"
-            >
+            <DropdownMenu aria-label="Profile Actions" color="success">
               <DropdownSection aria-label="Info" showDivider>
                 <DropdownItem
                   key="info Zone"
@@ -84,31 +78,91 @@ function UserHeader() {
                 </DropdownItem>
               </DropdownSection>
               <DropdownSection aria-label="Profile Zone" showDivider>
-                <DropdownItem startContent={<FaRegUser />} key="profile">
-                  My Profile
+                <DropdownItem
+                  className="group"
+                  startContent={
+                    <FaRegUser className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
+                  key="profile"
+                >
+                  <Link
+                    className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
+                    href="/profile"
+                  >
+                    My Profile
+                  </Link>
                 </DropdownItem>
-                <DropdownItem startContent={<FaBoxOpen />} key="orders">
-                  My Orders
+                <DropdownItem
+                  className="group"
+                  startContent={
+                    <FaBoxOpen className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
+                  key="orders"
+                >
+                  <Link
+                    className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
+                    href="/orders"
+                  >
+                    My Orders
+                  </Link>
                 </DropdownItem>
-                <DropdownItem startContent={<FaRegHeart />} key="wishlist">
-                  My Wishlist
+                <DropdownItem
+                  className="group"
+                  startContent={
+                    <FaRegHeart className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
+                  key="wishlist"
+                >
+                  <Link
+                    className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
+                    href="/wishlist"
+                  >
+                    My Wishlist
+                  </Link>
                 </DropdownItem>
-                <DropdownItem startContent={<FaAddressBook />} key="address">
-                  Address
+                <DropdownItem
+                  className="group"
+                  startContent={
+                    <FaAddressBook className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
+                  key="address"
+                >
+                  <Link
+                    className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
+                    href="/address"
+                  >
+                    My Address
+                  </Link>
                 </DropdownItem>
-                <DropdownItem startContent={<IoSettings />} key="settings">
-                  Settings
+                <DropdownItem
+                  className="group"
+                  startContent={
+                    <IoSettings className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
+                  key="settings"
+                >
+                  <Link
+                    className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
+                    href="/settings"
+                  >
+                    My Settings
+                  </Link>
                 </DropdownItem>
               </DropdownSection>
 
               <DropdownSection aria-label="Logout Zone">
                 <DropdownItem
-                  startContent={<FaSignOutAlt />}
+                  className="group"
+                  startContent={
+                    <FaSignOutAlt className="group-hover:text-white transition-colors duration-300 ease-in-out" />
+                  }
                   key="logout"
                   color="danger"
                   onPress={handleLogout}
                 >
-                  Log Out
+                  <p className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out">
+                    Log Out
+                  </p>
                 </DropdownItem>
               </DropdownSection>
             </DropdownMenu>

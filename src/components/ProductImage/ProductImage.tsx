@@ -40,6 +40,7 @@ function ProductImage({
                 height={500}
                 className="w-full h-full object-cover rounded-xl"
                 src={image}
+                loading="eager"
               />
             </SwiperSlide>
           ))}
@@ -61,6 +62,7 @@ function ProductImage({
                 alt={`${ProductName} Preview - FreshCart`}
                 className="w-full h-full object-cover "
                 src={image}
+                loading="eager"
               />
             </SwiperSlide>
           ))}

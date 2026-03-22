@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { LoginFormData } from '../../types/login.type';
 import { signIn, SignInResponse } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { CiLogin } from 'react-icons/ci';
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -46,9 +47,11 @@ function LoginForm() {
 
       setTimeout(() => {
         addToast({
-          title: 'Success',
-          description: 'Login successful',
+          title: 'Logged in successfully',
+          icon: <CiLogin color="#16A34A" />,
           color: 'success',
+          closeIcon: true,
+          shouldShowTimeoutProgress: true,
         });
       }, 1000);
 

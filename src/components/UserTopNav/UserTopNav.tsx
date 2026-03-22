@@ -1,14 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { FaRegUser, FaUserPlus } from 'react-icons/fa';
-import { useSession } from 'next-auth/react';
 import { CiLogout } from 'react-icons/ci';
 import { logout } from '../../utils/handleLogOut';
 import { addToast } from '@heroui/toast';
 import { MdError } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
 
 function UserTopNav() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -16,8 +16,7 @@ function UserTopNav() {
     if (res.success) {
       addToast({
         title: 'Logged out successfully',
-        description: 'You have been logged out successfully',
-        icon: <CiLogout color="#FB2C36" />,
+        icon: <CiLogout color="#16A34A" />,
         color: 'success',
         closeIcon: true,
         shouldShowTimeoutProgress: true,
@@ -25,7 +24,6 @@ function UserTopNav() {
     } else {
       addToast({
         title: 'Something went wrong',
-        description: 'Please try again later',
         icon: <MdError color="#FB2C36" />,
         color: 'danger',
         closeIcon: true,
@@ -37,7 +35,7 @@ function UserTopNav() {
   return (
     <div className="flex items-center gap-5">
       <div className="flex items-center justify-center gap-1 group">
-        {session ? (
+        {status === 'authenticated' ? (
           <>
             <FaRegUser color="#16A34A" size={15} />
             <Link

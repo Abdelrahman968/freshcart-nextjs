@@ -1,18 +1,18 @@
 'use client';
 import Link from 'next/link';
 import { FaBars, FaRegHeart, FaSignOutAlt, FaTruck } from 'react-icons/fa';
-import logo from '@assets/header/logo.svg';
+import ImageLogo from '@assets/header/logo.svg';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
 import BiSupport from '../BiSupport/BiSupport';
 import AppImage from '../AppImage/AppImage';
-import { useSession } from 'next-auth/react';
 import { RxAvatar } from 'react-icons/rx';
 import { logout } from '../../utils/handleLogOut';
 import { addToast } from '@heroui/toast';
 import { CiLogout } from 'react-icons/ci';
 import { MdError } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
 
 interface MobileLinksProps {
   id: number;
@@ -28,8 +28,8 @@ const mobileLinks: MobileLinksProps[] = [
 ];
 
 function MobileLinks() {
-  const { data: session } = useSession();
   const [showMobileLinks, setShowMobileLinks] = useState(false);
+  const { data: session, status } = useSession();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -37,8 +37,7 @@ function MobileLinks() {
     if (res.success) {
       addToast({
         title: 'Logged out successfully',
-        description: 'You have been logged out successfully',
-        icon: <CiLogout color="#FB2C36" />,
+        icon: <CiLogout color="#16A34A" />,
         color: 'success',
         closeIcon: true,
         shouldShowTimeoutProgress: true,
@@ -46,7 +45,6 @@ function MobileLinks() {
     } else {
       addToast({
         title: 'Something went wrong',
-        description: 'Please try again later',
         icon: <MdError color="#FB2C36" />,
         color: 'danger',
         closeIcon: true,
@@ -86,7 +84,7 @@ function MobileLinks() {
       >
         <div className="flex items-center justify-between p-2 pb-5">
           <AppImage
-            src={logo}
+            src={ImageLogo}
             alt="Logo"
             width={165}
             height={32}
@@ -154,7 +152,7 @@ function MobileLinks() {
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
         <div className="flex flex-col sm:flex-row gap-3">
-          {session ? (
+          {status === 'authenticated' ? (
             <div className="flex flex-col gap-3 w-full">
               <Link
                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-100 transition-colors active:scale-105 bg-green-50"

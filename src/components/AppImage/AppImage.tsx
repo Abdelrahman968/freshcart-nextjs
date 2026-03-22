@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import placeholder from '@assets/ImagePlaceHolder/placeholder.svg';
 
-function AppImage({ src, alt, ...props }: ImageProps) {
+function AppImage({ src, alt, loading = 'lazy', ...props }: ImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
@@ -13,6 +13,7 @@ function AppImage({ src, alt, ...props }: ImageProps) {
       {...props}
       src={imgSrc}
       alt={alt}
+      loading={loading}
       onError={() => setImgSrc(placeholder)}
     />
   );

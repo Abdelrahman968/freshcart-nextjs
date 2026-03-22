@@ -33,6 +33,39 @@ export const getFeaturedProducts = async (
   }
 };
 
+// GET All PRODUCTS By category[in]
+export const getProductsByCategory = async (
+  subCategoryId?: string
+): Promise<FullProductsResponseType | null> => {
+  try {
+    const url = new URL(
+      `${process.env.NEXT_PUBLIC_API_URL}/products?limit=100`
+    );
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const data = await response.json();
+    const filteredData = data.data.filter(
+      (product: ProductCardProps) =>
+        product.subcategory[0]._id === subCategoryId
+    );
+    // console.log('categoryId', categoryId);
+    // console.log('filteredData', filteredData);
+    return {
+      data: filteredData,
+      metadata: data.metadata,
+      results: data.results,
+    };
+  } catch (error) {
+    console.log(error);
+    throw new Error('Failed to fetch products', { cause: error });
+  }
+};
+
 // GET PRODUCT BY ID
 export const getProductById = async (
   id: string

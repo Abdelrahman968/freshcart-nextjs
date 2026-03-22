@@ -80,7 +80,7 @@ export default async function ProductDetailsPage(
       <Breadcrumb
         homeURL="/"
         categoryURL={`/categories/${product.category._id}`}
-        SubCategoryURL={`/sub-category/${product.subcategory[0]._id}`}
+        SubCategoryURL={`/products?subcategory=${product.subcategory[0]._id}`}
         categoryName={product.category.name}
         SubCategoryName={product.subcategory[0].name}
         productName={product.title}

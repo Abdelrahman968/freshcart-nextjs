@@ -1,4 +1,4 @@
-import logo from '@assets/header/logo.svg';
+import ImageLogo from '@assets/header/logo.svg';
 
 import TopNav from '@components/TopNav/TopNav';
 import SearchHeader from '@components/SearchHeader/SearchHeader';
@@ -24,12 +24,12 @@ function Navbar() {
               className="block w-full cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
             >
               <AppImage
-                src={logo}
+                src={ImageLogo}
                 alt="Logo"
                 width={165}
                 height={32}
                 loading="eager"
-                className="w-full h-full object-cover"
+                className="object-contain"
               />
             </Link>
             <div className="relative w-full mr-5 hidden md:block">

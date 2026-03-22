@@ -3,37 +3,37 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
-interface Category {
+interface CategoryList {
   id: string;
   name: string;
   link: string;
 }
 
-const categories: Category[] = [
+const categories: CategoryList[] = [
   {
     id: '0',
     name: 'All Categories',
     link: '/categories',
   },
   {
-    id: '6439d58a0049ad0b52b9003f',
-    name: 'Electronics',
-    link: '/categories?category=6439d58a0049ad0b52b9003f',
+    id: '6439d61c0049ad0b52b90051',
+    name: 'Music',
+    link: '/categories/6439d61c0049ad0b52b90051',
   },
   {
-    id: '6439d58a0049ad0b52b90040',
+    id: '6439d58a0049ad0b52b9003f',
     name: "Women's Fashion",
-    link: '/categories?category=6439d58a0049ad0b52b9003f',
+    link: '/categories/6439d58a0049ad0b52b9003f',
   },
   {
     id: '6439d5b90049ad0b52b90048',
     name: "Men's Fashion",
-    link: '/categories?category=6439d5b90049ad0b52b90048',
+    link: '/categories/6439d5b90049ad0b52b90048',
   },
   {
     id: '6439d30b67d9aa4ca97064b1',
     name: 'Beauty & Health',
-    link: '/categories?category=6439d30b67d9aa4ca97064b1',
+    link: '/categories/6439d30b67d9aa4ca97064b1',
   },
 ];
 

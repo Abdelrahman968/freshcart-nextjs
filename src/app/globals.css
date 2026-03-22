@@ -5,6 +5,8 @@
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 
+@import '@smastrom/react-rating/style.css';
+
 body {
   font-family: var(--font-exo), Arial, Helvetica, sans-serif;
   /* min-height: 500vh; */

@@ -64,3 +64,7 @@ export interface FullProductsResponseType {
   };
   results: number;
 }
+
+export interface ProductsByCategoryResponseType {
+  data: ProductCardProps[];
+}
