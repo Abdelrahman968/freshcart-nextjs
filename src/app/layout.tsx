@@ -6,6 +6,7 @@ import ProgressBar from '@components/Nprogress/Nprogress';
 import Footer from '@components/Footer/Footer';
 import { ToastProviderHeroUI } from '../context/ToastProvider';
 import SessionWrapperProvider from '../context/SessionWrapperProvider';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const exo = Exo({
   variable: '--font-exo',
@@ -48,6 +49,7 @@ export default function RootLayout({
             <Footer />
           </SessionWrapperProvider>
         </ToastProviderHeroUI>
+        <SpeedInsights />
       </body>
     </html>
   );
