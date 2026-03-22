@@ -1,5 +1,5 @@
 'use client';
-import { Tab, Tabs } from '@heroui/react';
+import { Chip, Tab, Tabs } from '@heroui/react';
 import { FaBox, FaTruck } from 'react-icons/fa';
 import { useState } from 'react';
 import { FaStarHalfStroke } from 'react-icons/fa6';
@@ -44,6 +44,9 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
               <div className="flex items-center gap-1 sm:gap-2">
                 <FaStarHalfStroke className="text-lg md:text-base" />
                 <span className="hidden sm:block">Reviews</span>
+                <Chip variant="flat" size="sm">
+                  {product.reviews.length}
+                </Chip>
               </div>
             }
           >
