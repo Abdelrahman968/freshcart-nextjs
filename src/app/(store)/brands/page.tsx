@@ -1,4 +1,4 @@
-import { FaBoxOpen } from 'react-icons/fa';
+import { FaTags } from 'react-icons/fa';
 import PageHeader from '../../../components/PageHeader/PageHeader';
 import MainTitle from '../../../components/MainTitle/MainTitle';
 import { Metadata } from 'next';
@@ -21,9 +21,9 @@ async function BrandsPage() {
   return (
     <>
       <PageHeader
-        title="All Brands"
-        subTitle="Explore our complete brands"
-        icon={<FaBoxOpen size={40} />}
+        title="Top Brands"
+        subTitle="Shop from your favorite brands"
+        icon={<FaTags size={40} />}
       />
       <div className="container mx-auto px-4 py-8 flex flex-col gap-6 justify-start items-start">
         <MainTitle textOne="All" textTwo="Brands" />

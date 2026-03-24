@@ -59,7 +59,6 @@ function ContactForm() {
             placeholder="John Doe"
             type="text"
             defaultValue={session?.user?.name || ''}
-            isReadOnly={session?.user?.name ? true : false}
             endContent={
               session?.user?.name && <RxAvatar size={20} color="#16A34A" />
             }
@@ -78,7 +77,6 @@ function ContactForm() {
             placeholder="john@example.com"
             type="email"
             defaultValue={session?.user?.email || ''}
-            isReadOnly={session?.user?.email ? true : false}
             endContent={
               session?.user?.email && <RxAvatar size={20} color="#16A34A" />
             }
@@ -129,7 +127,9 @@ function ContactForm() {
         type="submit"
         color="success"
         variant="solid"
-        startContent={<FaPaperPlane />}
+        startContent={
+          <FaPaperPlane className={`${isSubmitting ? 'hidden' : 'block'}`} />
+        }
         className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed shadow-sm shadow-green-600/20"
         disabled={isSubmitting}
         isLoading={isSubmitting}

@@ -115,7 +115,7 @@ function Footer() {
                 <li>
                   <Link
                     className="text-gray-400 hover:text-green-400 transition-colors text-sm"
-                    href="/products?category=6439d58a0049ad0b52b9003f"
+                    href="/products?category=6439d2d167d9aa4ca970649f"
                   >
                     Electronics
                   </Link>
@@ -123,7 +123,7 @@ function Footer() {
                 <li>
                   <Link
                     className="text-gray-400 hover:text-green-400 transition-colors text-sm"
-                    href="/products?category=6439d2d167d9aa4ca970649f"
+                    href="/products?category=6439d5b90049ad0b52b90048"
                   >
                     Men&apos;s Fashion
                   </Link>
@@ -131,7 +131,7 @@ function Footer() {
                 <li>
                   <Link
                     className="text-gray-400 hover:text-green-400 transition-colors text-sm"
-                    href="/products?category=6439d5b90049ad0b52b90048"
+                    href="/products?category=6439d58a0049ad0b52b9003f"
                   >
                     Women&apos;s Fashion
                   </Link>

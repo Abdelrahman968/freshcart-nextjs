@@ -6,6 +6,7 @@ import Pagination from '../../../components/Pagination/Pagination';
 import {
   getFeaturedProducts,
   getProductsByCategory,
+  getProductsBySubCategory,
 } from '../../../services/products.service';
 import Link from 'next/link';
 import Filters from '../../../components/Filters/Filters';
@@ -51,9 +52,14 @@ export async function generateMetadata({
 async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page: number; brand: string; subcategory: string }>;
+  searchParams: Promise<{
+    page: number;
+    brand: string;
+    subcategory: string;
+    category: string;
+  }>;
 }) {
-  const { page, brand, subcategory } = await searchParams;
+  const { page, brand, subcategory, category } = await searchParams;
 
   let featuredProducts;
   if (!subcategory) {
@@ -77,9 +83,12 @@ async function ProductsPage({
   if (subcategory) {
     subCategoryData = await getSpecificSubCategory(subcategory);
     categoryData = await getSpecificCategory(subCategoryData.category);
-    featuredProducts = await getProductsByCategory(subcategory); // ✅ مباشرة
+    featuredProducts = await getProductsBySubCategory(subcategory);
+  } else if (category) {
+    categoryData = await getSpecificCategory(category);
+    featuredProducts = await getProductsByCategory(category);
   } else {
-    featuredProducts = await getFeaturedProducts(page, brand); // ✅
+    featuredProducts = await getFeaturedProducts(page, brand);
   }
 
   return (
@@ -90,16 +99,19 @@ async function ProductsPage({
             ? `${brandData?.name || 'Unknown'} Products`
             : subcategory
               ? `${subCategoryData?.name || 'Unknown'} Products`
-              : 'All Products'
+              : category
+                ? `${categoryData?.name || 'Unknown'} Products`
+                : 'All Products'
         }
         subTitle={
           brand
             ? `Explore ${brandData?.name || 'Unknown'} products`
             : subcategory
               ? `Explore ${subCategoryData?.name || 'Unknown'} products`
-              : 'Explore our complete product collection'
+              : category
+                ? `Explore ${categoryData?.name || 'Unknown'} products`
+                : 'Explore our complete product collection'
         }
-        subTitle2={brand ? brandData?.name : subcategory && categoryData?.name}
         subTitle2Link={
           brand ? '/brands' : subcategory && `/categories/${categoryData?._id}`
         }
@@ -113,6 +125,8 @@ async function ProductsPage({
               className="rounded-full object-cover"
             />
           ) : subcategory ? (
+            <BiSolidCategory size={40} />
+          ) : category ? (
             <BiSolidCategory size={40} />
           ) : (
             <FaBoxOpen size={40} />
@@ -133,6 +147,12 @@ async function ProductsPage({
             fallbackURL="categories"
           />
         )}
+        {category && (
+          <Filters
+            itemName={categoryData?.name || 'Product'}
+            fallbackURL="categories"
+          />
+        )}
         {(featuredProducts?.data?.length ?? 0) ? (
           <div>
             <div className="flex justify-between items-center">
@@ -143,7 +163,9 @@ async function ProductsPage({
                     ? `${brandData?.name || 'Unknown'} Products`
                     : subcategory
                       ? `${subCategoryData?.name || 'Unknown'} Products`
-                      : 'Products'
+                      : category
+                        ? `${categoryData?.name || 'Unknown'} Products`
+                        : 'Products'
                 }
               />
               <p className="text-gray-600 text-sm hidden md:block">
@@ -153,13 +175,16 @@ async function ProductsPage({
                   ? `${featuredProducts?.data[0].brand.name} Products`
                   : subcategory
                     ? `${featuredProducts?.data[0].subcategory[0].name} Products`
-                    : 'Featured Products'}
+                    : category
+                      ? `${featuredProducts?.data[0].category.name} Products`
+                      : 'Featured Products'}
               </p>
             </div>
             <FeaturedProducts
               page={page}
               brand={brand}
               subcategoryID={subcategory}
+              categoryID={category}
             />
           </div>
         ) : (

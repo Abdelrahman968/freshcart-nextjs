@@ -11,6 +11,12 @@ import PageHeader from '../../../components/PageHeader/PageHeader';
 import { MdEmail } from 'react-icons/md';
 import { FaCircleQuestion, FaLocationDot } from 'react-icons/fa6';
 import ContactForm from '../../../components/ContactForm/ContactForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us - FreshCart',
+  description: 'Contact Us - FreshCart',
+};
 
 function ContactPage() {
   return (

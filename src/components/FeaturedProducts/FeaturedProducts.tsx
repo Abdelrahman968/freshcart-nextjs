@@ -1,6 +1,7 @@
 import {
   getFeaturedProducts,
   getProductsByCategory,
+  getProductsBySubCategory,
 } from '../../services/products.service';
 import { ProductCardProps } from '../../types/product.type';
 import ProductCard from '../ProductCard/ProductCard';
@@ -9,24 +10,26 @@ interface FeaturedProductsProps {
   page: number;
   brand?: string;
   subcategoryID?: string;
+  categoryID?: string;
 }
 
 export default async function FeaturedProducts({
   page,
   brand,
   subcategoryID,
+  categoryID,
 }: FeaturedProductsProps) {
   let featuredProducts;
 
   if (brand) {
     featuredProducts = await getFeaturedProducts(page, brand);
   } else if (subcategoryID) {
-    featuredProducts = await getProductsByCategory(subcategoryID);
+    featuredProducts = await getProductsBySubCategory(subcategoryID);
+  } else if (categoryID) {
+    featuredProducts = await getProductsByCategory(categoryID);
   } else {
     featuredProducts = await getFeaturedProducts(page);
   }
-
-  // console.log('featuredProducts', featuredProducts);
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center">

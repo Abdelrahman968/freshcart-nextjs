@@ -35,6 +35,38 @@ export const getFeaturedProducts = async (
 
 // GET All PRODUCTS By category[in]
 export const getProductsByCategory = async (
+  categoryId?: string
+): Promise<FullProductsResponseType | null> => {
+  try {
+    const url = new URL(
+      `${process.env.NEXT_PUBLIC_API_URL}/products?limit=100`
+    );
+
+    if (categoryId) {
+      url.searchParams.append('category[in]', categoryId);
+    }
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const data = await response.json();
+
+    return {
+      data: data.data,
+      metadata: data.metadata,
+      results: data.results,
+    };
+  } catch (error) {
+    console.log(error);
+    throw new Error('Failed to fetch products', { cause: error });
+  }
+};
+
+// GET All PRODUCTS By subCategory MODIFIED
+export const getProductsBySubCategory = async (
   subCategoryId?: string
 ): Promise<FullProductsResponseType | null> => {
   try {
@@ -53,8 +85,7 @@ export const getProductsByCategory = async (
       (product: ProductCardProps) =>
         product.subcategory[0]._id === subCategoryId
     );
-    // console.log('categoryId', categoryId);
-    // console.log('filteredData', filteredData);
+
     return {
       data: filteredData,
       metadata: data.metadata,
