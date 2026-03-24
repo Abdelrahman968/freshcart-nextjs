@@ -105,6 +105,7 @@ function MobileLinks() {
             roundValue="rounded-lg"
             width="w-full"
             height="h-10"
+            onClick={() => setShowMobileLinks(false)}
           />
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />

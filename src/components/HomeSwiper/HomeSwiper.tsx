@@ -53,7 +53,7 @@ function MySwiper({ slides, slidesPerView, spaceBetween }: MySwiperProps) {
               className="w-full h-[400px] object-cover"
             />
 
-            <div className="bg-linear-to-r from-green-800/70 to-green-600/70 flex items-center absolute inset-0 z-10">
+            <div className="bg-linear-to-r from-green-900/70 to-green-800/70 flex items-center absolute inset-0 z-10">
               <div className="ml-0 md:ml-20 px-4 mx-auto w-full text-white text-center md:text-start">
                 <h1 className="text-2xl md:text-3xl font-bold mb-4 animate-in fade-in slide-in-from-bottom-8 duration-500">
                   {slide.title.map((line, i) => (
@@ -92,7 +92,7 @@ function MySwiper({ slides, slidesPerView, spaceBetween }: MySwiperProps) {
         ))}
       </Swiper>
 
-      <div className="absolute top-5 md:bottom-10 md:top-full md:-translate-y-10 items-center justify-center md:justify-end w-full gap-4 px-20 flex z-10">
+      <div className="absolute top-5 md:bottom-10 md:top-full md:-translate-y-10 items-center justify-center md:justify-end w-full gap-4 px-20 z-10 hidden md:flex">
         <button className="custom-prev bg-white/70 text-[#00C950] p-2 rounded-full shadow-lg hover:bg-white cursor-pointer transition-all duration-300 ease-in-out hover:scale-105">
           <HiArrowLeft size={24} />
         </button>

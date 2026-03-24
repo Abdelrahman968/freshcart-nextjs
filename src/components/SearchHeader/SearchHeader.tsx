@@ -1,6 +1,7 @@
 'use client';
 import { IoSearch } from 'react-icons/io5';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 type Inputs = {
   searchQ: string;
@@ -11,6 +12,7 @@ type SearchHeaderProps = {
   roundValue: string;
   width: string;
   height: string;
+  onClick: () => void;
 };
 
 function SearchHeader({
@@ -18,6 +20,7 @@ function SearchHeader({
   roundValue,
   width,
   height,
+  onClick,
 }: SearchHeaderProps) {
   const { register, handleSubmit } = useForm<Inputs>({
     defaultValues: {
@@ -26,8 +29,11 @@ function SearchHeader({
     mode: 'onSubmit',
   });
 
+  const router = useRouter();
+
   const onSubmit = async (data: { searchQ: string }) => {
-    console.log(data.searchQ);
+    router.push(`/search?q=${data.searchQ}`);
+    onClick();
   };
 
   return (

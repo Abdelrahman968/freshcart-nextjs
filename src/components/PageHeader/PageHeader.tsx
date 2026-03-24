@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 function PageHeader({
   title,
@@ -33,12 +34,16 @@ function PageHeader({
                 href={subTitle2Link}
                 className="font-medium hover:text-white transition-colors"
               >
-                {subTitle2}
+                <Suspense fallback={<div>Loading...</div>}>
+                  {subTitle2}
+                </Suspense>
               </Link>
             </>
           )}
           <span className="text-white/40">/</span>
-          <span className="text-white font-medium">{title}</span>
+          <span className="text-white font-medium">
+            <Suspense fallback={<div>Loading...</div>}>{title}</Suspense>
+          </span>
         </nav>
         <div className="flex flex-col md:flex-row text-center md:text-start items-center gap-5">
           <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl ring-1 ring-white/30">
@@ -46,9 +51,11 @@ function PageHeader({
           </div>
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {title}
+              <Suspense fallback={<div>Loading...</div>}>{title}</Suspense>
             </h1>
-            <p className="text-white/80 mt-1">{subTitle}</p>
+            <p className="text-white/80 mt-1">
+              <Suspense fallback={<div>Loading...</div>}>{subTitle}</Suspense>
+            </p>
           </div>
         </div>
       </div>

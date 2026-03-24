@@ -1,0 +1,57 @@
+import { getToken } from 'next-auth/jwt';
+import { NextResponse, type NextRequest } from 'next/server';
+
+const protectedRoutes = [
+  '/cart',
+  '/wishlist',
+  '/checkout',
+  '/profile',
+  '/orders',
+  '/settings',
+  '/address',
+  '/payment',
+  '/shipping',
+];
+
+const authRoutes = ['/login', '/register', '/forgot-password'];
+
+export async function proxy(req: NextRequest) {
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+    cookieName: 'fresh-cart.session-token',
+  });
+
+  const { pathname } = req.nextUrl;
+
+  const isProtected = protectedRoutes.some(route => pathname.startsWith(route));
+  const isAuthPage = authRoutes.some(route => pathname.startsWith(route));
+
+  if (isProtected && (!token || token.error === 'TokenExpired')) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  if (isAuthPage && token && token.error !== 'TokenExpired') {
+    return NextResponse.redirect(new URL('/', req.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    '/cart',
+    '/wishlist',
+    '/checkout',
+    '/profile',
+    '/orders',
+    '/settings',
+    '/address',
+    '/payment',
+    '/shipping',
+    '/order/:id*',
+    '/login',
+    '/register',
+    '/forgot-password',
+  ],
+};

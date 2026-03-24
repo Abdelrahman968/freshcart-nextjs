@@ -1,10 +1,12 @@
-import MainSlideImage from '@assets/home/home-slider.png';
+import homeSlider1 from '@assets/home/home-slider-1.png';
+import homeSlider2 from '@assets/home/home-slider-2.jpeg';
+import homeSlider3 from '@assets/home/home-slider-3.jpeg';
 import type { HomeSlideType } from '../types/MySwiper.slider';
 
 export const slides: HomeSlideType[] = [
   {
     id: 1,
-    image: MainSlideImage,
+    image: homeSlider1,
     title: ['Fresh Products Delivered to', 'your DoorStep'],
     description: 'Get 20% off your first order',
     buttonText: 'Shop Now',
@@ -14,7 +16,7 @@ export const slides: HomeSlideType[] = [
   },
   {
     id: 2,
-    image: MainSlideImage,
+    image: homeSlider2,
     title: ['Premium Quality', 'Guaranteed'],
     description: 'Fresh from farm to your table',
     buttonText: 'Shop Now',
@@ -24,7 +26,7 @@ export const slides: HomeSlideType[] = [
   },
   {
     id: 3,
-    image: MainSlideImage,
+    image: homeSlider3,
     title: ['Fast & Free Delivery'],
     description: 'Same day delivery available',
     buttonText: 'Order Now',
