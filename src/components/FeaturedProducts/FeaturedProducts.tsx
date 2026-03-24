@@ -26,7 +26,7 @@ export default async function FeaturedProducts({
     featuredProducts = await getFeaturedProducts(page);
   }
 
-  console.log('featuredProducts', featuredProducts);
+  // console.log('featuredProducts', featuredProducts);
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center">

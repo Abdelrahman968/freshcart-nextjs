@@ -14,7 +14,7 @@ function PageHeader({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="bg-linear-to-br from-green-600 via-green-500 to-green-400 text-white">
+    <div className="bg-linear-to-br from-green-800 via-green-600 to-green-500 text-white">
       <div className="container mx-auto px-4 py-10 sm:py-14">
         <nav className="flex items-center gap-2 text-sm text-white/70 mb-6 flex-wrap">
           <Link className="hover:text-white transition-colors" href="/">

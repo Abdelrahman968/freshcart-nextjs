@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BiSupport as SupportIcon } from 'react-icons/bi';
+import { FaHeadset } from 'react-icons/fa';
 
 interface BiSupportProps {
   LinkClassName: string;
@@ -28,9 +28,9 @@ function BiSupport({
 }: BiSupportProps) {
   return (
     <>
-      <Link href="/support" className={LinkClassName}>
+      <Link href="/contact" className={LinkClassName}>
         <div className={iconClassName}>
-          <SupportIcon color={color} size={size} strokeWidth={strokeWidth} />
+          <FaHeadset color={color} size={size} strokeWidth={strokeWidth} />
         </div>
         <div className={textDivClassName}>
           <p className={firstTextClassName}>{firstText}</p>

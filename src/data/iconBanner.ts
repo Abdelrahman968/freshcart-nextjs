@@ -1,6 +1,5 @@
 import { IconType } from 'react-icons';
-import { BiSupport } from 'react-icons/bi';
-import { FaShieldAlt, FaTruck } from 'react-icons/fa';
+import { FaHeadset, FaShieldAlt, FaTruck } from 'react-icons/fa';
 import { TbRefresh } from 'react-icons/tb';
 
 export interface IconBannerType {
@@ -43,7 +42,7 @@ export const notFoundBannerInfo: IconBannerType[] = [
   },
   {
     id: 4,
-    Icon: BiSupport,
+    Icon: FaHeadset,
     title: '24/7 Support',
     description: 'Contact us anytime',
     color: 'text-green-600',
@@ -81,7 +80,7 @@ export const homeTopBannerInfo: IconBannerType[] = [
   },
   {
     id: 4,
-    Icon: BiSupport,
+    Icon: FaHeadset,
     title: '24/7 Support',
     description: 'Dedicated support team',
     color: 'text-purple-500',
