@@ -12,7 +12,7 @@ type SearchHeaderProps = {
   roundValue: string;
   width: string;
   height: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 function SearchHeader({
@@ -33,7 +33,7 @@ function SearchHeader({
 
   const onSubmit = async (data: { searchQ: string }) => {
     router.push(`/search?q=${data.searchQ}`);
-    onClick();
+    onClick?.();
   };
 
   return (
