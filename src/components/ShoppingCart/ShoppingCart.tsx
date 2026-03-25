@@ -1,11 +1,20 @@
 'use client';
 import Link from 'next/link';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/reduxStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/reduxStore';
+import { useEffect } from 'react';
+import { getUserCartAsync } from '../../redux/slices/CartSlice';
 
 function ShoppingCart() {
-  const { numOfCartItems } = useSelector((store: RootState) => store.cart);
+  const dispatch = useDispatch<AppDispatch>();
+  const { numOfCartItems, isNumOfCartItemsLoading } = useSelector(
+    (store: RootState) => store.cart
+  );
+
+  useEffect(() => {
+    dispatch(getUserCartAsync());
+  }, [dispatch]);
   return (
     <div className="relative">
       <Link
@@ -15,7 +24,7 @@ function ShoppingCart() {
       >
         <FaShoppingCart size={20} strokeWidth={1.1} />
       </Link>
-      {numOfCartItems > 0 && (
+      {!isNumOfCartItemsLoading && numOfCartItems > 0 && (
         <span className="absolute top-0 right-0 w-5.5 h-5.5 rounded-full bg-green-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
           {numOfCartItems > 99 ? '99+' : numOfCartItems}
         </span>
