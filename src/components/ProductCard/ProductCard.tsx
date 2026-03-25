@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import {
   FaRegHeart,
@@ -7,12 +5,13 @@ import {
   FaRegEye,
   FaStar,
   FaRegStar,
-  FaPlus,
 } from 'react-icons/fa6';
 import { getDiscountPercentage } from '../../utils/price';
 import AppImage from '../AppImage/AppImage';
+import AddToCart from '../AddToCart/AddToCart';
 
 type ProductCardProps = {
+  id: string;
   title: string;
   category: string;
   image: string;
@@ -24,6 +23,7 @@ type ProductCardProps = {
 };
 
 function ProductCard({
+  id,
   title,
   category,
   image,
@@ -66,13 +66,17 @@ function ProductCard({
             <FaRegHeart />
           </button>
 
-          <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 shadow-sm">
+          <button
+            className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 shadow-sm"
+            aria-label="Compare"
+          >
             <FaArrowsRotate />
           </button>
 
           <Link
             href={link}
             className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 shadow-sm"
+            aria-label="View"
           >
             <FaRegEye />
           </Link>
@@ -87,6 +91,7 @@ function ProductCard({
             className="line-clamp-2 leading-5 min-h-10"
             href={link}
             title={title}
+            aria-label={title}
           >
             {title}
           </Link>
@@ -114,9 +119,7 @@ function ProductCard({
             <span className="text-lg font-bold text-gray-800">{price} EGP</span>
           )}
 
-          <button className="h-10 w-10 rounded-full flex items-center justify-center transition bg-green-600 text-white hover:bg-green-700 cursor-pointer">
-            <FaPlus />
-          </button>
+          <AddToCart productId={id} />
         </div>
       </div>
     </div>

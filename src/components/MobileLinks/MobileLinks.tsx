@@ -58,6 +58,10 @@ function MobileLinks() {
       <button
         onClick={() => setShowMobileLinks(prev => !prev)}
         className="xl:hidden bg-[#16A34A] w-10 h-10 rounded-full text-white flex items-center justify-center cursor-pointer"
+        aria-label={
+          showMobileLinks ? 'Close navigation menu' : 'Open navigation menu'
+        }
+        aria-expanded={showMobileLinks}
       >
         <div className="relative w-full h-full flex items-center justify-center">
           <FaBars

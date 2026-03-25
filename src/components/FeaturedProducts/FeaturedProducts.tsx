@@ -37,6 +37,7 @@ export default async function FeaturedProducts({
         {featuredProducts?.data.map((product: ProductCardProps) => (
           <ProductCard
             key={product._id}
+            id={product._id}
             title={product.title}
             category={product.category.name}
             image={product.imageCover}

@@ -4,8 +4,8 @@ import './globals.css';
 import Navbar from '@components/Navbar/Navbar';
 import ProgressBar from '@components/Nprogress/Nprogress';
 import Footer from '@components/Footer/Footer';
-import { ToastProviderHeroUI } from '../context/ToastProvider';
-import SessionWrapperProvider from '../context/SessionWrapperProvider';
+
+import Providers from '../context/Providers';
 
 const exo = Exo({
   variable: '--font-exo',
@@ -40,14 +40,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${exo.variable} antialiased`}>
-        <ToastProviderHeroUI>
+        <Providers>
           <ProgressBar />
-          <SessionWrapperProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SessionWrapperProvider>
-        </ToastProviderHeroUI>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

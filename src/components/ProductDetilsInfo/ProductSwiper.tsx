@@ -67,6 +67,7 @@ function ProductSwiper({
           <SwiperSlide key={product._id} className="py-5 text-left">
             <ProductCard
               key={product._id}
+              id={product._id}
               title={product.title}
               category={product.category.name}
               image={product.imageCover}

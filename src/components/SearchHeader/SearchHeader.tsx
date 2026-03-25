@@ -22,7 +22,7 @@ function SearchHeader({
   height,
   onClick,
 }: SearchHeaderProps) {
-  const { register, handleSubmit } = useForm<Inputs>({
+  const { register, handleSubmit, reset } = useForm<Inputs>({
     defaultValues: {
       searchQ: '',
     },
@@ -34,6 +34,7 @@ function SearchHeader({
   const onSubmit = async (data: { searchQ: string }) => {
     router.push(`/search?q=${data.searchQ}`);
     onClick?.();
+    reset();
   };
 
   return (
