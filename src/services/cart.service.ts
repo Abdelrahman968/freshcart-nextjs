@@ -1,4 +1,5 @@
 'use server';
+import { revalidateTag } from 'next/cache';
 import { AddToCartResponse } from '../types/cart.type';
 import { decodeAuthUserToken } from '../utils/decodeAuthUserToken';
 
@@ -42,6 +43,9 @@ export async function getUserCart(): Promise<AddToCartResponse> {
         'Content-Type': 'application/json',
         token: (await decodeAuthUserToken()) || '',
       },
+      next: {
+        tags: ['UserCart'],
+      },
     });
 
     if (!res.ok) {
@@ -50,13 +54,68 @@ export async function getUserCart(): Promise<AddToCartResponse> {
 
     const data: AddToCartResponse = await res.json();
 
-    if (!data.numOfCartItems || !data.cartId) {
-      throw new Error('Invalid API response');
-    }
-
     return data;
   } catch (error) {
     console.error('AddToCart service error:', error);
+    throw error;
+  }
+}
+
+// Apply promo code
+export async function applyPromoCode(code: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL_V2}/cart/applyCoupon`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          token: (await decodeAuthUserToken()) || '',
+        },
+        body: JSON.stringify({
+          couponName: code,
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      return {
+        statusMsg: 'fail',
+        message: 'Coupon is invalid or has expired',
+      };
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error('ApplyPromoCode service error:', error);
+    throw error;
+  }
+}
+
+// DELETE User Cart
+export async function deleteUserCart() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_V2}/cart`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        token: (await decodeAuthUserToken()) || '',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to delete user cart');
+    }
+
+    const data = await res.json();
+
+    revalidateTag('UserCart', 'force-cache');
+
+    return data;
+  } catch (error) {
+    console.error('DeleteUserCart service error:', error);
     throw error;
   }
 }

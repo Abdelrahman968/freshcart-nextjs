@@ -1,7 +1,6 @@
 import {
   FaStar,
   FaRegStar,
-  FaBolt,
   FaRegHeart,
   FaTruck,
   FaUndoAlt,
@@ -12,6 +11,7 @@ import { getDiscountPercentage } from '../../utils/price';
 import ProductQuantity from '../ProductQuantity/ProductQuantity';
 import ShareBtn from '../ShareBtn/ShareBtn';
 import AddToCartBtn from '../AddToCartBtn/AddToCartBtn';
+import BuyNowBtn from '../BuyNowBtn/BuyNowBtn';
 
 function ProductInfo({ product }: { product: ProductCardProps }) {
   const discount = getDiscountPercentage(
@@ -101,13 +101,7 @@ function ProductInfo({ product }: { product: ProductCardProps }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <AddToCartBtn productId={product.id} />
-          <button
-            id="buy-now"
-            className="flex-1 bg-gray-900 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <FaBolt />
-            Buy Now
-          </button>
+          <BuyNowBtn />
         </div>
         <div className="flex gap-3 mb-6">
           <button

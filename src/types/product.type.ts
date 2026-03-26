@@ -5,14 +5,14 @@ interface Subcategory {
   category: string;
 }
 
-interface Category {
+export interface Category {
   _id: string;
   name: string;
   slug: string;
   image: string;
 }
 
-interface Brand {
+export interface Brand {
   _id: string;
   name: string;
   slug: string;

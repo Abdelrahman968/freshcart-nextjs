@@ -28,7 +28,7 @@ function BiSupport({
 }: BiSupportProps) {
   return (
     <>
-      <Link href="/contact" className={LinkClassName}>
+      <Link href="/contact" className={LinkClassName} title="Support">
         <div className={iconClassName}>
           <FaHeadset color={color} size={size} strokeWidth={strokeWidth} />
         </div>
