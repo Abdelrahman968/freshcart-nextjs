@@ -14,6 +14,7 @@ function AppImage({ src, alt, loading = 'lazy', ...props }: ImageProps) {
       src={imgSrc}
       alt={alt}
       loading={loading}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       onError={() => setImgSrc(placeholder)}
     />
   );

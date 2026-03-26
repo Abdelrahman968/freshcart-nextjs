@@ -34,7 +34,7 @@ function AddToCart({ productId }: { productId: string }) {
       {isLoading ? (
         <Spinner color="white" variant="simple" size="sm" />
       ) : isError ? (
-        <MdError size={17} />
+        <MdError className="text-red-500" size={17} />
       ) : isSuccess ? (
         <FaCheck size={17} />
       ) : (

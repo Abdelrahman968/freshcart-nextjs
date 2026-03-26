@@ -99,6 +99,12 @@ const CartSlice = createSlice({
       state.isNumOfCartItemsSuccess = false;
       state.isNumOfCartItemsError = false;
     },
+    clearCart: state => {
+      state.numOfCartItems = 0;
+      state.items = [];
+      state.totalCartPrice = 0;
+      state.cartId = '';
+    },
   },
   extraReducers: builder => {
     //  addToCart
@@ -142,5 +148,6 @@ const CartSlice = createSlice({
   },
 });
 
-export const { updateCartCount, resetCartStatus } = CartSlice.actions;
+export const { updateCartCount, resetCartStatus, clearCart } =
+  CartSlice.actions;
 export default CartSlice.reducer;

@@ -13,11 +13,14 @@ import {
 } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../../../../redux/slices/CartSlice';
 
 function FooterActions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     onOpen();
@@ -35,6 +38,7 @@ function FooterActions() {
       });
       onClose();
       router.refresh();
+      dispatch(clearCart());
     } catch (error) {
       addToast({
         title: 'Error',
