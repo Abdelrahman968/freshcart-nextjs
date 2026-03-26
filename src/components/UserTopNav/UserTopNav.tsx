@@ -6,9 +6,11 @@ import { logout } from '../../utils/handleLogOut';
 import { addToast } from '@heroui/toast';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function UserTopNav() {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -21,6 +23,7 @@ function UserTopNav() {
         closeIcon: true,
         shouldShowTimeoutProgress: true,
       });
+      router.refresh();
     } else {
       addToast({
         title: 'Something went wrong',

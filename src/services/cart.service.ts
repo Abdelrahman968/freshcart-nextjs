@@ -4,12 +4,19 @@ import { decodeAuthUserToken } from '../utils/decodeAuthUserToken';
 
 // POST : Add product to cart
 export async function addToCart(id: string): Promise<AddToCartResponse> {
+  const token = await decodeAuthUserToken();
+  if (!token) {
+    return {
+      status: 'fail',
+      message: 'User is not authenticated',
+    } as AddToCartResponse;
+  }
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_V2}/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        token: (await decodeAuthUserToken()) || '',
+        token: token || '',
       },
       body: JSON.stringify({
         productId: id,
@@ -35,12 +42,19 @@ export async function addToCart(id: string): Promise<AddToCartResponse> {
 
 // GET : Get user cart
 export async function getUserCart(): Promise<AddToCartResponse> {
+  const token = await decodeAuthUserToken();
+  if (!token) {
+    return {
+      status: 'fail',
+      message: 'User is not authenticated',
+    } as AddToCartResponse;
+  }
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_V2}/cart`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        token: (await decodeAuthUserToken()) || '',
+        token: token || '',
       },
     });
 
@@ -59,6 +73,13 @@ export async function getUserCart(): Promise<AddToCartResponse> {
 
 // Apply promo code
 export async function applyPromoCode(code: string) {
+  const token = await decodeAuthUserToken();
+  if (!token) {
+    return {
+      status: 'fail',
+      message: 'User is not authenticated',
+    } as AddToCartResponse;
+  }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL_V2}/cart/applyCoupon`,
@@ -66,7 +87,7 @@ export async function applyPromoCode(code: string) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          token: (await decodeAuthUserToken()) || '',
+          token: token || '',
         },
         body: JSON.stringify({
           couponName: code,
@@ -92,12 +113,19 @@ export async function applyPromoCode(code: string) {
 
 // DELETE User Cart
 export async function deleteUserCart() {
+  const token = await decodeAuthUserToken();
+  if (!token) {
+    return {
+      status: 'fail',
+      message: 'User is not authenticated',
+    } as AddToCartResponse;
+  }
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_V2}/cart`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        token: (await decodeAuthUserToken()) || '',
+        token: token || '',
       },
     });
 
@@ -143,6 +171,13 @@ export async function deleteProductFromCart(productId: string) {
 
 // Update Cart Product Quantity (v2)
 export async function updateProductQuantity(productId: string, count: number) {
+  const token = await decodeAuthUserToken();
+  if (!token) {
+    return {
+      status: 'fail',
+      message: 'User is not authenticated',
+    } as AddToCartResponse;
+  }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL_V2}/cart/${productId}`,
@@ -150,7 +185,7 @@ export async function updateProductQuantity(productId: string, count: number) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          token: (await decodeAuthUserToken()) || '',
+          token: token || '',
         },
         body: JSON.stringify({
           count: count,

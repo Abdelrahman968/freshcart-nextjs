@@ -7,7 +7,7 @@ import {
   deleteProductFromCart,
   updateProductQuantity,
 } from '../../../../services/cart.service';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { updateCartCount } from '../../../../redux/slices/CartSlice';
@@ -59,6 +59,10 @@ function CartItemCard({ count, product, price, id }: CartItemCardProps) {
   const [counter, setCounter] = useState(() => {
     return count;
   });
+
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
 
   const increase = () => {
     const next = Math.min(product.quantity, counter + 1);

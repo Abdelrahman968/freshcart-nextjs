@@ -13,6 +13,7 @@ import { addToast } from '@heroui/toast';
 import { CiLogout } from 'react-icons/ci';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 interface MobileLinksProps {
   id: number;
@@ -30,6 +31,7 @@ const mobileLinks: MobileLinksProps[] = [
 function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -42,6 +44,7 @@ function MobileLinks() {
         closeIcon: true,
         shouldShowTimeoutProgress: true,
       });
+      router.refresh();
     } else {
       addToast({
         title: 'Something went wrong',

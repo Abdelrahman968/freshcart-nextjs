@@ -1,14 +1,16 @@
 'use client';
 // In ProductDetails Page
 
-import { Button, Spinner } from '@heroui/react';
+import { addToast, Button, Spinner } from '@heroui/react';
 import { FaCheck, FaShoppingCart } from 'react-icons/fa';
 import { addToCartAsync } from '../../redux/slices/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/reduxStore';
 import { MdError } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
 
 function AddToCartBtn({ productId }: { productId: string }) {
+  const { data: session } = useSession();
   const dispatch = useDispatch<AppDispatch>();
   const isLoading = useSelector(
     (state: RootState) => state.cart.loadingById[productId]
@@ -21,6 +23,16 @@ function AddToCartBtn({ productId }: { productId: string }) {
   );
 
   const handleAddToCart = () => {
+    if (!session?.user) {
+      addToast({
+        title: 'You must login first',
+        description: 'User is not authenticated',
+        color: 'danger',
+        timeout: 5000,
+        shouldShowTimeoutProgress: true,
+      });
+      return;
+    }
     dispatch(addToCartAsync(productId));
   };
   return (

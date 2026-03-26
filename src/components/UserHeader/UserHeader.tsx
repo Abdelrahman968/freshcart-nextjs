@@ -23,9 +23,11 @@ import { logout } from '../../utils/handleLogOut';
 import { MdError } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function UserHeader() {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const handleLogout = async () => {
     const res = await logout();
@@ -38,6 +40,7 @@ function UserHeader() {
         closeIcon: true,
         shouldShowTimeoutProgress: true,
       });
+      router.refresh();
     } else {
       addToast({
         title: 'Something went wrong',
