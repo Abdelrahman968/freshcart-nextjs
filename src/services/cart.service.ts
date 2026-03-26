@@ -1,5 +1,4 @@
 'use server';
-import { revalidateTag } from 'next/cache';
 import { AddToCartResponse } from '../types/cart.type';
 import { decodeAuthUserToken } from '../utils/decodeAuthUserToken';
 
@@ -42,9 +41,6 @@ export async function getUserCart(): Promise<AddToCartResponse> {
       headers: {
         'Content-Type': 'application/json',
         token: (await decodeAuthUserToken()) || '',
-      },
-      next: {
-        tags: ['UserCart'],
       },
     });
 
@@ -111,11 +107,66 @@ export async function deleteUserCart() {
 
     const data = await res.json();
 
-    revalidateTag('UserCart', 'force-cache');
+    return data;
+  } catch (error) {
+    console.error('DeleteUserCart service error:', error);
+    throw error;
+  }
+}
+
+// Remove Product From Cart (v2)
+export async function deleteProductFromCart(productId: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL_V2}/cart/${productId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          token: (await decodeAuthUserToken()) || '',
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to delete user cart');
+    }
+
+    const data = await res.json();
 
     return data;
   } catch (error) {
     console.error('DeleteUserCart service error:', error);
+    throw error;
+  }
+}
+
+// Update Cart Product Quantity (v2)
+export async function updateProductQuantity(productId: string, count: number) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL_V2}/cart/${productId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          token: (await decodeAuthUserToken()) || '',
+        },
+        body: JSON.stringify({
+          count: count,
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to update product quantity');
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error('UpdateProductQuantity service error:', error);
     throw error;
   }
 }

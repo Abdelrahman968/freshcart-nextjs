@@ -1,8 +1,16 @@
 'use client';
-import { FaCheck, FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaCheck, FaMinus, FaPlus, FaSpinner, FaTrash } from 'react-icons/fa';
 import Link from 'next/link';
 import AppImage from '../../../../components/AppImage/AppImage';
-import { Button } from '@heroui/react';
+import { addToast, Button } from '@heroui/react';
+import {
+  deleteProductFromCart,
+  updateProductQuantity,
+} from '../../../../services/cart.service';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { updateCartCount } from '../../../../redux/slices/CartSlice';
 
 interface ProductInCart {
   subcategory: {
@@ -42,12 +50,104 @@ interface CartItemCardProps {
 function CartItemCard({ count, product, price, id }: CartItemCardProps) {
   const sku = product._id.slice(-6).toUpperCase();
   const total = price * count;
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+
+  const [counter, setCounter] = useState(() => {
+    return count;
+  });
+
+  const increase = () => {
+    const next = Math.min(product.quantity, counter + 1);
+    setCounter(next);
+    handleUpdateQuantity(product._id, next);
+  };
+
+  const decrease = () => {
+    const next = Math.max(1, counter - 1);
+    setCounter(next);
+    handleUpdateQuantity(product._id, next);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = Number(e.target.value);
+
+    if (value < 1) value = 1;
+    if (value > product.quantity) value = product.quantity;
+
+    setCounter(value);
+  };
+
+  const handleUpdateQuantity = async (productId: string, quantity: number) => {
+    setIsUpdating(true);
+    try {
+      const res = await updateProductQuantity(productId, quantity);
+      dispatch(updateCartCount(res.numOfCartItems));
+    } catch (error) {
+      addToast({
+        title: 'Error',
+        description: `${error}`,
+        color: 'danger',
+        shouldShowTimeoutProgress: true,
+      });
+    } finally {
+      setIsUpdating(false);
+      router.refresh();
+    }
+  };
+
+  const handleBlur = () => {
+    handleUpdateQuantity(product._id, counter);
+  };
+
+  const handleRemoveFromCart = async () => {
+    setIsLoading(true);
+    try {
+      const res = await deleteProductFromCart(product._id);
+      addToast({
+        title: 'Product removed from cart',
+        color: 'success',
+        shouldShowTimeoutProgress: true,
+      });
+      router.refresh();
+      dispatch(updateCartCount(res.numOfCartItems));
+    } catch (error) {
+      addToast({
+        title: 'Error',
+        description: `${error}`,
+        color: 'danger',
+        shouldShowTimeoutProgress: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
       className="relative bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300"
       id={id}
     >
+      {isLoading && (
+        <div className="absolute inset-0 bg-white/50 flex items-center justify-center z-10">
+          <div className="flex items-center gap-2 bg-red-100 p-2 rounded-lg shadow-sm">
+            <FaSpinner className="animate-spin text-red-600 text-2xl" />{' '}
+            <p className="text-red-600 font-semibold text-sm">Removing...</p>
+          </div>
+        </div>
+      )}
+
+      {isUpdating && (
+        <div className="absolute inset-0 bg-white/50 flex items-center justify-center z-10">
+          <div className="flex items-center gap-2 bg-green-50 p-2 rounded-lg shadow-sm">
+            <FaSpinner className="animate-spin text-green-600 text-2xl" />{' '}
+            <p className="text-green-600 font-semibold text-sm">Updating...</p>
+          </div>
+        </div>
+      )}
       <div className="p-4 sm:p-5">
         <div className="flex gap-4 sm:gap-6">
           {/* Product Image */}
@@ -103,27 +203,50 @@ function CartItemCard({ count, product, price, id }: CartItemCardProps) {
               {/* Quantity stepper */}
               <div className="flex items-center">
                 <div className="flex items-center bg-gray-50 rounded-xl p-1 border border-gray-200">
-                  <Button
-                    isIconOnly
-                    aria-label="Decrease quantity"
-                    className="h-8 w-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none transition-all"
-                    color="primary"
-                    variant="flat"
-                  >
-                    <FaMinus className="text-xs" />
-                  </Button>
-                  <span className="w-12 text-center font-bold text-gray-900">
-                    {count}
-                  </span>
-                  <Button
-                    isIconOnly
-                    aria-label="Increase quantity"
-                    className="h-8 w-8 rounded-lg bg-green-600 shadow-sm shadow-green-600/30 flex items-center justify-center text-white hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                    color="primary"
-                    variant="flat"
-                  >
-                    <FaPlus className="text-xs" />
-                  </Button>
+                  {product.quantity === 0 ? (
+                    <p className="text-red-500 font-medium">
+                      Sorry, this product is out of stock
+                    </p>
+                  ) : (
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center border-2 border-none rounded-lg overflow-hidden">
+                        <Button
+                          isIconOnly
+                          aria-label="Decrease quantity"
+                          className="h-8 w-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none transition-all"
+                          color="primary"
+                          variant="flat"
+                          isDisabled={counter <= 1 || isLoading}
+                          onPress={decrease}
+                        >
+                          <FaMinus />
+                        </Button>
+
+                        <input
+                          min={1}
+                          max={product.quantity}
+                          type="number"
+                          value={counter}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          disabled={true}
+                          className="w-12 text-center font-bold text-gray-900"
+                        />
+
+                        <Button
+                          isIconOnly
+                          aria-label="Increase quantity"
+                          className="h-8 w-8 rounded-lg bg-green-600 shadow-sm shadow-green-600/30 flex items-center justify-center text-white hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                          color="primary"
+                          variant="flat"
+                          isDisabled={counter >= product.quantity || isLoading}
+                          onPress={increase}
+                        >
+                          <FaPlus />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -145,6 +268,7 @@ function CartItemCard({ count, product, price, id }: CartItemCardProps) {
                   className="h-10 w-10 rounded-xl border border-red-200 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 flex items-center justify-center disabled:opacity-40 transition-all duration-200"
                   color="danger"
                   variant="flat"
+                  onPress={handleRemoveFromCart}
                 >
                   <FaTrash className="text-sm" />
                 </Button>
