@@ -13,6 +13,7 @@ import Link from 'next/link';
 import LoginImage from '@assets/login/main-image.png';
 import AppImage from '../../../components/AppImage/AppImage';
 import LoginForm from '../../../components/Login/LoginForm';
+import { Suspense } from 'react';
 
 function LoginPage() {
   return (
@@ -99,7 +100,9 @@ function LoginPage() {
                 </span>
               </div>
             </div>
-            <LoginForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <LoginForm />
+            </Suspense>
             <div className="text-center mt-8 pt-6 border-t border-gray-100">
               <p className="text-gray-600">
                 New to FreshCart?
