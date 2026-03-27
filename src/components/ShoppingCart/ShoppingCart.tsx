@@ -9,9 +9,7 @@ import { useRouter } from 'next/navigation';
 
 function ShoppingCart() {
   const dispatch = useDispatch<AppDispatch>();
-  const { numOfCartItems, isNumOfCartItemsLoading } = useSelector(
-    (store: RootState) => store.cart
-  );
+  const { numOfCartItems } = useSelector((store: RootState) => store.cart);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,7 +24,7 @@ function ShoppingCart() {
       >
         <FaShoppingCart size={20} strokeWidth={1.1} />
       </Link>
-      {!isNumOfCartItemsLoading && numOfCartItems > 0 && (
+      {numOfCartItems > 0 && (
         <span
           className="absolute top-0 right-0 w-5.5 h-5.5 rounded-full bg-green-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white cursor-pointer"
           onClick={() => router.push('/cart')}

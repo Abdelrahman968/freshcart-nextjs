@@ -24,11 +24,14 @@ export async function proxy(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
 
+  const loginUrl = new URL('/login', req.url);
+  loginUrl.searchParams.set('callbackUrl', pathname);
+
   const isProtected = protectedRoutes.some(route => pathname.startsWith(route));
   const isAuthPage = authRoutes.some(route => pathname.startsWith(route));
 
   if (isProtected && (!token || token.error === 'TokenExpired')) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(loginUrl);
   }
 
   if (isAuthPage && token && token.error !== 'TokenExpired') {

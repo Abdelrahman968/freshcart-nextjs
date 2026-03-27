@@ -1,30 +1,36 @@
 import Link from 'next/link';
 import { FaCartShopping } from 'react-icons/fa6';
 import Breadcrumb from '../../../components/Breadcrumb/Breadcrumb';
-import CartItemCard from './components/CartItemCard';
-import FooterActions from './components/FooterActions';
-import { getUserCart } from '../../../services/cart.service';
+import CartList from './components/CartList';
 import OrderSummary from './components/OrderSummary';
-
-export interface CartProduct {
-  _id: string;
-  title: string;
-  imageCover: string;
-  price: number;
-  category: { name: string };
-}
-
-export interface CartItem {
-  _id: string;
-  product: CartProduct;
-  count: number;
-  price: number;
-}
+import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
+import { CartApiResponse } from '../../../types/cart.type';
 
 export default async function CartPage() {
-  const data = await getUserCart();
+  async function getUserCart() {
+    const token = await decodeAuthUserToken();
+    if (!token) return null;
 
-  const isEmpty = data.numOfCartItems === 0;
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_V2}/cart`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          token,
+        },
+        cache: 'no-store',
+      });
+
+      if (!res.ok) return null;
+
+      return (await res.json()) as CartApiResponse;
+    } catch {
+      return null;
+    }
+  }
+
+  const data = await getUserCart();
+  const isEmpty = !data || data.numOfCartItems === 0;
 
   return (
     <div className="bg-gray-50 min-h-screen py-8">
@@ -45,7 +51,7 @@ export default async function CartPage() {
               <p className="text-gray-500 mt-2">
                 You have{' '}
                 <span className="font-semibold text-green-600">
-                  {data.numOfCartItems} items
+                  {data?.numOfCartItems ?? 0} items
                 </span>{' '}
                 in your cart
               </p>
@@ -72,21 +78,10 @@ export default async function CartPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
-                {data.data.products.map(item => (
-                  <CartItemCard
-                    key={item._id}
-                    id={item._id}
-                    product={item.product}
-                    count={item.count}
-                    price={item.price}
-                  />
-                ))}
-              </div>
-              <FooterActions />
+              <CartList />
             </div>
 
-            <OrderSummary data={data} />
+            <OrderSummary />
           </div>
         )}
       </div>

@@ -9,8 +9,12 @@ import { LoginFormData } from '../../types/login.type';
 import { signIn, SignInResponse } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
+import { isSafeUrl } from '../../utils/url';
 
-function LoginForm() {
+function LoginForm({ callbackUrl }: { callbackUrl: string }) {
+  const safeCallback =
+    callbackUrl && isSafeUrl(callbackUrl) ? callbackUrl : '/';
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const {
@@ -33,7 +37,6 @@ function LoginForm() {
       const res: SignInResponse | undefined = await signIn('credentials', {
         ...data,
         redirect: false,
-        callbackUrl: '/',
       });
 
       if (!res || res.error) {
@@ -45,17 +48,15 @@ function LoginForm() {
         return;
       }
 
-      setTimeout(() => {
-        addToast({
-          title: 'Logged in successfully',
-          icon: <CiLogin color="#16A34A" />,
-          color: 'success',
-          closeIcon: true,
-          shouldShowTimeoutProgress: true,
-        });
-      }, 1000);
+      addToast({
+        title: 'Logged in successfully',
+        icon: <CiLogin color="#16A34A" />,
+        color: 'success',
+        closeIcon: true,
+        shouldShowTimeoutProgress: true,
+      });
 
-      router.push(res.url ?? '/');
+      router.push(safeCallback);
     } catch (err) {
       console.error(err);
 
@@ -124,7 +125,6 @@ function LoginForm() {
               isSelected={field.value}
               onValueChange={field.onChange}
               isInvalid={!!errors.rememberMe}
-              {...register('rememberMe')}
             >
               <span className="text-sm text-gray-700">Keep me signed in</span>
             </Checkbox>
