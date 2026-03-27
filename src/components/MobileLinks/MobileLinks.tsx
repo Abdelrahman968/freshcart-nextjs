@@ -14,6 +14,10 @@ import { CiLogout } from 'react-icons/ci';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/reduxStore';
+import { clearCart } from '../../redux/slices/CartSlice';
+import { clearWishlist } from '../../redux/slices/WishlistSlice';
 
 interface MobileLinksProps {
   id: number;
@@ -29,12 +33,16 @@ const mobileLinks: MobileLinksProps[] = [
 ];
 
 function MobileLinks() {
+  const dispatch = useDispatch<AppDispatch>();
   const [showMobileLinks, setShowMobileLinks] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
 
   const handleLogout = async () => {
     const res = await logout();
+
+    dispatch(clearCart());
+    dispatch(clearWishlist());
 
     if (res.success) {
       addToast({

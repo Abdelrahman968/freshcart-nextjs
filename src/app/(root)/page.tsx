@@ -23,7 +23,7 @@ function HomePage() {
         />
       </section>
 
-      <section className="px-1 md:px-9">
+      <section className="px-2 md:px-9">
         <CategoriesSection />
       </section>
       <section className="py-10 w-[90%] mx-auto">
@@ -61,11 +61,11 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-1 md:px-9">
+      <section className="px-2 md:px-9">
         <MainTitle textOne="Featured" textTwo="Products" />
         <FeaturedProducts page={1} />
       </section>
-      <section className="py-16 bg-linear-to-b from-white to-gray-50 px-1 md:px-9 overflow-hidden">
+      <section className="py-16 bg-linear-to-b from-white to-gray-50 px-2 md:px-9 overflow-hidden">
         <NewsletterSection />
       </section>
     </>

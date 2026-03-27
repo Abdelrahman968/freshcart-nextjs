@@ -91,7 +91,7 @@ function RegisterPage() {
             Create Your Account
           </h2>
           <p className="text-center">Start your fresh journey with us today</p>
-          <div className="register-options flex gap-2 *:grow my-10">
+          <div className="register-options flex flex-col md:flex-row gap-2 *:grow my-10">
             <button
               type="button"
               disabled

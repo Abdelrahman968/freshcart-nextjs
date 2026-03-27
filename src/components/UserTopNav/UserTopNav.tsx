@@ -7,13 +7,21 @@ import { addToast } from '@heroui/toast';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { clearCart } from '../../redux/slices/CartSlice';
+import { clearWishlist } from '../../redux/slices/WishlistSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/reduxStore';
 
 function UserTopNav() {
+  const dispatch = useDispatch<AppDispatch>();
   const { data: session, status } = useSession();
   const router = useRouter();
 
   const handleLogout = async () => {
     const res = await logout();
+
+    dispatch(clearCart());
+    dispatch(clearWishlist());
 
     if (res.success) {
       addToast({

@@ -58,7 +58,7 @@ function FeatureCard({
 
         <p className="text-white/80 mb-4">{description}</p>
 
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
           <div className="text-3xl font-bold">{discount}</div>
 
           <div className="text-sm text-white/70">

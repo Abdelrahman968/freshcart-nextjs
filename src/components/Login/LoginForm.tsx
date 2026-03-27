@@ -11,8 +11,13 @@ import { useRouter } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
 import { useSearchParams } from 'next/navigation';
 import { isSafeUrl } from '../../utils/url';
+import { getUserCartAsync } from '../../redux/slices/CartSlice';
+import { getUserWishlistAsync } from '../../redux/slices/WishlistSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/reduxStore';
 
 function LoginForm() {
+  const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
   const safeCallback =
@@ -58,6 +63,9 @@ function LoginForm() {
         closeIcon: true,
         shouldShowTimeoutProgress: true,
       });
+
+      dispatch(getUserCartAsync());
+      dispatch(getUserWishlistAsync());
 
       router.push(safeCallback);
     } catch (err) {
