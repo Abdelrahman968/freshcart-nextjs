@@ -136,12 +136,20 @@ function WishList() {
 
               <div className="md:col-span-2 flex md:justify-center items-center gap-2">
                 <div className="text-right md:text-center">
-                  <div className="font-semibold text-gray-900">
-                    {product.price} EGP
-                  </div>
-                  <div className="text-sm text-gray-400 line-through">
-                    {product.priceAfterDiscount} EGP
-                  </div>
+                  {product.priceAfterDiscount ? (
+                    <>
+                      <div className="font-semibold text-gray-900">
+                        {product.price} EGP
+                      </div>
+                      <div className="text-sm text-gray-400 line-through">
+                        {product.priceAfterDiscount} EGP
+                      </div>
+                    </>
+                  ) : (
+                    <div className="font-semibold text-gray-900">
+                      {product.price} EGP
+                    </div>
+                  )}
                 </div>
               </div>
 
