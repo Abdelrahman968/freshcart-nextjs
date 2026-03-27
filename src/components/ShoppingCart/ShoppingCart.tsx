@@ -29,7 +29,7 @@ function ShoppingCart() {
           className="absolute top-0 right-0 w-5.5 h-5.5 rounded-full bg-green-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white cursor-pointer"
           onClick={() => router.push('/cart')}
         >
-          {numOfCartItems > 99 ? '99+' : numOfCartItems}
+          {numOfCartItems > 9 ? '9+' : numOfCartItems}
         </span>
       )}
     </div>

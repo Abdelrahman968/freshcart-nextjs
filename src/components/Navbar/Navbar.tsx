@@ -9,8 +9,8 @@ import ShoppingCart from '@components/ShoppingCart/ShoppingCart';
 import BiSupport from '@components/BiSupport/BiSupport';
 
 import Link from 'next/link';
-import { FaRegHeart } from 'react-icons/fa';
 import AppImage from '../AppImage/AppImage';
+import Wishlist from '../Wishlist/Wishlist';
 
 function Navbar() {
   return (
@@ -57,14 +57,7 @@ function Navbar() {
             />
             <div className="w-[2px] h-10 bg-[#E5E7EB] hidden xl:block" />
             <div className="flex items-center gap-2">
-              <Link
-                href="/wishlist"
-                className="w-10 h-10 rounded-full hover:bg-red-50 flex items-center justify-center hover:text-red-600 transition-all duration-300 ease-in-out cursor-pointer"
-                aria-label="Wishlist"
-                title="Wishlist"
-              >
-                <FaRegHeart size={20} strokeWidth={1.1} />
-              </Link>
+              <Wishlist />
               <ShoppingCart />
             </div>
             <UserHeader />

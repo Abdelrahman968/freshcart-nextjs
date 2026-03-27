@@ -1,20 +1,14 @@
 'use client';
 
 import { addToast, Button, Spinner } from '@heroui/react';
-import { FaBan, FaCheck, FaPlus } from 'react-icons/fa';
-import { addToCartAsync } from '../../redux/slices/CartSlice';
+import { FaCheck, FaPlus } from 'react-icons/fa';
+import { addToCartAsync } from '../../../redux/slices/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/reduxStore';
+import { AppDispatch, RootState } from '../../../redux/reduxStore';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 
-function AddToCart({
-  productId,
-  quantity,
-}: {
-  productId: string;
-  quantity: number;
-}) {
+function AddToCart({ productId }: { productId: string }) {
   const dispatch = useDispatch<AppDispatch>();
   const { data: session } = useSession();
 
@@ -48,7 +42,7 @@ function AddToCart({
       className="h-10 w-10 rounded-full flex items-center justify-center bg-green-600 text-white hover:bg-green-700"
       aria-label="Add to cart"
       onPress={handleAddToCart}
-      isDisabled={isLoading || quantity === 0}
+      isDisabled={isLoading}
     >
       {isLoading ? (
         <Spinner color="white" variant="simple" size="sm" />
@@ -56,8 +50,6 @@ function AddToCart({
         <MdError className="text-red-500" size={17} />
       ) : isSuccess ? (
         <FaCheck size={17} />
-      ) : quantity === 0 ? (
-        <FaBan size={17} />
       ) : (
         <FaPlus size={17} />
       )}

@@ -3,6 +3,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { addToast } from '@heroui/toast';
+import { MdErrorOutline } from 'react-icons/md';
+import { IoReloadOutline } from 'react-icons/io5';
+import { GoHome } from 'react-icons/go';
 import { Button } from '@heroui/react';
 
 interface ErrorPageProps {
@@ -24,17 +27,46 @@ export default function GlobalError({ error, reset }: ErrorPageProps) {
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-3">
-      <p className="text-default-400 text-sm">
-        Something went wrong in the FreshCart
-      </p>
-      <div className="flex gap-2">
-        <Button color="primary" size="sm" onPress={reset}>
-          Try Again!
-        </Button>
-        <Button variant="bordered" size="sm" onPress={() => router.push('/')}>
-          Home
-        </Button>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 max-w-sm w-full text-center">
+        <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-50 mx-auto mb-6">
+          <MdErrorOutline className="text-green-600 text-3xl" />
+        </div>
+
+        <h1 className="text-gray-800 text-xl font-semibold mb-2">
+          Something went wrong
+        </h1>
+        <p className="text-gray-400 text-sm leading-relaxed mb-8">
+          An unexpected error occurred in FreshCart. Please try again or return
+          to the homepage.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <Button
+            onPress={reset}
+            className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-sm font-medium rounded-xl py-2.5 transition-colors duration-150"
+            color="success"
+            variant="solid"
+            size="md"
+          >
+            <IoReloadOutline className="text-base" />
+            Try Again
+          </Button>
+          <Button
+            onPress={() => router.push('/')}
+            className="flex items-center justify-center gap-2 w-full bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-600 text-sm font-medium rounded-xl py-2.5 border border-gray-200 transition-colors duration-150"
+            color="primary"
+            variant="solid"
+            size="md"
+          >
+            <GoHome className="text-base" />
+            Go Home
+          </Button>
+        </div>
+
+        {error.digest && (
+          <p className="mt-6 text-xs text-gray-300">Error ID: {error.digest}</p>
+        )}
       </div>
     </div>
   );

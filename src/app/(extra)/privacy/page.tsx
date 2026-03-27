@@ -293,7 +293,7 @@ function PrivacyPolicyPage() {
         title="Privacy Policy"
         subTitle="We value your privacy and are committed to protecting your personal data."
         subTitle2="Privacy Policy"
-        icon={<FaShieldAlt size={36} />}
+        icon={<FaShieldAlt size={40} />}
       />
 
       <div className="container mx-auto px-4 py-12">

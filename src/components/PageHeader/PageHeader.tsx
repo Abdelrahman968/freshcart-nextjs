@@ -19,7 +19,9 @@ function PageHeader({
       className={`bg-linear-to-br from-green-800 via-green-600 to-green-500 text-white ${
         title === 'Top Brands'
           ? 'bg-linear-to-br from-violet-800 via-violet-600 to-violet-500'
-          : ''
+          : title === 'Wishlist'
+            ? 'bg-linear-to-br from-red-800 via-red-600 to-red-500'
+            : ''
       }`}
     >
       <div className="container mx-auto px-4 py-10 sm:py-14">

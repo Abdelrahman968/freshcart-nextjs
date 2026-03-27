@@ -109,7 +109,7 @@ function ReturnsRefundsPage() {
         title="Returns & Refunds"
         subTitle="Hassle-free returns within 30 days. Your satisfaction is our priority."
         subTitle2="Returns & Refunds"
-        icon={<FaUndoAlt size={36} />}
+        icon={<FaUndoAlt size={40} />}
       />
 
       <div className="container mx-auto px-4 py-12">

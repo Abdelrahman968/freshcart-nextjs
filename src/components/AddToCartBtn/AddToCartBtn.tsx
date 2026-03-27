@@ -9,7 +9,15 @@ import { AppDispatch, RootState } from '../../redux/reduxStore';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 
-function AddToCartBtn({ productId }: { productId: string }) {
+function AddToCartBtn({
+  productId,
+  from,
+  quantity,
+}: {
+  productId: string;
+  from: 'wishlist' | 'productDetails';
+  quantity: number;
+}) {
   const { data: session } = useSession();
   const dispatch = useDispatch<AppDispatch>();
   const isLoading = useSelector(
@@ -39,11 +47,12 @@ function AddToCartBtn({ productId }: { productId: string }) {
     <>
       <Button
         id="add-to-cart"
-        className="flex-1 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg shadow-green-600/25 bg-green-600 cursor-pointer"
+        className={` ${from === 'wishlist' ? 'flex-1 md:flex-none bg-green-600 text-white hover:bg-green-700' : 'flex-1 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg shadow-green-600/25 bg-green-600'}`}
         color="success"
         variant="solid"
-        size="lg"
+        size={from === 'wishlist' ? 'md' : 'lg'}
         onPress={handleAddToCart}
+        isDisabled={quantity === 0}
       >
         {isLoading ? (
           <Spinner color="white" variant="simple" size="sm" />
@@ -54,7 +63,11 @@ function AddToCartBtn({ productId }: { productId: string }) {
         ) : (
           <FaShoppingCart size={17} />
         )}
-        {isLoading ? 'Adding...' : 'Add to Cart'}
+        {isLoading
+          ? 'Adding...'
+          : quantity > 0
+            ? 'Add to Cart'
+            : 'Out of Stock'}
       </Button>
     </>
   );

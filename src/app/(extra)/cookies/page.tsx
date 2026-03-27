@@ -84,7 +84,7 @@ function CookiePolicyPage() {
         title="Cookie Policy"
         subTitle="We use cookies to improve your experience. Here's everything you need to know."
         subTitle2="Cookie Policy"
-        icon={<FaCookie size={36} />}
+        icon={<FaCookie size={40} />}
       />
 
       <div className="container mx-auto px-4 py-12">

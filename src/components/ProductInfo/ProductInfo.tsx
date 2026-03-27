@@ -100,7 +100,11 @@ function ProductInfo({ product }: { product: ProductCardProps }) {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          <AddToCartBtn productId={product.id} />
+          <AddToCartBtn
+            productId={product.id}
+            from="productDetails"
+            quantity={product.quantity}
+          />
           <BuyNowBtn productId={product.id} />
         </div>
         <div className="flex gap-3 mb-6">

@@ -1,14 +1,9 @@
 import Link from 'next/link';
-import {
-  FaRegHeart,
-  FaArrowsRotate,
-  FaRegEye,
-  FaStar,
-  FaRegStar,
-} from 'react-icons/fa6';
+import { FaArrowsRotate, FaRegEye, FaStar, FaRegStar } from 'react-icons/fa6';
 import { getDiscountPercentage } from '../../utils/price';
 import AppImage from '../AppImage/AppImage';
 import AddToCart from '../AddToCart/AddToCart';
+import WishListBtn from './WishListBtn';
 
 type ProductCardProps = {
   id: string;
@@ -20,6 +15,7 @@ type ProductCardProps = {
   reviews: number;
   link: string;
   priceAfterDiscount?: number;
+  quantity: number;
 };
 
 function ProductCard({
@@ -32,6 +28,7 @@ function ProductCard({
   reviews,
   link,
   priceAfterDiscount,
+  quantity,
 }: ProductCardProps) {
   const renderStars = () => {
     return [...Array(5)].map((_, i) =>
@@ -62,9 +59,7 @@ function ProductCard({
         )}
 
         <div className="absolute top-3 right-3 flex flex-col space-y-2">
-          <button className="bg-white h-8 w-8 rounded-full flex items-center justify-center shadow-sm text-gray-600 hover:text-red-500">
-            <FaRegHeart />
-          </button>
+          <WishListBtn productId={id} />
 
           <button
             className="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 shadow-sm"
@@ -119,7 +114,7 @@ function ProductCard({
             <span className="text-lg font-bold text-gray-800">{price} EGP</span>
           )}
 
-          <AddToCart productId={id} />
+          <AddToCart productId={id} quantity={quantity} />
         </div>
       </div>
     </div>

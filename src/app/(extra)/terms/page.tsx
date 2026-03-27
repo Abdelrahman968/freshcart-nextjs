@@ -319,7 +319,7 @@ function TermsOfServicePage() {
         title="Terms of Service"
         subTitle="Please read these terms carefully before using FreshCart."
         subTitle2="Terms of Service"
-        icon={<FaFileContract size={36} />}
+        icon={<FaFileContract size={40} />}
       />
 
       <div className="container mx-auto px-4 py-12">

@@ -46,6 +46,7 @@ export default async function FeaturedProducts({
             reviews={product.ratingsQuantity}
             link={`/products/${product._id}`}
             priceAfterDiscount={product.priceAfterDiscount}
+            quantity={product.quantity}
           />
         ))}
       </div>

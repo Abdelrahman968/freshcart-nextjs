@@ -295,7 +295,7 @@ function TrackOrderPage() {
         title="Track Your Order"
         subTitle="Enter your order number or tracking number to get real-time updates."
         subTitle2="Track Order"
-        icon={<FaTruck size={36} />}
+        icon={<FaTruck size={40} />}
       />
 
       <div className="container mx-auto px-4 py-12">
