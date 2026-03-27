@@ -9,9 +9,12 @@ import { LoginFormData } from '../../types/login.type';
 import { signIn, SignInResponse } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
+import { useSearchParams } from 'next/navigation';
 import { isSafeUrl } from '../../utils/url';
 
-function LoginForm({ callbackUrl }: { callbackUrl: string }) {
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
   const safeCallback =
     callbackUrl && isSafeUrl(callbackUrl) ? callbackUrl : '/';
 

@@ -9,16 +9,12 @@ import {
   FaStar,
 } from 'react-icons/fa6';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 import LoginImage from '@assets/login/main-image.png';
 import AppImage from '../../../components/AppImage/AppImage';
 import LoginForm from '../../../components/Login/LoginForm';
 
 function LoginPage() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
-
   return (
     <div className="container py-16 mx-auto px-4" id="login-section">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
@@ -103,7 +99,7 @@ function LoginPage() {
                 </span>
               </div>
             </div>
-            <LoginForm callbackUrl={callbackUrl} />
+            <LoginForm />
             <div className="text-center mt-8 pt-6 border-t border-gray-100">
               <p className="text-gray-600">
                 New to FreshCart?
