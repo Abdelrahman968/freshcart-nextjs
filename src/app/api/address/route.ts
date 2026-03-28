@@ -1,0 +1,47 @@
+import { NextResponse } from 'next/server';
+// import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// GET /api/address
+export async function GET(req: Request) {
+  const token = req.headers.get('token');
+
+  if (!token) {
+    return NextResponse.json(
+      { status: 'fail', message: 'User is not authenticated' },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/addresses`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        token,
+      },
+      cache: 'no-store',
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return NextResponse.json(
+        {
+          status: 'fail',
+          message: data.message || 'Failed to fetch addresses',
+        },
+        { status: res.status }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('[GET /api/address]', error);
+    return NextResponse.json(
+      { status: 'fail', message: 'Network error' },
+      { status: 500 }
+    );
+  }
+}

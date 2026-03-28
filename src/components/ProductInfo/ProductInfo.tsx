@@ -12,6 +12,7 @@ import ProductQuantity from '../ProductQuantity/ProductQuantity';
 import ShareBtn from '../ShareBtn/ShareBtn';
 import AddToCartBtn from '../AddToCartBtn/AddToCartBtn';
 import BuyNowBtn from '../BuyNowBtn/BuyNowBtn';
+import AddToWishList from '../AddToWishList/AddToWishList';
 
 function ProductInfo({ product }: { product: ProductCardProps }) {
   const discount = getDiscountPercentage(
@@ -108,13 +109,7 @@ function ProductInfo({ product }: { product: ProductCardProps }) {
           <BuyNowBtn productId={product.id} />
         </div>
         <div className="flex gap-3 mb-6">
-          <button
-            id="wishlist-button"
-            className="flex-1 border-2 py-3 px-4 rounded-xl font-medium transition flex items-center justify-center gap-2 border-gray-200 text-gray-700 hover:border-green-300 hover:text-green-600 cursor-pointer"
-          >
-            <FaRegHeart />
-            Add to Wishlist
-          </button>
+          <AddToWishList productId={product.id} />
           <ShareBtn />
         </div>
         <div className="border-t border-gray-100 pt-6">
