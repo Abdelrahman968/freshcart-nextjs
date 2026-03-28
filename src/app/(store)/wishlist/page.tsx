@@ -1,5 +1,5 @@
-import HeaderWishList from './HeaderWishList';
-import WishList from './WishList';
+import HeaderWishList from './_components/HeaderWishList';
+import WishList from './_components/WishList';
 
 function WishlistPage() {
   return (

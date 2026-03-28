@@ -6,7 +6,7 @@ import {
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { DecodedJwtPayload, jwtDecoder } from '../utils/jwtDecoder';
-import { AppSession, AppUser } from '../types/next-auth.types';
+// import { AppSession, AppUser } from '../types/next-auth.types';
 
 export const nextAuthConfig: NextAuthOptions = {
   providers: [
@@ -47,6 +47,7 @@ export const nextAuthConfig: NextAuthOptions = {
             name: data.user.name,
             email: data.user.email,
             routeToken: data.token,
+            role: data.user.role,
             expiresAt: decodedToken.exp,
           };
 
@@ -65,10 +66,10 @@ export const nextAuthConfig: NextAuthOptions = {
   callbacks: {
     jwt({ token, user }) {
       if (user) {
-        const u = user as AppUser;
-        token.id = u.id;
-        token.routeToken = u.routeToken;
-        token.expiresAt = u.expiresAt;
+        token.id = user.id;
+        token.routeToken = user.routeToken;
+        token.expiresAt = user.expiresAt;
+        token.role = user.role;
       }
 
       if (token.expiresAt && Date.now() >= (token.expiresAt as number) * 1000) {
@@ -78,20 +79,17 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     session({ session, token }) {
-      const s = session as AppSession;
-
       if (token.error === 'TokenExpired') {
-        s.expiresAt = undefined;
-        s.routeToken = undefined;
+        session.expiresAt = undefined;
+        session.routeToken = undefined;
 
         return session;
       }
 
       if (token) {
-        const u = token as AppUser;
-
-        s.user.id = u.id;
-        s.expiresAt = u.expiresAt;
+        session.user.id = token.id;
+        session.expiresAt = token.expiresAt;
+        session.user.role = token.role;
       }
 
       return session;

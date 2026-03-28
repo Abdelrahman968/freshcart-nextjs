@@ -3,13 +3,13 @@ import { signOut } from 'next-auth/react';
 export const logout = async () => {
   try {
     const res = await signOut({
-      redirect: false,
+      redirect: true,
       callbackUrl: '/login',
     });
 
     return {
       success: true,
-      url: res?.url,
+      url: res,
     };
   } catch (error) {
     return {

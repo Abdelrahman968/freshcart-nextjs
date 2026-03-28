@@ -1,6 +1,6 @@
 import { decodeAuthUserToken } from '../../../../utils/decodeAuthUserToken';
-import AddAddress from '../components/AddAddress';
-import AddressCard from '../components/AddressCard';
+import AddAddress from '../_components/AddAddress';
+import AddressCard from '../_components/AddressCard';
 
 export default async function AddressPage() {
   const token = await decodeAuthUserToken();

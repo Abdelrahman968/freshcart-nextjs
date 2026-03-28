@@ -2,7 +2,7 @@ import Link from 'next/link';
 import PageHeader from '../../../components/PageHeader/PageHeader';
 import { FaChevronRight, FaUser } from 'react-icons/fa';
 import { FaGear, FaLocationDot } from 'react-icons/fa6';
-import Aside from './components/Aside';
+import Aside from './_components/Aside';
 import { AddressProvider } from '../../../context/AddressContext';
 
 export default function ProfileLayout({

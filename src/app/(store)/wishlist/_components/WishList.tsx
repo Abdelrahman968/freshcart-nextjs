@@ -1,17 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import AppImage from '../../../components/AppImage/AppImage';
+import AppImage from '../../../../components/AppImage/AppImage';
 import { FaArrowRight, FaHeart, FaTrash } from 'react-icons/fa';
 import { addToast, Button } from '@heroui/react';
 import { useEffect } from 'react';
 import {
   getUserWishlistAsync,
   removeProductFromWishlistAsync,
-} from '../../../redux/slices/WishlistSlice';
+} from '../../../../redux/slices/WishlistSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/reduxStore';
-import AddToCartBtn from '../../../components/AddToCartBtn/AddToCartBtn';
+import { AppDispatch, RootState } from '../../../../redux/reduxStore';
+import AddToCartBtn from '../../../../components/AddToCartBtn/AddToCartBtn';
 import { useState } from 'react';
 
 function WishList() {

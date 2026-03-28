@@ -140,7 +140,7 @@ function UserHeader() {
                 >
                   <Link
                     className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
-                    href="/address"
+                    href="/profile/address"
                   >
                     My Address
                   </Link>
@@ -154,7 +154,7 @@ function UserHeader() {
                 >
                   <Link
                     className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
-                    href="/settings"
+                    href="/profile/settings"
                   >
                     My Settings
                   </Link>

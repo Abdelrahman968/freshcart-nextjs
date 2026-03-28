@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import PageHeader from '../../../components/PageHeader/PageHeader';
+import PageHeader from '../../../../components/PageHeader/PageHeader';
 import { FaHeart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/reduxStore';
+import { RootState } from '../../../../redux/reduxStore';
 
 function HeaderWishList() {
   const { count } = useSelector((store: RootState) => store.wishlist);

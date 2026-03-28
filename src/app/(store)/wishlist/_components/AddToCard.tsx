@@ -2,9 +2,9 @@
 
 import { addToast, Button, Spinner } from '@heroui/react';
 import { FaCheck, FaPlus } from 'react-icons/fa';
-import { addToCartAsync } from '../../../redux/slices/CartSlice';
+import { addToCartAsync } from '../../../../redux/slices/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/reduxStore';
+import { AppDispatch, RootState } from '../../../../redux/reduxStore';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 

@@ -5,6 +5,7 @@ export type AppUser = {
   routeToken?: string;
   expires?: string;
   expiresAt?: string;
+  role?: string;
 };
 
 export interface AppSession {
@@ -12,5 +13,6 @@ export interface AppSession {
   expiresAt?: string;
   user: {
     id?: string;
+    role?: string;
   };
 }

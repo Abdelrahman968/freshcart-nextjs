@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 function Aside() {
   const pathname = usePathname();
   return (
-    <aside className="w-full lg:w-72 shrink-0">
+    <aside className="w-full lg:w-72 shrink-0 md:sticky md:top-22 h-fit">
       <nav className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="p-4 border-b border-gray-100">
           <h2 className="font-bold text-gray-900">My Account</h2>

@@ -14,7 +14,7 @@ export async function decodeAuthUserToken() {
 
   if (!decodedToken) return null;
 
-  const user = decodedToken as AppUser;
+  const user = decodedToken;
 
   return user?.routeToken ?? null;
 }

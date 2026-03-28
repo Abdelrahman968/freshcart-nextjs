@@ -19,5 +19,6 @@ export interface AuthJSAuthorizeType {
   name: string;
   email: string;
   routeToken: string;
+  role: string;
   expiresAt: number;
 }

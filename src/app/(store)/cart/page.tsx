@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { FaCartShopping } from 'react-icons/fa6';
 import Breadcrumb from '../../../components/Breadcrumb/Breadcrumb';
-import CartList from './components/CartList';
-import OrderSummary from './components/OrderSummary';
+import CartList from './_components/CartList';
+import OrderSummary from './_components/OrderSummary';
 import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
 import { CartApiResponse } from '../../../types/cart.type';
 

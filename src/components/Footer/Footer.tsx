@@ -20,7 +20,7 @@ import AppImage from '../AppImage/AppImage';
 function Footer() {
   return (
     <>
-      <div className="bg-green-50 p-5 w-full">
+      <div className="bg-green-50 py-2 w-full">
         <IconBanner data={notFoundBannerInfo} />
       </div>
       <footer className="bg-gray-900 text-white">
