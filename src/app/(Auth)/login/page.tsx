@@ -14,6 +14,40 @@ import LoginImage from '@assets/login/main-image.png';
 import AppImage from '../../../components/AppImage/AppImage';
 import LoginForm from '../../../components/Login/LoginForm';
 import { Suspense } from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login | FreshCart',
+  description:
+    'Welcome back! Sign in to your FreshCart account to continue shopping for fresh groceries and enjoy exclusive member benefits.',
+  keywords: ['FreshCart', 'Login'],
+  openGraph: {
+    title: 'Login | FreshCart',
+    description:
+      'Welcome back! Sign in to your FreshCart account to continue shopping for fresh groceries and enjoy exclusive member benefits.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Login | FreshCart',
+    description:
+      'Welcome back! Sign in to your FreshCart account to continue shopping for fresh groceries and enjoy exclusive member benefits.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 function LoginPage() {
   return (
@@ -116,16 +150,16 @@ function LoginPage() {
             </div>
             <div className="flex items-center justify-center space-x-6 mt-6 text-xs text-gray-500">
               <div className="flex items-center">
-                <FaLock className="mr-1" />
-                SSL Secured
+                <FaLock className="sm:mr-1 " />
+                <p className="hidden sm:block">SSL Secured</p>
               </div>
               <div className="flex items-center">
-                <FaUsers className="mr-1" />
-                50K+ Users
+                <FaUsers className="sm:mr-1" />
+                <p className="hidden sm:block">50K+ Users</p>
               </div>
               <div className="flex items-center">
                 <FaStar className="mr-1" />
-                4.9 Rating
+                <p className="hidden sm:block">4.9 Rating</p>
               </div>
             </div>
           </div>

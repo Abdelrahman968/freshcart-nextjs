@@ -12,6 +12,40 @@ import { FaLocationDot } from 'react-icons/fa6';
 import PageHeader from '../../../components/PageHeader/PageHeader';
 import { useState } from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Track Order | FreshCart',
+  description:
+    'Track your FreshCart order and get real-time updates on its delivery status.',
+  keywords: ['FreshCart', 'Track Order'],
+  openGraph: {
+    title: 'Track Order | FreshCart',
+    description:
+      'Track your FreshCart order and get real-time updates on its delivery status.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Track Order | FreshCart',
+    description:
+      'Track your FreshCart order and get real-time updates on its delivery status.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 type TrackingStatus =
   | 'processing'

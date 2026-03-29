@@ -10,6 +10,40 @@ import SearchBar from '../../../components/search/SearchBar';
 import SearchFilters from '../../../components/search/SearchFilters';
 import SearchControls from '../../../components/search/SearchControls';
 import SearchPagination from '../../../components/search/SearchPagination';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Search Results | FreshCart',
+  description:
+    'Search results for your query. Find the best products at FreshCart.',
+  keywords: ['FreshCart', 'Search', 'Products'],
+  openGraph: {
+    title: 'Search Results | FreshCart',
+    description:
+      'Search results for your query. Find the best products at FreshCart.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Search Results | FreshCart',
+    description:
+      'Search results for your query. Find the best products at FreshCart.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 

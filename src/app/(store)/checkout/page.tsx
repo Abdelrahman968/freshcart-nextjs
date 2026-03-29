@@ -3,6 +3,40 @@ import { FaReceipt, FaArrowLeft } from 'react-icons/fa6';
 import Breadcrumb from '../../../components/Breadcrumb/Breadcrumb';
 import MainForm from './_components/MainForm';
 import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Checkout | FreshCart',
+  description:
+    'Complete your purchase at FreshCart. Secure checkout with multiple payment options.',
+  keywords: ['FreshCart', 'Checkout', 'Online Payment'],
+  openGraph: {
+    title: 'Checkout | FreshCart',
+    description:
+      'Complete your purchase at FreshCart. Secure checkout with multiple payment options.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Checkout | FreshCart',
+    description:
+      'Complete your purchase at FreshCart. Secure checkout with multiple payment options.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default async function CheckoutPage() {
   let addresses = [];

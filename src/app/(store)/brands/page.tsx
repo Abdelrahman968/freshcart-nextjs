@@ -7,12 +7,42 @@ import { getAllBrands } from '../../../services/brands.service';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Brands Page | FreshCart`,
-    description: `Brands Page | FreshCart`,
-    keywords: ['Brands Page'],
+    title: `Brands | FreshCart`,
+    description: `Shop from your favorite brands at FreshCart. Discover a wide range of products from top brands at competitive prices.`,
+    keywords: [
+      'Brands',
+      'FreshCart',
+      'Online Grocery',
+      'Fresh Food',
+      'Organic Products',
+    ],
     authors: [{ name: 'Abdelrahman Ayman' }],
     creator: 'Abdelrahman Ayman',
     publisher: 'Abdelrahman Ayman',
+    openGraph: {
+      title: `Brands | FreshCart`,
+      description: `Shop from your favorite brands at FreshCart. Discover a wide range of products from top brands at competitive prices.`,
+      siteName: 'FreshCart',
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      title: `Brands | FreshCart`,
+      description: `Shop from your favorite brands at FreshCart. Discover a wide range of products from top brands at competitive prices.`,
+      site: '@FreshCart',
+      creator: '@FreshCart',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

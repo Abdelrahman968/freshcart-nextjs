@@ -15,9 +15,36 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - FreshCart',
+  title: 'Terms of Service | FreshCart',
   description:
     "Read FreshCart's Terms of Service governing your use of our platform.",
+  keywords: ['FreshCart', 'Terms of Service'],
+  openGraph: {
+    title: 'Terms of Service | FreshCart',
+    description:
+      "Read FreshCart's Terms of Service governing your use of our platform.",
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Terms of Service | FreshCart',
+    description:
+      "Read FreshCart's Terms of Service governing your use of our platform.",
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 interface TermsSection {

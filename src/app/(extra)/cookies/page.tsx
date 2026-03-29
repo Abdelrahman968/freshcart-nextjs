@@ -17,6 +17,33 @@ export const metadata: Metadata = {
   title: 'Cookie Policy - FreshCart',
   description:
     'Learn how FreshCart uses cookies and how you can manage your preferences.',
+  keywords: ['FreshCart', 'Cookie Policy'],
+  openGraph: {
+    title: 'Cookie Policy - FreshCart',
+    description:
+      'Learn how FreshCart uses cookies and how you can manage your preferences.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Cookie Policy - FreshCart',
+    description:
+      'Learn how FreshCart uses cookies and how you can manage your preferences.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 interface CookieType {

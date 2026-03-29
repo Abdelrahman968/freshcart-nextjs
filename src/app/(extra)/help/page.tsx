@@ -15,8 +15,36 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Help Center - FreshCart',
-  description: 'Help Center - FreshCart',
+  title: 'Help Center | FreshCart',
+  description:
+    'Find answers to common questions or get in touch with our support team.',
+  keywords: ['FreshCart', 'Help Center'],
+  openGraph: {
+    title: 'Help Center | FreshCart',
+    description:
+      'Find answers to common questions or get in touch with our support team.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Help Center | FreshCart',
+    description:
+      'Find answers to common questions or get in touch with our support team.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 interface FAQItem {

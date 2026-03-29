@@ -9,6 +9,40 @@ import {
 import AppImage from '../../../components/AppImage/AppImage';
 import ReviewAuthor from '@assets/register/review-author.webp';
 import RegisterForm from '../../../components/Register/RegisterForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Register | FreshCart',
+  description:
+    'Join thousands of happy customers who enjoy fresh groceries delivered right to their doorstep.',
+  keywords: ['FreshCart', 'Register'],
+  openGraph: {
+    title: 'Register | FreshCart',
+    description:
+      'Join thousands of happy customers who enjoy fresh groceries delivered right to their doorstep.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Register | FreshCart',
+    description:
+      'Join thousands of happy customers who enjoy fresh groceries delivered right to their doorstep.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 function RegisterPage() {
   return (

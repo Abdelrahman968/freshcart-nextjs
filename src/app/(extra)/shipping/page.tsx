@@ -15,11 +15,37 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Shipping Information - FreshCart',
+  title: 'Shipping Information | FreshCart',
   description:
     'Learn about FreshCart shipping methods, delivery times, and policies.',
+  keywords: ['FreshCart', 'Shipping Information'],
+  openGraph: {
+    title: 'Shipping Information | FreshCart',
+    description:
+      'Learn about FreshCart shipping methods, delivery times, and policies.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Shipping Information | FreshCart',
+    description:
+      'Learn about FreshCart shipping methods, delivery times, and policies.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
-
 interface ShippingMethod {
   icon: React.ReactNode;
   title: string;

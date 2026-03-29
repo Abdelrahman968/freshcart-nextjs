@@ -1,9 +1,38 @@
-import Link from 'next/link';
 import PageHeader from '../../../components/PageHeader/PageHeader';
-import { FaChevronRight, FaUser } from 'react-icons/fa';
-import { FaGear, FaLocationDot } from 'react-icons/fa6';
+import { FaUser } from 'react-icons/fa';
 import Aside from './_components/Aside';
 import { AddressProvider } from '../../../context/AddressContext';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Profile | FreshCart',
+  description: 'Manage your addresses and account settings',
+  keywords: ['FreshCart', 'Profile'],
+  openGraph: {
+    title: 'Profile | FreshCart',
+    description: 'Manage your addresses and account settings',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Profile | FreshCart',
+    description: 'Manage your addresses and account settings',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default function ProfileLayout({
   children,

@@ -13,9 +13,36 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Returns & Refunds - FreshCart',
+  title: 'Returns & Refunds | FreshCart',
   description:
     'Learn about FreshCart return policy, refund process, and eligible items.',
+  keywords: ['FreshCart', 'Returns & Refunds'],
+  openGraph: {
+    title: 'Returns & Refunds | FreshCart',
+    description:
+      'Learn about FreshCart return policy, refund process, and eligible items.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Returns & Refunds | FreshCart',
+    description:
+      'Learn about FreshCart return policy, refund process, and eligible items.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 interface ReturnStep {

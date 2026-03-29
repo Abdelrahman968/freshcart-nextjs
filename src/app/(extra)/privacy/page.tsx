@@ -14,9 +14,36 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - FreshCart',
+  title: 'Privacy Policy | FreshCart',
   description:
     'Learn how FreshCart collects, uses, and protects your personal data.',
+  keywords: ['FreshCart', 'Privacy Policy'],
+  openGraph: {
+    title: 'Privacy Policy | FreshCart',
+    description:
+      'Learn how FreshCart collects, uses, and protects your personal data.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Privacy Policy | FreshCart',
+    description:
+      'Learn how FreshCart collects, uses, and protects your personal data.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 interface PolicySection {

@@ -32,11 +32,11 @@ export async function generateMetadata({
   if (brand) {
     const brandData = await getBrandById(brand);
     title = `${brandData?.name || 'Brand'} Products | FreshCart`;
-    description = `Explore ${brandData?.name || 'brand'} products on FreshCart`;
+    description = `Shop from ${brandData?.name || 'brand'} at FreshCart. Discover a wide range of products from top brands at competitive prices.`;
   } else if (subcategory) {
     const subCategoryData = await getSpecificSubCategory(subcategory);
     title = `${subCategoryData?.name || 'Category'} Products | FreshCart`;
-    description = `Explore ${subCategoryData?.name || 'category'} products on FreshCart`;
+    description = `Shop from ${subCategoryData?.name || 'category'} at FreshCart. Discover a wide range of products from top brands at competitive prices.`;
   }
 
   return {
@@ -46,6 +46,30 @@ export async function generateMetadata({
     authors: [{ name: 'Abdelrahman Ayman' }],
     creator: 'Abdelrahman Ayman',
     publisher: 'Abdelrahman Ayman',
+    openGraph: {
+      title,
+      description,
+      siteName: 'FreshCart',
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      title,
+      description,
+      site: '@FreshCart',
+      creator: '@FreshCart',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

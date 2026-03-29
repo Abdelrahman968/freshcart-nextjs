@@ -7,12 +7,42 @@ import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Categories Page | FreshCart`,
-    description: `Categories Page | FreshCart`,
-    keywords: ['Categories Page'],
+    title: `Categories | FreshCart`,
+    description: `Shop from a wide range of categories at FreshCart. Discover fresh food, organic products, and daily essentials.`,
+    keywords: [
+      'Categories',
+      'FreshCart',
+      'Online Grocery',
+      'Fresh Food',
+      'Organic Products',
+    ],
     authors: [{ name: 'Abdelrahman Ayman' }],
     creator: 'Abdelrahman Ayman',
     publisher: 'Abdelrahman Ayman',
+    openGraph: {
+      title: `Categories | FreshCart`,
+      description: `Shop from a wide range of categories at FreshCart. Discover fresh food, organic products, and daily essentials.`,
+      siteName: 'FreshCart',
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      title: `Categories | FreshCart`,
+      description: `Shop from a wide range of categories at FreshCart. Discover fresh food, organic products, and daily essentials.`,
+      site: '@FreshCart',
+      creator: '@FreshCart',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

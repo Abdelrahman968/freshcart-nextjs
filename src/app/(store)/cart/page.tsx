@@ -5,6 +5,40 @@ import CartList from './_components/CartList';
 import OrderSummary from './_components/OrderSummary';
 import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
 import { CartApiResponse } from '../../../types/cart.type';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Shopping Cart | FreshCart',
+  description:
+    'Your shopping cart at FreshCart. Review your items and proceed to checkout.',
+  keywords: ['FreshCart', 'Shopping Cart'],
+  openGraph: {
+    title: 'Shopping Cart | FreshCart',
+    description:
+      'Your shopping cart at FreshCart. Review your items and proceed to checkout.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Shopping Cart | FreshCart',
+    description:
+      'Your shopping cart at FreshCart. Review your items and proceed to checkout.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default async function CartPage() {
   async function getUserCart() {

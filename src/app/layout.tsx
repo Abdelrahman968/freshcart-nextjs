@@ -13,7 +13,7 @@ const exo = Exo({
 });
 
 export const metadata: Metadata = {
-  title: 'FreshCart',
+  title: 'FreshCart | Online Store',
   description: 'FreshCart is an e-commerce website',
   keywords: ['FreshCart', 'e-commerce', 'website'],
   authors: [{ name: 'Abdelrahman Ayman' }],
@@ -29,6 +29,20 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  openGraph: {
+    title: 'FreshCart',
+    description: 'FreshCart is an e-commerce website',
+    siteName: 'FreshCart',
+    images: ['/og.png'],
+    type: 'website',
+  },
+  twitter: {
+    title: 'FreshCart',
+    description: 'FreshCart is an e-commerce website',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+    images: ['/og.png'],
   },
 };
 

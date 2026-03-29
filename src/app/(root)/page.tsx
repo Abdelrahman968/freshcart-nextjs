@@ -8,6 +8,40 @@ import NewsletterSection from '@components/NewsletterSection/NewsletterSection';
 import { homeTopBannerInfo } from '../../data/iconBanner';
 import { slides } from '../../data/MySwiperSlides.data';
 import MainTitle from '../../components/MainTitle/MainTitle';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'FreshCart - Online Grocery Store',
+  description:
+    'FreshCart is your one-stop destination for fresh groceries, organic products, and daily essentials delivered to your doorstep.',
+  keywords: ['FreshCart', 'Online Grocery', 'Fresh Food', 'Organic Products'],
+  openGraph: {
+    title: 'FreshCart - Online Grocery Store',
+    description:
+      'FreshCart is your one-stop destination for fresh groceries, organic products, and daily essentials delivered to your doorstep.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'FreshCart - Online Grocery Store',
+    description:
+      'FreshCart is your one-stop destination for fresh groceries, organic products, and daily essentials delivered to your doorstep.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 function HomePage() {
   return (

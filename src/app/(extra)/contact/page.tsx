@@ -15,7 +15,35 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact Us - FreshCart',
-  description: 'Contact Us - FreshCart',
+  description:
+    'Get in touch with FreshCart for support, inquiries, and feedback. We’re here to help!',
+  keywords: ['FreshCart', 'Contact Us'],
+  openGraph: {
+    title: 'Contact Us - FreshCart',
+    description:
+      'Get in touch with FreshCart for support, inquiries, and feedback. We’re here to help!',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Contact Us - FreshCart',
+    description:
+      'Get in touch with FreshCart for support, inquiries, and feedback. We’re here to help!',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 function ContactPage() {

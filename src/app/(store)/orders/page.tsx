@@ -8,6 +8,40 @@ import OrderSummary from './_components/OrderSummary';
 import { Order } from '../../../types/order.type';
 import { nextAuthConfig } from '../../../next-auth/nextAuth.config';
 import OrderStatus from './_components/OrderStatus';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'My Orders | FreshCart',
+  description:
+    'Track and manage your orders at FreshCart. View order history and delivery status.',
+  keywords: ['FreshCart', 'Orders', 'Order History', 'Order Tracking'],
+  openGraph: {
+    title: 'My Orders | FreshCart',
+    description:
+      'Track and manage your orders at FreshCart. View order history and delivery status.',
+    siteName: 'FreshCart',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: 'My Orders | FreshCart',
+    description:
+      'Track and manage your orders at FreshCart. View order history and delivery status.',
+    site: '@FreshCart',
+    creator: '@FreshCart',
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default async function OrdersPage({
   searchParams,
