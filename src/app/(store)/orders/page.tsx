@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { FaBox } from 'react-icons/fa';
+import { FaBox, FaCheck, FaTimes } from 'react-icons/fa';
 import { FaBagShopping } from 'react-icons/fa6';
 import OrderCard from './_components/OrderCard';
 import DeliveryAddress from './_components/DeliveryAddress';
@@ -7,9 +7,16 @@ import OrderItems from './_components/OrderItems';
 import OrderSummary from './_components/OrderSummary';
 import { Order } from '../../../types/order.type';
 import { nextAuthConfig } from '../../../next-auth/nextAuth.config';
+import OrderStatus from './_components/OrderStatus';
 
-export default async function OrdersPage() {
+export default async function OrdersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ payment?: string; operation?: string }>;
+}) {
   const session = await getServerSession(nextAuthConfig);
+
+  const { payment, operation } = await searchParams;
 
   if (!session) {
     return (
@@ -34,6 +41,7 @@ export default async function OrdersPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <OrderStatus payment={payment} operation={operation} />
       <div className="mb-8">
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
           <a className="hover:text-green-600 transition" href="/">

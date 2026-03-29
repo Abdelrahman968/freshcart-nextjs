@@ -26,7 +26,7 @@ export async function verifyResetCode(params: { resetCode: string }) {
     }
   );
   const data = await res.json();
-  console.log('data', data);
+  // console.log('data', data);
   return {
     status: data.statusMsg || data.status || 'fail',
   };

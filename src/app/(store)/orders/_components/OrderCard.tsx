@@ -45,7 +45,7 @@ interface OrderCardProps {
 }
 
 export default function OrderCard({ order, children }: OrderCardProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const formattedDate = new Date(order.createdAt).toLocaleDateString('en-US', {
     year: 'numeric',

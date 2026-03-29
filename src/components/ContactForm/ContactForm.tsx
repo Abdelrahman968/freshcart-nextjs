@@ -36,7 +36,7 @@ function ContactForm() {
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    // console.log(data);
     await new Promise(resolve => setTimeout(resolve, 2000));
     addToast({
       title: 'Message sent successfully',

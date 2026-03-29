@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-// import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
+import { decodeAuthUserToken } from '../../../utils/decodeAuthUserToken';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,6 +13,7 @@ export async function GET(req: Request) {
       { status: 401 }
     );
   }
+  console.log(token);
 
   try {
     const res = await fetch(`${API_URL}/addresses`, {

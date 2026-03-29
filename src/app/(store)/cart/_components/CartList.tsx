@@ -7,7 +7,11 @@ import CartItemCard from './CartItemCard';
 import FooterActions from './FooterActions';
 import { FaSpinner } from 'react-icons/fa';
 
-export default function CartList() {
+export default function CartList({
+  fromCheckout = false,
+}: {
+  fromCheckout?: boolean;
+}) {
   const dispatch = useDispatch<AppDispatch>();
 
   const { products, isCartLoading, isCartError } = useSelector(
@@ -27,16 +31,14 @@ export default function CartList() {
   }
 
   if (isCartError) {
-    return (
-      <div className="bg-red-50 text-red-600 rounded-xl p-6 text-center">
-        Failed to load cart items. Please refresh the page.
-      </div>
-    );
+    dispatch(getUserCartAsync());
   }
 
   return (
     <>
-      <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
+      <div
+        className={`space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto pr-2 ${fromCheckout && 'max-h-full'}`}
+      >
         {products.map(item => (
           <CartItemCard
             key={item._id}
@@ -44,10 +46,11 @@ export default function CartList() {
             product={item.product}
             count={item.count}
             price={item.price}
+            fromCheckout={fromCheckout}
           />
         ))}
       </div>
-      <FooterActions />
+      {!fromCheckout && <FooterActions />}
     </>
   );
 }
