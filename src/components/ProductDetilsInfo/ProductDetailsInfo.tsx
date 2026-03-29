@@ -51,7 +51,7 @@ function ProductDetailsInfo({ product }: { product: ProductCardProps }) {
             }
           >
             <div className="border-2 border-gray-200 p-5 rounded-lg">
-              <ReviewProduct product={product} />
+              <ReviewProduct productId={product._id} />
             </div>
           </Tab>
           <Tab
