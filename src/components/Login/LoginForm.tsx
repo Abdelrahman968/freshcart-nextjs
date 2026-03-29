@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { LoginFormData } from '../../types/login.type';
 import { signIn, SignInResponse } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
 import { useSearchParams } from 'next/navigation';
 import { isSafeUrl } from '../../utils/url';
@@ -24,7 +23,6 @@ function LoginForm() {
     callbackUrl && isSafeUrl(callbackUrl) ? callbackUrl : '/';
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -44,7 +42,8 @@ function LoginForm() {
     try {
       const res: SignInResponse | undefined = await signIn('credentials', {
         ...data,
-        redirect: false,
+        redirect: true,
+        callbackUrl: safeCallback,
       });
 
       if (!res || res.error) {
@@ -66,8 +65,6 @@ function LoginForm() {
 
       dispatch(getUserCartAsync());
       dispatch(getUserWishlistAsync());
-
-      router.push(safeCallback);
     } catch (err) {
       console.error(err);
 
