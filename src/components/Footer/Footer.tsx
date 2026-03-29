@@ -152,7 +152,7 @@ function Footer() {
                 <li>
                   <Link
                     className="text-gray-400 hover:text-green-400 transition-colors text-sm"
-                    href="/profile/orders"
+                    href="/orders"
                   >
                     Order History
                   </Link>
