@@ -21,8 +21,8 @@ import {
 } from 'react-icons/fa';
 import OrderSummary from './OrderSummary';
 import { Input, Textarea } from '@heroui/react';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
 import visa from '@assets/icons8/visa.png';
 import mastercard from '@assets/icons8/mastercard.png';
@@ -49,28 +49,10 @@ function MainForm({ addresses }: { addresses: Address }) {
   const myAddresses = addresses?.data || [];
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
   const [isLoadingById, setIsLoadingById] = useState<string | null>(null);
-  const [selectedAddressData, setSelectedAddressData] = useState<any>({
-    city: '',
-    details: '',
-    phone: '',
-  });
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card'>('cash');
 
-  const getAddressById = async (id: string) => {
-    setIsLoadingById(id);
-    const res = await fetch(`/api/address/${id}`);
-    const data = await res.json();
-    setIsLoadingById(null);
-    setSelectedAddressData({
-      city: data.data.city,
-      details: data.data.details,
-      phone: data.data.phone,
-    });
-    return data;
-  };
-
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -82,13 +64,17 @@ function MainForm({ addresses }: { addresses: Address }) {
     },
   });
 
-  useEffect(() => {
+  const getAddressById = async (id: string) => {
+    setIsLoadingById(id);
+    const res = await fetch(`/api/address/${id}`);
+    const data = await res.json();
+    setIsLoadingById(null);
     reset({
-      city: selectedAddressData.city,
-      details: selectedAddressData.details,
-      phone: selectedAddressData.phone,
+      city: data.data.city,
+      details: data.data.details,
+      phone: data.data.phone,
     });
-  }, [selectedAddressData, reset]);
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -118,9 +104,7 @@ function MainForm({ addresses }: { addresses: Address }) {
     setIsLoading(true);
     const res = await fetch(`/api/pay/cash/${cartId}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
     const data = await res.json();
@@ -129,7 +113,6 @@ function MainForm({ addresses }: { addresses: Address }) {
     } else {
       router.push('/orders?payment=cash&operation=error');
     }
-
     setIsLoading(false);
   };
 
@@ -137,20 +120,15 @@ function MainForm({ addresses }: { addresses: Address }) {
     setIsLoading(true);
     const res = await fetch(`/api/pay/card/${cartId}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
     const data = await res.json();
-    // console.log(data);
-
     if (data.status === 'success') {
       router.push(data.session.url);
     } else {
       router.push('/orders?payment=card&operation=error');
     }
-
     setIsLoading(false);
   };
 
@@ -261,7 +239,10 @@ function MainForm({ addresses }: { addresses: Address }) {
                         ? 'border-green-500 bg-green-50 border-dashed'
                         : 'border-gray-200 hover:border-green-200 hover:bg-gray-50'
                     }`}
-                    onClick={() => setSelectedAddress(null)}
+                    onClick={() => {
+                      setSelectedAddress(null);
+                      reset({ city: '', details: '', phone: '' });
+                    }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-green-500 text-white">
@@ -295,59 +276,70 @@ function MainForm({ addresses }: { addresses: Address }) {
                   </div>
                 </div>
 
-                <div>
-                  <Input
-                    label="City"
-                    type="text"
-                    placeholder="e.g. Cairo, Alexandria, Giza"
-                    size="lg"
-                    endContent={<FaCity className="text-gray-500 text-sm" />}
-                    {...register('city', {
-                      required: 'City is required',
-                    })}
-                    isInvalid={!!errors.city}
-                    errorMessage={errors.city?.message}
-                  />
-                </div>
+                <Controller
+                  name="city"
+                  control={control}
+                  rules={{ required: 'City is required' }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      label="City"
+                      type="text"
+                      placeholder="e.g. Cairo, Alexandria, Giza"
+                      size="lg"
+                      endContent={<FaCity className="text-gray-500 text-sm" />}
+                      isInvalid={!!errors.city}
+                      errorMessage={errors.city?.message}
+                    />
+                  )}
+                />
 
-                <div>
-                  <Textarea
-                    label="Street Address"
-                    placeholder="Street name, building number, floor, apartment..."
-                    size="lg"
-                    minRows={3}
-                    endContent={
-                      <FaLocationDot className="text-gray-500 text-sm" />
-                    }
-                    {...register('details', {
-                      required: 'Street address is required',
-                    })}
-                    isInvalid={!!errors.details}
-                    errorMessage={errors.details?.message}
-                  />
-                </div>
+                <Controller
+                  name="details"
+                  control={control}
+                  rules={{ required: 'Street address is required' }}
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      label="Street Address"
+                      placeholder="Street name, building number, floor, apartment..."
+                      size="lg"
+                      minRows={3}
+                      endContent={
+                        <FaLocationDot className="text-gray-500 text-sm" />
+                      }
+                      isInvalid={!!errors.details}
+                      errorMessage={errors.details?.message}
+                    />
+                  )}
+                />
 
-                <div>
-                  <Input
-                    label="Phone Number (Egyptian numbers only)"
-                    type="tel"
-                    placeholder="01xxxxxxxxx"
-                    size="lg"
-                    endContent={<FaPhone className="text-gray-500 text-sm" />}
-                    startContent={
-                      <span className="text-gray-500 text-sm">+20</span>
-                    }
-                    {...register('phone', {
-                      required: 'Phone number is required',
-                      pattern: {
-                        value: /^01\d{9}$/,
-                        message: 'Please enter a valid Egyptian phone number',
-                      },
-                    })}
-                    isInvalid={!!errors.phone}
-                    errorMessage={errors.phone?.message}
-                  />
-                </div>
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{
+                    required: 'Phone number is required',
+                    pattern: {
+                      value: /^01\d{9}$/,
+                      message: 'Please enter a valid Egyptian phone number',
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      label="Phone Number (Egyptian numbers only)"
+                      type="tel"
+                      placeholder="01xxxxxxxxx"
+                      size="lg"
+                      endContent={<FaPhone className="text-gray-500 text-sm" />}
+                      startContent={
+                        <span className="text-gray-500 text-sm">+20</span>
+                      }
+                      isInvalid={!!errors.phone}
+                      errorMessage={errors.phone?.message}
+                    />
+                  )}
+                />
               </div>
             </div>
 

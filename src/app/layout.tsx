@@ -13,6 +13,7 @@ const exo = Exo({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXTAUTH_URL ?? 'http://localhost:3000'),
   title: 'FreshCart | Online Store',
   description: 'FreshCart is an e-commerce website',
   keywords: ['FreshCart', 'e-commerce', 'website'],
