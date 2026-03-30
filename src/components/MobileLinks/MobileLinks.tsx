@@ -172,7 +172,7 @@ function MobileLinks() {
             <div className="flex flex-col gap-3 w-full">
               <Link
                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-100 transition-colors active:scale-105 bg-green-50"
-                href="/profile"
+                href="/profile/address"
               >
                 <div className="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center">
                   <RxAvatar size={25} color="#16A34A" />

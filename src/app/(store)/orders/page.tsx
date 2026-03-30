@@ -9,6 +9,7 @@ import { Order } from '../../../types/order.type';
 import { nextAuthConfig } from '../../../next-auth/nextAuth.config';
 import OrderStatus from './_components/OrderStatus';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'My Orders | FreshCart',
@@ -112,26 +113,51 @@ export default async function OrdersPage({
       </div>
 
       <div className="space-y-4">
-        {orders.map(order => (
-          <OrderCard key={order._id} order={order}>
-            <OrderItems
-              items={order.cartItems.map(item => ({
-                title: item.product.title,
-                imageCover: item.product.imageCover,
-                price: item.price,
-                count: item.count,
-              }))}
-            />
-            <div className="px-5 sm:px-6 pb-5 sm:pb-6 grid sm:grid-cols-2 gap-4">
-              <DeliveryAddress shippingAddress={order.shippingAddress} />
-              <OrderSummary
-                totalOrderPrice={order.totalOrderPrice}
-                taxPrice={order.taxPrice}
-                shippingPrice={order.shippingPrice}
-              />
+        {orders.length === 0 ? (
+          <div className="min-h-[60vh] flex items-center justify-center px-4">
+            <div className="max-w-sm text-center">
+              <div className="w-24 h-24 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-6">
+                <FaBox className="text-gray-400" size={40} />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                No orders yet
+              </h2>
+              <p className="text-gray-500 mb-8 text-sm leading-relaxed">
+                When you place orders, they'll appear here
+                <br />
+                so you can track them.
+              </p>
+              <Link
+                className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3.5 px-8 rounded-xl font-semibold transition-all shadow-lg shadow-green-600/20 w-full sm:w-auto"
+                href="/"
+              >
+                <FaBagShopping />
+                Start Shopping
+              </Link>
             </div>
-          </OrderCard>
-        ))}
+          </div>
+        ) : (
+          orders.map(order => (
+            <OrderCard key={order._id} order={order}>
+              <OrderItems
+                items={order.cartItems.map(item => ({
+                  title: item.product.title,
+                  imageCover: item.product.imageCover,
+                  price: item.price,
+                  count: item.count,
+                }))}
+              />
+              <div className="px-5 sm:px-6 pb-5 sm:pb-6 grid sm:grid-cols-2 gap-4">
+                <DeliveryAddress shippingAddress={order.shippingAddress} />
+                <OrderSummary
+                  totalOrderPrice={order.totalOrderPrice}
+                  taxPrice={order.taxPrice}
+                  shippingPrice={order.shippingPrice}
+                />
+              </div>
+            </OrderCard>
+          ))
+        )}
       </div>
     </div>
   );

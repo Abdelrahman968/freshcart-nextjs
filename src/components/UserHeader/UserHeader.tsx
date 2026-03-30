@@ -98,7 +98,7 @@ function UserHeader() {
                 >
                   <Link
                     className="w-full h-full block font-semibold group-hover:text-white transition-colors duration-300 ease-in-out"
-                    href="/profile"
+                    href="/profile/address"
                   >
                     My Profile
                   </Link>

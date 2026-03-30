@@ -50,7 +50,7 @@ function UserTopNav() {
           <>
             <FaRegUser color="#16A34A" size={15} />
             <Link
-              href="/profile"
+              href="/profile/address"
               className="lg:font-semibold group-hover:text-[#16A34A] transition-colors duration-300 ease-in-out"
             >
               {session.user?.name}
