@@ -88,7 +88,7 @@ function MainForm({ addresses }: { addresses: Address }) {
       details: selectedAddressData.details,
       phone: selectedAddressData.phone,
     });
-  }, [selectedAddressData]);
+  }, [selectedAddressData, reset]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -305,7 +305,6 @@ function MainForm({ addresses }: { addresses: Address }) {
                     {...register('city', {
                       required: 'City is required',
                     })}
-                    value={selectedAddressData?.city}
                     isInvalid={!!errors.city}
                     errorMessage={errors.city?.message}
                   />
@@ -323,7 +322,6 @@ function MainForm({ addresses }: { addresses: Address }) {
                     {...register('details', {
                       required: 'Street address is required',
                     })}
-                    value={selectedAddressData?.details}
                     isInvalid={!!errors.details}
                     errorMessage={errors.details?.message}
                   />
@@ -346,7 +344,6 @@ function MainForm({ addresses }: { addresses: Address }) {
                         message: 'Please enter a valid Egyptian phone number',
                       },
                     })}
-                    value={selectedAddressData?.phone}
                     isInvalid={!!errors.phone}
                     errorMessage={errors.phone?.message}
                   />
