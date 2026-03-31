@@ -234,6 +234,14 @@ function Footer() {
                     Track Order
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="text-gray-400 hover:text-green-400 transition-colors text-sm"
+                    href="/changelog"
+                  >
+                    Changelog
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="lg:col-span-2">
