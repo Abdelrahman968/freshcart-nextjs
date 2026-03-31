@@ -4,9 +4,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const baseUrl = `${process.env.NEXTAUTH_URL}`;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/products?limit=1000`,
+      {
+        cache: 'no-store',
+      }
+    );
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');
@@ -17,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const products = Array.isArray(data) ? data : data.data || [];
 
     const productUrls = products.map((product: any) => ({
-      url: `${baseUrl}/product/${product.id}`,
+      url: `${baseUrl}/products/${product.id}`,
       lastModified: product.updatedAt
         ? new Date(product.updatedAt)
         : new Date(),

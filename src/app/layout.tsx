@@ -17,6 +17,12 @@ export const metadata: Metadata = {
   title: 'FreshCart | Online Store',
   description: 'FreshCart is an e-commerce website',
   keywords: ['FreshCart', 'e-commerce', 'website'],
+  verification: {
+    google: process.env.GOOGLE_WEBMASTER || '',
+    other: {
+      'msvalidate.01': process.env.BING_WEBMASTER || '',
+    },
+  },
   authors: [{ name: 'Abdelrahman Ayman' }],
   creator: 'Abdelrahman Ayman',
   publisher: 'Abdelrahman Ayman',
