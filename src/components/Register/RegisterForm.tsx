@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { calculatePasswordStrength } from '../../utils/calculatePasswordStrength';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { registerUser } from '../../services/register.service';
-import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 type RegisterFormData = {
   name: string;
@@ -19,7 +19,6 @@ type RegisterFormData = {
 };
 
 function RegisterForm() {
-  const router = useRouter();
   const [passwordValue, setPasswordValue] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
@@ -60,7 +59,12 @@ function RegisterForm() {
         color: 'success',
       });
 
-      router.push('/');
+      await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: true,
+        callbackUrl: '/',
+      });
     } catch (error) {
       addToast({
         title: 'Registration failed',

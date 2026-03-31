@@ -173,6 +173,9 @@ function MobileLinks() {
               <Link
                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-100 transition-colors active:scale-105 bg-green-50"
                 href="/profile/address"
+                onClick={() => setShowMobileLinks(false)}
+                aria-label="Profile"
+                type="button"
               >
                 <div className="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center">
                   <RxAvatar size={25} color="#16A34A" />
@@ -182,8 +185,13 @@ function MobileLinks() {
                 </span>
               </Link>
               <button
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  setShowMobileLinks(false);
+                }}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-100 transition-colors w-full text-left active:scale-105 bg-red-50 cursor-pointer"
+                aria-label="Sign out"
+                type="button"
               >
                 <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center">
                   <FaSignOutAlt color="#FB2C36" strokeWidth={5} />

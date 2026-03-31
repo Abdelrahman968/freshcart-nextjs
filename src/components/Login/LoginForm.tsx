@@ -3,22 +3,28 @@ import { addToast, Button, Checkbox, Input } from '@heroui/react';
 import Link from 'next/link';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { LoginFormData } from '../../types/login.type';
-import { signIn, SignInResponse } from 'next-auth/react';
-import { CiLogin } from 'react-icons/ci';
+import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { isSafeUrl } from '../../utils/url';
-import { getUserCartAsync } from '../../redux/slices/CartSlice';
-import { getUserWishlistAsync } from '../../redux/slices/WishlistSlice';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/reduxStore';
 
 function LoginForm() {
-  const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const error = searchParams.get('error');
+
+  useEffect(() => {
+    if (error === 'CredentialsSignin') {
+      addToast({
+        title: 'Login Failed',
+        description: 'Invalid email or password',
+        color: 'danger',
+      });
+    }
+  }, [error]);
+
   const safeCallback =
     callbackUrl && isSafeUrl(callbackUrl) ? callbackUrl : '/';
 
@@ -40,31 +46,11 @@ function LoginForm() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const res: SignInResponse | undefined = await signIn('credentials', {
+      await signIn('credentials', {
         ...data,
         redirect: true,
         callbackUrl: safeCallback,
       });
-
-      if (!res || res.error) {
-        addToast({
-          title: 'Error',
-          description: 'Invalid email or password',
-          color: 'danger',
-        });
-        return;
-      }
-
-      addToast({
-        title: 'Logged in successfully',
-        icon: <CiLogin color="#16A34A" />,
-        color: 'success',
-        closeIcon: true,
-        shouldShowTimeoutProgress: true,
-      });
-
-      dispatch(getUserCartAsync());
-      dispatch(getUserWishlistAsync());
     } catch (err) {
       console.error(err);
 

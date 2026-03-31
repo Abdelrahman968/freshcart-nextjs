@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { WishlistApiResponse, WishlistState } from '../../types/wishlist.type';
+import { getSession } from 'next-auth/react';
 
 const extractWishlistData = (response: WishlistApiResponse) => ({
   count: response.count,
@@ -10,6 +11,12 @@ const extractWishlistData = (response: WishlistApiResponse) => ({
 export const getUserWishlistAsync = createAsyncThunk<WishlistApiResponse>(
   'wishlist/getUserWishlist',
   async (_, { rejectWithValue }) => {
+    const session = await getSession();
+
+    if (!session) {
+      return rejectWithValue('No session found');
+    }
+
     try {
       const res = await fetch('/api/wishlist');
       const data: WishlistApiResponse = await res.json();

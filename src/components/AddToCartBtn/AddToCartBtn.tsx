@@ -47,7 +47,7 @@ function AddToCartBtn({
     <>
       <Button
         id="add-to-cart"
-        className={` ${from === 'wishlist' ? 'flex-1 md:flex-none bg-green-600 text-white hover:bg-green-700' : 'flex-1 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg shadow-green-600/25 bg-green-600'}`}
+        className={` ${from === 'wishlist' ? 'flex-1 md:flex-none bg-green-600 text-white hover:bg-green-700 cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-green-600 disabled:hover:text-white disabled:active:scale-100 disabled:focus:bg-green-600 disabled:focus:text-white' : 'flex-1 text-white py-3.5 px-6 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg shadow-green-600/25 bg-green-600 cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-green-600 disabled:hover:text-white disabled:active:scale-100 disabled:focus:bg-green-600 disabled:focus:text-white'}`}
         color="success"
         variant="solid"
         size={from === 'wishlist' ? 'md' : 'lg'}
@@ -63,11 +63,25 @@ function AddToCartBtn({
         ) : (
           <FaShoppingCart size={17} />
         )}
-        {isLoading
-          ? 'Adding...'
-          : quantity > 0
-            ? 'Add to Cart'
-            : 'Out of Stock'}
+        {isLoading ? (
+          'Adding...'
+        ) : quantity > 0 ? (
+          <p
+            className={`${
+              from === 'wishlist' ? 'md:hidden text-sm' : 'md:text-base text-sm'
+            }`}
+          >
+            Add to Cart
+          </p>
+        ) : (
+          <p
+            className={`${
+              from === 'wishlist' ? 'md:hidden text-sm' : 'md:text-base text-sm'
+            }`}
+          >
+            Out of Stock
+          </p>
+        )}
       </Button>
     </>
   );

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartApiResponse, CartState } from '../../types/cart.type';
+import { getSession } from 'next-auth/react';
 
 const extractCartData = (response: CartApiResponse) => ({
   numOfCartItems: response.numOfCartItems,
@@ -13,6 +14,12 @@ const extractCartData = (response: CartApiResponse) => ({
 export const getUserCartAsync = createAsyncThunk<CartApiResponse>(
   'cart/getUserCart',
   async (_, { rejectWithValue }) => {
+    const session = await getSession();
+
+    if (!session) {
+      return rejectWithValue('No session found');
+    }
+
     try {
       const res = await fetch('/api/cart');
       const data: CartApiResponse = await res.json();
