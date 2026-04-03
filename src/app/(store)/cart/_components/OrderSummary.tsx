@@ -11,6 +11,9 @@ import {
   resetPromoStatus,
 } from '../../../../redux/slices/CartSlice';
 
+const FREE_SHIPPING_THRESHOLD = 500;
+const SHIPPING_FEE = 100;
+
 const PromoCodeData = [
   { id: 1, code: 'ORGANIC40', discount: 40 },
   { id: 2, code: 'FRESH25', discount: 25 },
@@ -32,6 +35,17 @@ function OrderSummary() {
   const [showPromoCode, setShowPromoCode] = useState(false);
   const [inputCode, setInputCode] = useState('');
   const [loadingCode, setLoadingCode] = useState<string | null>(null);
+
+  const isFreeShipping = totalCartPrice >= FREE_SHIPPING_THRESHOLD;
+  const shippingFee = isFreeShipping ? 0 : SHIPPING_FEE;
+  const discountedSubtotal = totalAfterDiscount ?? totalCartPrice;
+  const displayPrice = discountedSubtotal + shippingFee;
+  const originalTotal = totalCartPrice + shippingFee;
+  const hasDiscount =
+    totalAfterDiscount !== null && totalAfterDiscount < totalCartPrice;
+
+  const progressValue = Math.min(totalCartPrice, FREE_SHIPPING_THRESHOLD);
+  const remaining = FREE_SHIPPING_THRESHOLD - totalCartPrice;
 
   const handleApplyPromoCode = async (code: string) => {
     setLoadingCode(code);
@@ -60,10 +74,6 @@ function OrderSummary() {
     }
   };
 
-  const displayPrice = totalAfterDiscount ?? totalCartPrice;
-  const hasDiscount =
-    totalAfterDiscount !== null && totalAfterDiscount < totalCartPrice;
-
   return (
     <div className="lg:col-span-1">
       <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden sticky top-20 shadow-sm">
@@ -78,17 +88,19 @@ function OrderSummary() {
         </div>
 
         <div className="p-6 space-y-5">
-          <div className="bg-linear-to-r from-green-50 to-emerald-50 rounded-xl p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-              <FaTruck className="text-green-600" />
+          {isFreeShipping && (
+            <div className="bg-linear-to-r from-green-50 to-emerald-50 rounded-xl p-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                <FaTruck className="text-green-600" />
+              </div>
+              <div>
+                <p className="font-semibold text-green-700">Free Shipping!</p>
+                <p className="text-sm text-green-600">
+                  You qualify for free delivery
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="font-semibold text-green-700">Free Shipping!</p>
-              <p className="text-sm text-green-600">
-                You qualify for free delivery
-              </p>
-            </div>
-          </div>
+          )}
 
           <div className="space-y-3">
             <div className="flex justify-between text-gray-600">
@@ -108,9 +120,53 @@ function OrderSummary() {
               </div>
             )}
 
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-xs text-gray-500">
+                <span className="flex items-center gap-1">
+                  <FaTruck
+                    className={
+                      isFreeShipping ? 'text-green-500' : 'text-gray-400'
+                    }
+                  />
+                  Free Shipping
+                </span>
+                {isFreeShipping ? (
+                  <span className="text-green-600 font-semibold">
+                    Unlocked! 🎉
+                  </span>
+                ) : (
+                  <span>
+                    <span className="font-semibold text-gray-700">
+                      {remaining.toLocaleString()} EGP
+                    </span>{' '}
+                    away
+                  </span>
+                )}
+              </div>
+
+              <div className="relative h-2 w-full rounded-full bg-gray-100 overflow-hidden">
+                <div
+                  className={`h-full rounded-full transition-all duration-500 ${
+                    isFreeShipping
+                      ? 'bg-linear-to-r from-green-400 to-green-500'
+                      : 'bg-linear-to-r from-amber-400 to-orange-400'
+                  }`}
+                  style={{
+                    width: `${(progressValue / FREE_SHIPPING_THRESHOLD) * 100}%`,
+                  }}
+                />
+              </div>
+            </div>
+
             <div className="flex justify-between text-gray-600">
               <span>Shipping</span>
-              <span className="font-medium text-green-600">FREE</span>
+              {isFreeShipping ? (
+                <span className="font-medium text-green-600">FREE</span>
+              ) : (
+                <span className="font-medium text-orange-500">
+                  {SHIPPING_FEE.toLocaleString()} EGP
+                </span>
+              )}
             </div>
 
             <div className="border-t border-dashed border-gray-200 pt-3 mt-3">
@@ -119,11 +175,13 @@ function OrderSummary() {
                 <div className="text-right">
                   {hasDiscount && (
                     <span className="text-sm text-gray-400 line-through mr-2">
-                      {totalCartPrice.toLocaleString()} EGP
+                      {originalTotal.toLocaleString()} EGP
                     </span>
                   )}
                   <span
-                    className={`text-2xl font-bold ${hasDiscount ? 'text-green-600' : 'text-gray-900'}`}
+                    className={`text-2xl font-bold ${
+                      hasDiscount ? 'text-green-600' : 'text-gray-900'
+                    }`}
                   >
                     {displayPrice.toLocaleString()}
                   </span>
@@ -182,7 +240,7 @@ function OrderSummary() {
                     readOnly
                     className="cursor-default"
                     endContent={
-                      <Chip className="text-sm   rounded-lg flex items-center justify-center">
+                      <Chip className="text-sm rounded-lg flex items-center justify-center">
                         {promo.discount}%
                       </Chip>
                     }

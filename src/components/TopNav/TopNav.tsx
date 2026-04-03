@@ -1,11 +1,21 @@
 import { CiMail } from 'react-icons/ci';
 import { FaGift, FaPhoneAlt, FaTruck } from 'react-icons/fa';
 import UserTopNav from '@components/UserTopNav/UserTopNav';
+import BgImage from '@assets/bgImage.svg';
 
 function TopNav() {
   return (
     <>
-      <div className="w-full hidden lg:flex justify-between items-center px-2 lg:px-5 xl:px-13 3xl:px-20  py-2.5 text-sm text-gray-500 border-b border-[#F1F2F4]">
+      <div
+        className="w-full hidden lg:flex justify-between items-center px-2 lg:px-5 xl:px-13 3xl:px-20  py-2.5 text-sm text-gray-500 border-b border-[#F1F2F4]"
+        style={{
+          backgroundImage: `url(${BgImage.src})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
         <div className="txt flex gap-4">
           <div className="flex items-center justify-center gap-2">
             <FaTruck color="#16A34A" />

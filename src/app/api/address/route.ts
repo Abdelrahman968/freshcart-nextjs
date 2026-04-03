@@ -13,7 +13,7 @@ export async function GET(req: Request) {
       { status: 401 }
     );
   }
-  console.log(token);
+  // console.log(token);
 
   try {
     const res = await fetch(`${API_URL}/addresses`, {

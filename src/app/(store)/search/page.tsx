@@ -11,6 +11,8 @@ import SearchFilters from '../../../components/search/SearchFilters';
 import SearchControls from '../../../components/search/SearchControls';
 import SearchPagination from '../../../components/search/SearchPagination';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import ProductCardSkeleton from '../../../components/Skeletons/ProductcardSkeleton';
 
 export const metadata: Metadata = {
   title: 'Search Results | FreshCart',
@@ -181,21 +183,23 @@ export default async function SearchPage({
                       : 'flex flex-col gap-3'
                   }
                 >
-                  {products.map(product => (
-                    <ProductCard
-                      key={product._id}
-                      id={product._id}
-                      title={product.title}
-                      category={product.category.name}
-                      image={product.imageCover}
-                      price={product.price}
-                      priceAfterDiscount={product.priceAfterDiscount}
-                      rating={product.ratingsAverage}
-                      reviews={product.ratingsQuantity}
-                      link={`/products/${product._id}`}
-                      quantity={product.quantity}
-                    />
-                  ))}
+                  <Suspense fallback={<ProductCardSkeleton />}>
+                    {products.map(product => (
+                      <ProductCard
+                        key={product._id}
+                        id={product._id}
+                        title={product.title}
+                        category={product.category.name}
+                        image={product.imageCover}
+                        price={product.price}
+                        priceAfterDiscount={product.priceAfterDiscount}
+                        rating={product.ratingsAverage}
+                        reviews={product.ratingsQuantity}
+                        link={`/products/${product._id}`}
+                        quantity={product.quantity}
+                      />
+                    ))}
+                  </Suspense>
                 </div>
 
                 <SearchPagination

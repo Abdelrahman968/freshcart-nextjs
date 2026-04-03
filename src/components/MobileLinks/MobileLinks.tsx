@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { FaBars, FaRegHeart, FaSignOutAlt, FaTruck } from 'react-icons/fa';
 import ImageLogo from '@assets/header/logo.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import SearchHeader from '../SearchHeader/SearchHeader';
 import BiSupport from '../BiSupport/BiSupport';
@@ -14,10 +14,11 @@ import { CiLogout } from 'react-icons/ci';
 import { MdError } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/reduxStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/reduxStore';
 import { clearCart } from '../../redux/slices/CartSlice';
 import { clearWishlist } from '../../redux/slices/WishlistSlice';
+import { FaCartShopping } from 'react-icons/fa6';
 
 interface MobileLinksProps {
   id: number;
@@ -37,6 +38,9 @@ function MobileLinks() {
   const [showMobileLinks, setShowMobileLinks] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
+
+  const { numOfCartItems } = useSelector((store: RootState) => store.cart);
+  const { count } = useSelector((store: RootState) => store.wishlist);
 
   const handleLogout = async () => {
     const res = await logout();
@@ -63,6 +67,15 @@ function MobileLinks() {
       });
     }
   };
+
+  useEffect(() => {
+    const bodyElement = document.body;
+    if (showMobileLinks) {
+      bodyElement.style.overflow = 'hidden';
+    } else {
+      bodyElement.style.overflow = 'auto';
+    }
+  }, [showMobileLinks]);
 
   return (
     <>
@@ -141,30 +154,46 @@ function MobileLinks() {
         <hr className="my-5 border-gray-200 w-full px-0" />
 
         <div className="flex flex-col gap-3">
-          <Link
-            href="/wishlist"
-            className="active:scale-105 transition-all duration-300 ease-in-out"
-            onClick={() => setShowMobileLinks(false)}
-          >
-            <div className=" flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
-              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <FaRegHeart color="#FB2C36" strokeWidth={5} />
+          <div className="relative">
+            <Link
+              href="/wishlist"
+              className="active:scale-105 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
+            >
+              <div className=" flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                  <FaRegHeart color="#FB2C36" strokeWidth={5} />
+                </div>
+                <p className="lg:font-semibold text-base text-black">
+                  Wishlist
+                </p>
               </div>
-              <p className="lg:font-semibold text-base text-black">Wishlist</p>
-            </div>
-          </Link>
-          <Link
-            href="/cart"
-            className="active:scale-105 transition-all duration-300 ease-in-out"
-            onClick={() => setShowMobileLinks(false)}
-          >
-            <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                <FaTruck color="#16A34A" strokeWidth={5} />
+            </Link>
+            {count > 0 && (
+              <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">
+                {count > 9 ? '9+' : count}
               </div>
-              <p className="lg:font-semibold text-base text-black">Cart</p>
-            </div>
-          </Link>
+            )}
+          </div>
+          <div className="relative">
+            <Link
+              href="/cart"
+              className="active:scale-105 transition-all duration-300 ease-in-out"
+              onClick={() => setShowMobileLinks(false)}
+            >
+              <div className="flex justify-start items-center gap-2 bg-green-50 p-3 rounded-xl border border-gray-200">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                  <FaCartShopping color="#16A34A" strokeWidth={5} />
+                </div>
+                <p className="lg:font-semibold text-base text-black">Cart</p>
+              </div>
+            </Link>
+            {numOfCartItems > 0 && (
+              <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">
+                {numOfCartItems > 9 ? '9+' : numOfCartItems}
+              </div>
+            )}
+          </div>
         </div>
         <hr className="my-5 border-gray-200 w-full px-0" />
         <div className="flex flex-col sm:flex-row gap-3">

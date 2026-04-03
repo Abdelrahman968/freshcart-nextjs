@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         { status: res.status }
       );
     }
-    console.log(data);
+    // console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.error('[POST /api/forgotPassword]', error);
